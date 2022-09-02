@@ -1,14 +1,23 @@
+import { Banner } from 'src/banners/entities/banner.entity';
 import { Image } from 'src/images/entities/image.entity';
 import { Product } from 'src/products/entities/product.entity';
-import { Base } from 'src/utilities/classes/base.entity';
+import { Column, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-export class Category extends Base {
+export class Category {
+  @PrimaryGeneratedColumn()
+  id: number;
+  @Column()
   code: string;
+  @Column()
   name: string;
+  @Column()
   description: string;
-  products: Product[];
+  @Column()
   order: number;
-  image: Image[];
-
-  // banner: Banner;
+  @OneToMany(() => Image, (image) => image.variant)
+  images: Image[];
+  @ManyToOne(() => Banner, (banner) => banner.categories)
+  banner: Banner;
+  @OneToMany(() => Product, (product) => product.category)
+  products: Product[];
 }

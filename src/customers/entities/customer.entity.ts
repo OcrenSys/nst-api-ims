@@ -1,13 +1,23 @@
-import { Base } from 'src/utilities/classes/base.entity';
+import { Invoice } from 'src/invoices/entities/invoice.entity';
+import { Column, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-export class Customer extends Base {
+export class Customer {
+  @PrimaryGeneratedColumn()
+  id: number;
+  @Column()
   name: string;
+  @Column()
   lastName: string;
+  @Column()
   phone: string;
+  @Column()
   address: string;
+  @Column()
   order: number;
+  @Column()
   avatar: string;
+  @Column()
   limit: string;
-
-  //   credits: Credit [];
+  @OneToMany(() => Invoice, (invoice) => invoice.percent)
+  invoice: Invoice[];
 }

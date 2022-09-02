@@ -1,8 +1,13 @@
 import { Invoice } from 'src/invoices/entities/invoice.entity';
-import { Base } from 'src/utilities/classes/base.entity';
+import { Column, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-export class Percent extends Base {
+export class Percent {
+  @PrimaryGeneratedColumn()
+  id: number;
+  @Column()
   fee: number;
+  @Column()
   rate: number;
-  invoice: Invoice;
+  @OneToMany(() => Invoice, (invoice) => invoice.percent)
+  invoices: Invoice[];
 }

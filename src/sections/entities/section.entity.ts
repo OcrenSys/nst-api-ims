@@ -1,7 +1,11 @@
 import { Product } from 'src/products/entities/product.entity';
-import { Base } from 'src/utilities/classes/base.entity';
+import { Column, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-export class Section extends Base {
+export class Section {
+  @PrimaryGeneratedColumn()
+  id: number;
+  @Column()
   name: string;
+  @OneToOne(() => Product, (product) => product.section)
   products: Product[];
 }

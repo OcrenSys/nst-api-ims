@@ -1,10 +1,17 @@
 import { Product } from 'src/products/entities/product.entity';
-import { Base } from 'src/utilities/classes/base.entity';
 import { Variant } from 'src/variants/entities/variant.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-export class Brand extends Base {
+@Entity()
+export class Brand {
+  @PrimaryGeneratedColumn()
+  id: number;
+  @Column()
   name: string;
+  @Column()
   description: string;
-  product: Product;
-  variant: Variant;
+  @OneToMany(() => Product, (product) => product.brand)
+  products: Product[];
+  @OneToMany(() => Variant, (variant) => variant.brand)
+  variants: Variant[];
 }
