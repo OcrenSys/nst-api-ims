@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+  mysql:
+    container_name: '${CONTAINER_NAME}_mysql'
+    image: mysql:8.0.29
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DATABASE_PASSWORD}'
+      MYSQL_PASSWORD: '${DATABASE_PASSWORD}'
+      MYSQL_DATABASE: '${DATABASE_NAME}'
+    volumes:
+      - mysqldata:/var/lib/mysql
+      - ./mysqlconfig:/etc/mysql/conf.d
+    env_file:
+      - .env
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - '${DATABASE_PORT}:${DATABASE_PORT}'
+
+  nestjs:
+    container_name: '${CONTAINER_NAME}_api'
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: >
+      sh -c "yarn && yarn start:dev"
+    ports:
+      - '${API_PORT}:${API_PORT}'
+    environment:
+      WAIT_HOSTS: mysql:${DATABASE_PORT}
+      NODE_ENV: development
+
+  phpmyadmin:
+    container_name: '${CONTAINER_NAME}_phpmyadmin'
+    image: phpmyadmin/phpmyadmin
+    env_file:
+      - .env
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: '${DATABASE_PASSWORD}'
+    ports:
+      - '${PHP_MYADMIN_PORT}:${PHP_MYADMIN_PORT}'
+    depends_on:
+      - mysql
+
+volumes:
+  mysqldata: {}

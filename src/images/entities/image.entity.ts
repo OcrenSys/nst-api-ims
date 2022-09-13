@@ -2,8 +2,9 @@ import { Banner } from 'src/banners/entities/banner.entity';
 import { Category } from 'src/categories/entities/category.entity';
 import { Product } from 'src/products/entities/product.entity';
 import { Variant } from 'src/variants/entities/variant.entity';
-import { Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity()
 export class Image {
   @PrimaryGeneratedColumn()
   id: number;

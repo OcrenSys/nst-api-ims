@@ -7,13 +7,14 @@ import { Section } from 'src/sections/entities/section.entity';
 import { Variant } from 'src/variants/entities/variant.entity';
 import {
   Column,
-  ManyToMany,
+  Entity,
   ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
+@Entity()
 export class Product {
   @PrimaryGeneratedColumn()
   id: number;

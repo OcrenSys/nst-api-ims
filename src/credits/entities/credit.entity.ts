@@ -4,12 +4,15 @@ import { Payment } from 'src/payments/entities/payment.entity';
 import { Percent } from 'src/percents/entities/percent.entity';
 import {
   Column,
+  Entity,
   ManyToOne,
   OneToMany,
   OneToOne,
+  JoinColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
+@Entity()
 export class Credit {
   @PrimaryGeneratedColumn()
   id: number;
@@ -17,12 +20,13 @@ export class Credit {
   fee: number;
   @Column()
   rate: number;
-  @OneToMany(() => Payment, (payment) => payment.invoice)
+  @OneToMany(() => Payment, (payment) => payment.credit)
   payments: Payment[];
-  @OneToMany(() => PaymentDate, (paymentDate) => paymentDate.invoice)
+  @OneToMany(() => PaymentDate, (paymentDate) => paymentDate.credit)
   paymentDates: PaymentDate[];
-  @ManyToOne(() => Percent, (percent) => percent.invoices)
+  @ManyToOne(() => Percent, (percent) => percent.credits)
   percent: Percent;
   @OneToOne(() => Invoice, (invoice) => invoice.credit)
+  @JoinColumn()
   invoice: Invoice;
 }

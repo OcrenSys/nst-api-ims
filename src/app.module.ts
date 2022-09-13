@@ -15,11 +15,12 @@ import { PaymentsModule } from './payments/payments.module';
 import { PaymentDatesModule } from './payment-dates/payment-dates.module';
 import { CreditsModule } from './credits/credits.module';
 import { PercentsModule } from './percents/percents.module';
-import { ConnectionsModule } from './connections/connections.module';
-import { Database } from './connections/database/database';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { typeOrmAsyncConfig } from './config/typeorm.config';
 
 @Module({
   imports: [
+    TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
     ProductsModule,
     VariantsModule,
     BrandsModule,
@@ -34,9 +35,8 @@ import { Database } from './connections/database/database';
     PaymentDatesModule,
     CreditsModule,
     PercentsModule,
-    ConnectionsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, Database],
+  providers: [AppService],
 })
 export class AppModule {}

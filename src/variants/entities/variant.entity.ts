@@ -4,13 +4,14 @@ import { InvoicesDetail } from 'src/invoices-details/entities/invoices-detail.en
 import { Product } from 'src/products/entities/product.entity';
 import {
   Column,
-  ManyToMany,
+  Entity,
   ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
+@Entity()
 export class Variant {
   @PrimaryGeneratedColumn()
   id: number;
