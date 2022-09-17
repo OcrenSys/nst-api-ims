@@ -1,13 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-
+import { Entity, Column, OneToMany } from 'typeorm';
 import { Category } from 'src/categories/entities/category.entity';
 import { Image } from 'src/images/entities/image.entity';
 import { Product } from 'src/products/entities/product.entity';
+import { Base } from 'src/utilities/classes/Base.entity';
 
 @Entity()
-export class Banner {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Banner extends Base {
   @Column()
   name: string;
   @Column()

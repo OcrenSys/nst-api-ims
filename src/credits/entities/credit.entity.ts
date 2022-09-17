@@ -2,6 +2,7 @@ import { Invoice } from 'src/invoices/entities/invoice.entity';
 import { PaymentDate } from 'src/payment-dates/entities/payment-date.entity';
 import { Payment } from 'src/payments/entities/payment.entity';
 import { Percent } from 'src/percents/entities/percent.entity';
+import { Base } from 'src/utilities/classes/Base.entity';
 import {
   Column,
   Entity,
@@ -9,13 +10,10 @@ import {
   OneToMany,
   OneToOne,
   JoinColumn,
-  PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity()
-export class Credit {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Credit extends Base {
   @Column()
   fee: number;
   @Column()

@@ -1,19 +1,11 @@
 import { Invoice } from 'src/invoices/entities/invoice.entity';
 import { Product } from 'src/products/entities/product.entity';
+import { Base } from 'src/utilities/classes/Base.entity';
 import { Variant } from 'src/variants/entities/variant.entity';
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToOne,
-  JoinColumn,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 
 @Entity()
-export class InvoicesDetail {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class InvoicesDetail extends Base {
   @Column()
   price: number;
   @Column()

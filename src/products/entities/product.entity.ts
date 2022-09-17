@@ -4,6 +4,7 @@ import { Category } from 'src/categories/entities/category.entity';
 import { Image } from 'src/images/entities/image.entity';
 import { InvoicesDetail } from 'src/invoices-details/entities/invoices-detail.entity';
 import { Section } from 'src/sections/entities/section.entity';
+import { Base } from 'src/utilities/classes/Base.entity';
 import { Variant } from 'src/variants/entities/variant.entity';
 import {
   Column,
@@ -15,9 +16,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Product {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Product extends Base {
   @Column()
   code: string;
   @Column()
@@ -34,6 +33,8 @@ export class Product {
   stock: number;
   @Column()
   order: number;
+  @Column({ default: false })
+  isPublished: boolean;
   @OneToMany(() => Image, (image) => image.product)
   images: Image[];
   @OneToMany(() => Variant, (variant) => variant.product)

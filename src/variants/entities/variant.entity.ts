@@ -2,19 +2,11 @@ import { Brand } from 'src/brands/entities/brand.entity';
 import { Image } from 'src/images/entities/image.entity';
 import { InvoicesDetail } from 'src/invoices-details/entities/invoices-detail.entity';
 import { Product } from 'src/products/entities/product.entity';
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Base } from 'src/utilities/classes/Base.entity';
+import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
 @Entity()
-export class Variant {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Variant extends Base {
   @Column()
   name: string;
   @Column()
@@ -31,12 +23,8 @@ export class Variant {
   stock: number;
   @Column()
   order: number;
-  @Column()
-  createdAt: string;
-  @Column()
-  updatedAt: string;
-  @Column()
-  isActive: boolean;
+  @Column({ default: false })
+  isPublished: boolean;
   @OneToOne(() => InvoicesDetail, (invoiceDetails) => invoiceDetails.product)
   invoiceDetail: InvoicesDetail;
   @OneToMany(() => Image, (image) => image.variant)

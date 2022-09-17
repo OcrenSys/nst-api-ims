@@ -1,17 +1,10 @@
 import { Credit } from 'src/credits/entities/credit.entity';
 import { PaymentDate } from 'src/payment-dates/entities/payment-date.entity';
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Base } from 'src/utilities/classes/Base.entity';
+import { Column, Entity, ManyToOne, OneToOne } from 'typeorm';
 
 @Entity()
-export class Payment {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Payment extends Base {
   @Column()
   date: string;
   @Column()

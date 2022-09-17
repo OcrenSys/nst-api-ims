@@ -1,19 +1,11 @@
 import { Credit } from 'src/credits/entities/credit.entity';
 import { Customer } from 'src/customers/entities/customer.entity';
 import { InvoicesDetail } from 'src/invoices-details/entities/invoices-detail.entity';
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Base } from 'src/utilities/classes/Base.entity';
+import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
 @Entity()
-export class Invoice {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Invoice extends Base {
   @Column()
   isAnulated: boolean;
   @Column()
