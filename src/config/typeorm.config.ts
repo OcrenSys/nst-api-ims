@@ -3,12 +3,13 @@ import {
   TypeOrmModuleAsyncOptions,
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
+import { DataSourceOptions } from 'typeorm';
 
 export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
   inject: [ConfigService],
   useFactory: async (): Promise<TypeOrmModuleOptions> => {
-    return {
+    const options: DataSourceOptions = {
       type: 'mysql',
       host: process.env.DATABASE_HOST,
       port: parseInt(process.env.DATABASE_PORT, 10),
@@ -23,6 +24,8 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
       synchronize: true,
       logging: true,
     };
+
+    return options;
   },
 };
 

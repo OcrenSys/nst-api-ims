@@ -1,26 +1,91 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { catchError, from, map, Observable, of } from 'rxjs';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
+import { Customer } from './entities/customer.entity';
 
 @Injectable()
 export class CustomersService {
-  create(createCustomerDto: CreateCustomerDto) {
-    return 'This action adds a new customer';
+  constructor(
+    @InjectRepository(Customer)
+    private readonly customerRepository: Repository<Customer>,
+  ) {}
+
+  create(createCustomerDto: CreateCustomerDto): Observable<Customer> {
+    return from(this.customerRepository.save(createCustomerDto)).pipe(
+      map((savedCustomer: Customer) => {
+        return { ...savedCustomer };
+      }),
+    );
   }
 
   findAll() {
-    return `This action returns all customers`;
+    const filters = {};
+    const relations = ['invoices'];
+
+    return this.customerRepository.find({
+      relations: relations,
+      where: {
+        ...filters,
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} customer`;
+  async findOne(id: number) {
+    const filters = {
+      id: id,
+    };
+    const relations = ['invoices'];
+
+    const customer = await this.customerRepository.findOne({
+      relations: relations,
+      where: {
+        ...filters,
+      },
+    });
+    if (!customer) throw new NotFoundException();
+
+    return customer;
   }
 
-  update(id: number, updateCustomerDto: UpdateCustomerDto) {
-    return `This action updates a #${id} customer`;
+  async update(id: number, updateCustomerDto: UpdateCustomerDto) {
+    const customer = await this.customerRepository.findOne({ where: { id } });
+    if (!customer) throw new NotFoundException();
+
+    return from(this.customerRepository.update(id, updateCustomerDto)).pipe(
+      map((result: UpdateResult) => {
+        return {
+          ...result,
+          raw: {
+            ...result.raw,
+            customer: {
+              ...customer,
+              updateCustomerDto,
+            },
+          },
+        };
+      }),
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} customer`;
+  async remove(id: number) {
+    const customer = await this.customerRepository.findOne({ where: { id } });
+    if (!customer) throw new NotFoundException();
+
+    return from(this.customerRepository.delete(id)).pipe(
+      map((result: DeleteResult) => {
+        return {
+          ...result,
+          raw: {
+            ...result.raw,
+            customer: {
+              ...customer,
+            },
+          },
+        };
+      }),
+    );
   }
 }

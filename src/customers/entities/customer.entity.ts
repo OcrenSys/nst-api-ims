@@ -1,26 +1,33 @@
 import { Invoice } from 'src/invoices/entities/invoice.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Base } from 'src/utilities/classes/Base.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()
-export class Customer {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Customer extends Base {
   @Column()
   nickName: string;
+
   @Column()
   name: string;
+
   @Column()
   lastName: string;
-  @Column()
+
+  @Column({ nullable: true })
   phone: string;
-  @Column()
+
+  @Column({ nullable: true })
   address: string;
-  @Column()
+
+  @Column({ default: 1 })
   order: number;
-  @Column()
+
+  @Column({ nullable: true })
   avatar: string;
-  @Column()
-  limit: string;
+
+  @Column({ default: 0 })
+  limit: number;
+
   @OneToMany(() => Invoice, (invoice) => invoice.customer)
   invoices: Invoice[];
 }
