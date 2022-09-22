@@ -1,6 +1,6 @@
-import { Credit } from 'src/credits/entities/credit.entity';
-import { Payment } from 'src/payments/entities/payment.entity';
-import { Base } from 'src/utilities/classes/Base.entity';
+import { Credit } from '../../credits/entities/credit.entity';
+import { Payment } from '../../payments/entities/payment.entity';
+import { Base } from '../../utilities/classes/Base.entity';
 import { Column, Entity, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 
 @Entity()

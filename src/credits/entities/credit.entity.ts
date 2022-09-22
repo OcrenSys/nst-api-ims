@@ -1,8 +1,8 @@
-import { Invoice } from 'src/invoices/entities/invoice.entity';
-import { PaymentDate } from 'src/payment-dates/entities/payment-date.entity';
-import { Payment } from 'src/payments/entities/payment.entity';
-import { Percent } from 'src/percents/entities/percent.entity';
-import { Base } from 'src/utilities/classes/Base.entity';
+import { Invoice } from '../../invoices/entities/invoice.entity';
+import { PaymentDate } from '../../payment-dates/entities/payment-date.entity';
+import { Payment } from '../../payments/entities/payment.entity';
+import { Percent } from '../../percents/entities/percent.entity';
+import { Base } from '../../utilities/classes/Base.entity';
 import {
   Column,
   Entity,

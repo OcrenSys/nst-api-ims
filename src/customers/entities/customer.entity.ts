@@ -1,5 +1,5 @@
-import { Invoice } from 'src/invoices/entities/invoice.entity';
-import { Base } from 'src/utilities/classes/Base.entity';
+import { Invoice } from '../../invoices/entities/invoice.entity';
+import { Base } from '../../utilities/classes/Base.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()

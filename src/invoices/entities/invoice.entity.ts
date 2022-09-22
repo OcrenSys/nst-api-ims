@@ -1,7 +1,7 @@
-import { Credit } from 'src/credits/entities/credit.entity';
-import { Customer } from 'src/customers/entities/customer.entity';
-import { InvoicesDetail } from 'src/invoices-details/entities/invoices-detail.entity';
-import { Base } from 'src/utilities/classes/Base.entity';
+import { Credit } from '../../credits/entities/credit.entity';
+import { Customer } from '../../customers/entities/customer.entity';
+import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.entity';
+import { Base } from '../../utilities/classes/Base.entity';
 import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
 @Entity()

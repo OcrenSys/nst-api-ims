@@ -1,8 +1,8 @@
-import { Brand } from 'src/brands/entities/brand.entity';
-import { Image } from 'src/images/entities/image.entity';
-import { InvoicesDetail } from 'src/invoices-details/entities/invoices-detail.entity';
-import { Product } from 'src/products/entities/product.entity';
-import { Base } from 'src/utilities/classes/Base.entity';
+import { Brand } from '../../brands/entities/brand.entity';
+import { Image } from '../../images/entities/image.entity';
+import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.entity';
+import { Product } from '../../products/entities/product.entity';
+import { Base } from '../../utilities/classes/Base.entity';
 import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
 @Entity()

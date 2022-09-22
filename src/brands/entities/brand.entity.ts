@@ -1,6 +1,6 @@
-import { Product } from 'src/products/entities/product.entity';
-import { Base } from 'src/utilities/classes/Base.entity';
-import { Variant } from 'src/variants/entities/variant.entity';
+import { Product } from '../../products/entities/product.entity';
+import { Base } from '../../utilities/classes/Base.entity';
+import { Variant } from '../../variants/entities/variant.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()

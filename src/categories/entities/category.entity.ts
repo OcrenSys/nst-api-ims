@@ -1,7 +1,7 @@
-import { Banner } from 'src/banners/entities/banner.entity';
-import { Image } from 'src/images/entities/image.entity';
-import { Product } from 'src/products/entities/product.entity';
-import { Base } from 'src/utilities/classes/Base.entity';
+import { Banner } from '../../banners/entities/banner.entity';
+import { Image } from '../../images/entities/image.entity';
+import { Product } from '../../products/entities/product.entity';
+import { Base } from '../../utilities/classes/Base.entity';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()

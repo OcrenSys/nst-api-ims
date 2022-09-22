@@ -4,12 +4,13 @@ import {
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
 import { DataSourceOptions } from 'typeorm';
+import { SeederOptions } from 'typeorm-extension';
 
-export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
+export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
   inject: [ConfigService],
   useFactory: async (): Promise<TypeOrmModuleOptions> => {
-    const options: DataSourceOptions = {
+    const dataSourceAndSeederOptions: DataSourceOptions & SeederOptions = {
       type: 'mysql',
       host: process.env.DATABASE_HOST,
       port: parseInt(process.env.DATABASE_PORT, 10),
@@ -22,10 +23,11 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
         charset: 'utf8mb4_unicode_ci',
       },
       synchronize: true,
+      dropSchema: false,
+      migrationsRun: true,
       logging: true,
     };
-
-    return options;
+    return dataSourceAndSeederOptions;
   },
 };
 

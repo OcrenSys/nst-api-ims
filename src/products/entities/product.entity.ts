@@ -1,11 +1,11 @@
-import { Banner } from 'src/banners/entities/banner.entity';
-import { Brand } from 'src/brands/entities/brand.entity';
-import { Category } from 'src/categories/entities/category.entity';
-import { Image } from 'src/images/entities/image.entity';
-import { InvoicesDetail } from 'src/invoices-details/entities/invoices-detail.entity';
-import { Section } from 'src/sections/entities/section.entity';
-import { Base } from 'src/utilities/classes/Base.entity';
-import { Variant } from 'src/variants/entities/variant.entity';
+import { Banner } from '../../banners/entities/banner.entity';
+import { Brand } from '../../brands/entities/brand.entity';
+import { Category } from '../../categories/entities/category.entity';
+import { Image } from '../../images/entities/image.entity';
+import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.entity';
+import { Section } from '../../sections/entities/section.entity';
+import { Base } from '../../utilities/classes/Base.entity';
+import { Variant } from '../../variants/entities/variant.entity';
 import {
   Column,
   Entity,
