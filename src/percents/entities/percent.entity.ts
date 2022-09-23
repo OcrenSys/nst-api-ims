@@ -8,6 +8,6 @@ export class Percent extends Base {
   fee: number;
   @Column()
   rate: number;
-  @OneToMany(() => Credit, (credit) => credit.percent)
-  credits: Credit[];
+  @OneToMany(() => Credit, (credit) => credit.percent, { nullable: true })
+  credits?: Credit[];
 }

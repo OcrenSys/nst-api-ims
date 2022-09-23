@@ -27,10 +27,10 @@ export class Variant extends Base {
   isPublished: boolean;
   @OneToOne(() => InvoicesDetail, (invoiceDetails) => invoiceDetails.product)
   invoiceDetail: InvoicesDetail;
-  @OneToMany(() => Image, (image) => image.variant)
-  images: Image[];
-  @ManyToOne(() => Product, (product) => product.variants)
-  product: Product;
-  @ManyToOne(() => Brand, (brand) => brand.variants)
-  brand: Brand;
+  @OneToMany(() => Image, (image) => image.variant, { nullable: true })
+  images?: Image[];
+  @ManyToOne(() => Product, (product) => product.variants, { nullable: true })
+  product?: Product;
+  @ManyToOne(() => Brand, (brand) => brand.variants, { nullable: true })
+  brand?: Brand;
 }

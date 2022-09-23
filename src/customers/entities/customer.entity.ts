@@ -28,6 +28,6 @@ export class Customer extends Base {
   @Column({ default: 0 })
   limit: number;
 
-  @OneToMany(() => Invoice, (invoice) => invoice.customer)
-  invoices: Invoice[];
+  @OneToMany(() => Invoice, (invoice) => invoice.customer, { nullable: true })
+  invoices?: Invoice[];
 }

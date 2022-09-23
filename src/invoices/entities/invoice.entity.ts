@@ -12,10 +12,12 @@ export class Invoice extends Base {
   isCompleted: boolean;
   @Column()
   comment: string;
-  @OneToOne(() => Credit, (credit) => credit.invoice)
-  credit: Credit;
-  @OneToMany(() => InvoicesDetail, (invoicesDetail) => invoicesDetail.invoice)
-  invoiceDetails: InvoicesDetail[];
+  @OneToOne(() => Credit, (credit) => credit.invoice, { nullable: true })
+  credit?: Credit;
+  @OneToMany(() => InvoicesDetail, (invoicesDetail) => invoicesDetail.invoice, {
+    nullable: true,
+  })
+  invoiceDetails?: InvoicesDetail[];
   @ManyToOne(() => Customer, (customer) => customer.invoices)
   customer: Customer;
 }

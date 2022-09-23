@@ -17,7 +17,7 @@ const otherConfig = {
   port: parseInt(process.env.DATABASE_PORT, 10),
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
-  synchronize: false,
+  synchronize: true,
   ...baseConfig,
 };
 
