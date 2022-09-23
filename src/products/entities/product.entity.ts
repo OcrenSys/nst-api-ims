@@ -1,19 +1,12 @@
-import { Banner } from 'src/banners/entities/banner.entity';
-import { Brand } from 'src/brands/entities/brand.entity';
-import { Category } from 'src/categories/entities/category.entity';
-import { Image } from 'src/images/entities/image.entity';
-import { InvoicesDetail } from 'src/invoices-details/entities/invoices-detail.entity';
-import { Section } from 'src/sections/entities/section.entity';
-import { Base } from 'src/utilities/classes/Base.entity';
-import { Variant } from 'src/variants/entities/variant.entity';
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Banner } from '../../banners/entities/banner.entity';
+import { Brand } from '../../brands/entities/brand.entity';
+import { Category } from '../../categories/entities/category.entity';
+import { Image } from '../../images/entities/image.entity';
+import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.entity';
+import { Section } from '../../sections/entities/section.entity';
+import { Base } from '../../utilities/classes/Base.entity';
+import { Variant } from '../../variants/entities/variant.entity';
+import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
 @Entity()
 export class Product extends Base {
@@ -24,7 +17,7 @@ export class Product extends Base {
   @Column()
   price: number;
   @Column()
-  price_credit: number;
+  priceCredit: number;
   @Column()
   cost: number;
   @Column()
@@ -35,18 +28,22 @@ export class Product extends Base {
   order: number;
   @Column({ default: false })
   isPublished: boolean;
-  @OneToMany(() => Image, (image) => image.product)
-  images: Image[];
+  @OneToMany(() => Image, (image) => image.product, { nullable: true })
+  images?: Image[];
   @OneToMany(() => Variant, (variant) => variant.product)
-  variants: Variant[];
-  @OneToOne(() => InvoicesDetail, (invoiceDetails) => invoiceDetails.product)
-  invoiceDetail: InvoicesDetail;
-  @ManyToOne(() => Category, (category) => category.products)
-  category: Category;
-  @ManyToOne(() => Brand, (brand) => brand.products)
-  brand: Brand;
-  @ManyToOne(() => Section, (section) => section.products)
-  section: Section;
-  @ManyToOne(() => Banner, (banner) => banner.products)
-  banner: Banner;
+  variants?: Variant[];
+  @OneToOne(() => InvoicesDetail, (invoiceDetails) => invoiceDetails.product, {
+    nullable: true,
+  })
+  invoiceDetail?: InvoicesDetail;
+  @ManyToOne(() => Category, (category) => category.products, {
+    nullable: true,
+  })
+  category?: Category;
+  @ManyToOne(() => Brand, (brand) => brand.products, { nullable: true })
+  brand?: Brand;
+  @ManyToOne(() => Section, (section) => section.products, { nullable: true })
+  section?: Section;
+  @ManyToOne(() => Banner, (banner) => banner.products, { nullable: true })
+  banner?: Banner;
 }

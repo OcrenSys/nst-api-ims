@@ -1,8 +1,8 @@
-import { Banner } from 'src/banners/entities/banner.entity';
-import { Category } from 'src/categories/entities/category.entity';
-import { Product } from 'src/products/entities/product.entity';
-import { Base } from 'src/utilities/classes/Base.entity';
-import { Variant } from 'src/variants/entities/variant.entity';
+import { Banner } from '../../banners/entities/banner.entity';
+import { Category } from '../../categories/entities/category.entity';
+import { Product } from '../../products/entities/product.entity';
+import { Base } from '../../utilities/classes/Base.entity';
+import { Variant } from '../../variants/entities/variant.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity()

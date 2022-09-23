@@ -19,14 +19,17 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm:cli": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -f src/config/typeorm.config-migrations.ts",
-    "migration:generate": "yarn typeorm:cli -- migration:generate -d src/database/migration -n",
-    "migration:create": "yarn typeorm:cli -- migration:create -d src/database/migration -n",
-    "migration:run": "yarn typeorm:cli -- migration:run",
-    "migration:revert": "yarn typeorm:cli -- migration:revert",
+    "typeorm:cli": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -f src/config/typeorm.config-migrations.ts src/config/ormconfig.ts",
+    "migrate:create": "ts-node ./node_modules/typeorm/cli.js migrations:create",
+    "migrate:generate": "ts-node ./node_modules/typeorm/cli.js migrations:generate",
+    "migrate:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert",
     "db:create": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js db:create",
     "db:drop": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js db:drop",
-    "seed": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js seed"
+    "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config",
+    "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed",
+    "schema:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop",
+    "schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
@@ -35,14 +38,17 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
+    "@types/faker": "^6.6.9",
     "class-validator": "^0.11.1",
     "mysql2": "^2.3.3",
+    "path": "^0.12.7",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "typeorm": "^0.3.9",
     "typeorm-extension": "^2.1.10",
-    "typeorm-naming-strategies": "^4.1.0"
+    "typeorm-naming-strategies": "^4.1.0",
+    "typeorm-seeding": "^1.6.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.1.2",

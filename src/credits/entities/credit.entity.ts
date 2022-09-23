@@ -1,8 +1,8 @@
-import { Invoice } from 'src/invoices/entities/invoice.entity';
-import { PaymentDate } from 'src/payment-dates/entities/payment-date.entity';
-import { Payment } from 'src/payments/entities/payment.entity';
-import { Percent } from 'src/percents/entities/percent.entity';
-import { Base } from 'src/utilities/classes/Base.entity';
+import { Invoice } from '../../invoices/entities/invoice.entity';
+import { PaymentDate } from '../../payment-dates/entities/payment-date.entity';
+import { Payment } from '../../payments/entities/payment.entity';
+import { Percent } from '../../percents/entities/percent.entity';
+import { Base } from '../../utilities/classes/Base.entity';
 import {
   Column,
   Entity,
@@ -18,13 +18,15 @@ export class Credit extends Base {
   fee: number;
   @Column()
   rate: number;
-  @OneToMany(() => Payment, (payment) => payment.credit)
-  payments: Payment[];
-  @OneToMany(() => PaymentDate, (paymentDate) => paymentDate.credit)
-  paymentDates: PaymentDate[];
+  @OneToMany(() => Payment, (payment) => payment.credit, { nullable: true })
+  payments?: Payment[];
+  @OneToMany(() => PaymentDate, (paymentDate) => paymentDate.credit, {
+    nullable: true,
+  })
+  paymentDates?: PaymentDate[];
   @ManyToOne(() => Percent, (percent) => percent.credits)
   percent: Percent;
-  @OneToOne(() => Invoice, (invoice) => invoice.credit)
+  @OneToOne(() => Invoice, (invoice) => invoice.credit, { nullable: true })
   @JoinColumn()
-  invoice: Invoice;
+  invoice?: Invoice;
 }

@@ -1,8 +1,8 @@
 import { Entity, Column, OneToMany } from 'typeorm';
-import { Category } from 'src/categories/entities/category.entity';
-import { Image } from 'src/images/entities/image.entity';
-import { Product } from 'src/products/entities/product.entity';
-import { Base } from 'src/utilities/classes/Base.entity';
+import { Category } from '../../categories/entities/category.entity';
+import { Image } from '../../images/entities/image.entity';
+import { Product } from '../../products/entities/product.entity';
+import { Base } from '../../utilities/classes/Base.entity';
 
 @Entity()
 export class Banner extends Base {
