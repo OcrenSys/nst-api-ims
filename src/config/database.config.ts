@@ -23,10 +23,10 @@ export default () =>
     extra: {
       charset: 'utf8mb4_unicode_ci',
     },
-    synchronize: true,
+    synchronize: Boolean(process.env.TYPEORM_SYNCHRONIZE) || false,
     dropSchema: false,
-    migrationsRun: true,
-    logging: true,
+    migrationsRun: Boolean(process.env.TYPEORM_MIGRATIONS_RUN) || false,
+    logging: Boolean(process.env.TYPEORM_LOGGING) || false,
   } as TypeOrmModuleOptions);
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
@@ -41,6 +41,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   extra: {
     charset: 'utf8mb4_unicode_ci',
   },
-  synchronize: false,
-  logging: true,
+  synchronize: Boolean(process.env.TYPEORM_SYNCHRONIZE) || false,
+  logging: Boolean(process.env.TYPEORM_LOGGING) || false,
 };

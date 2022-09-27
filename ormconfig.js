@@ -17,7 +17,6 @@ const otherConfig = {
   port: parseInt(process.env.DATABASE_PORT, 10),
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
-  synchronize: true,
   ...baseConfig,
 };
 
@@ -26,7 +25,7 @@ module.exports = {
   factories: [path.resolve(__dirname, 'src/database/factories/**/*{.ts,.js}')],
   ...baseConfig,
   ...otherConfig,
-  dropSchema: false,
-  synchronize: true,
-  migrationsRun: true,
+  dropSchema: true,
+  synchronize: Boolean(process.env.TYPEORM_SYNCHRONIZE) || false,
+  migrationsRun: Boolean(process.env.TYPEORM_MIGRATIONS_RUN) || false,
 };

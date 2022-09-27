@@ -1,7 +1,7 @@
 import { Banner } from '../../banners/entities/banner.entity';
 import { Category } from '../../categories/entities/category.entity';
 import { Product } from '../../products/entities/product.entity';
-import { Base } from '../../base/base.entity';
+import { Base } from '../../../utilities/classes/base.entity';
 import { Variant } from '../../variants/entities/variant.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 

@@ -2,7 +2,7 @@ import { Invoice } from '../../invoices/entities/invoice.entity';
 import { PaymentDate } from '../../payment-dates/entities/payment-date.entity';
 import { Payment } from '../../payments/entities/payment.entity';
 import { Percent } from '../../percents/entities/percent.entity';
-import { Base } from '../../base/base.entity';
+import { Base } from '../../../utilities/classes/base.entity';
 import {
   Column,
   Entity,

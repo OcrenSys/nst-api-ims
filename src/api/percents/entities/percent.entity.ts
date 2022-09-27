@@ -1,5 +1,5 @@
 import { Credit } from '../../credits/entities/credit.entity';
-import { Base } from './../../base/base.entity';
+import { Base } from '../../../utilities/classes/base.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()

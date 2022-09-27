@@ -2,7 +2,7 @@ import { Brand } from '../../brands/entities/brand.entity';
 import { Image } from '../../images/entities/image.entity';
 import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.entity';
 import { Product } from '../../products/entities/product.entity';
-import { Base } from './../../base/base.entity';
+import { Base } from '../../../utilities/classes/base.entity';
 import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
 @Entity()

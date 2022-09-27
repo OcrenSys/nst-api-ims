@@ -6,7 +6,7 @@ import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.
 import { Section } from '../../sections/entities/section.entity';
 import { Variant } from '../../variants/entities/variant.entity';
 import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
-import { Base } from '../../base/base.entity';
+import { Base } from '../../../utilities/classes/base.entity';
 
 @Entity()
 export class Product extends Base {
