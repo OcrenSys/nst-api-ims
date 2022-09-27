@@ -1,4 +1,4 @@
-import { Customer } from '../../customers/entities/customer.entity';
+import { Customer } from '../../api/customers/entities/customer.entity';
 
 export const CustomerData: Customer[] = [
   {

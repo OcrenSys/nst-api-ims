@@ -1,4 +1,4 @@
-import { Credit } from '../../credits/entities/credit.entity';
+import { Credit } from '../../api/credits/entities/credit.entity';
 import { InvoiceData } from './04_invoice.data';
 import { PercentData } from './001_percent.data';
 

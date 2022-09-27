@@ -1,4 +1,4 @@
-import { Invoice } from '../../invoices/entities/invoice.entity';
+import { Invoice } from '../../api/invoices/entities/invoice.entity';
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
 import { InvoiceData } from '../data/04_invoice.data';

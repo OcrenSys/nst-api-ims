@@ -1,4 +1,4 @@
-import { Customer } from '../../customers/entities/customer.entity';
+import { Customer } from '../../api/customers/entities/customer.entity';
 import { setSeederFactory } from 'typeorm-extension';
 
 export default setSeederFactory(Customer, (faker) => {
@@ -12,19 +12,6 @@ export default setSeederFactory(Customer, (faker) => {
   // customer.avatar = faker.image.avatar();
   // customer.limit = parseInt(faker.finance.amount());
   // customer.isActive = true;
-  // customer.createdAt = new Date().toTimeString();
-  // customer.updatedAt = new Date().toTimeString();
-
-  // customer.order = 1;
-  // customer.nickName = 'Jhon';
-  // customer.name = 'name ';
-  // customer.lastName = 'lastName ';
-  // customer.phone = 'phone ';
-  // customer.address = 'address ';
-  // customer.avatar = 'avatar ';
-  // customer.limit = 1;
-  // customer.isActive = true;
-  // customer.invoices = [];
   // customer.createdAt = new Date().toTimeString();
   // customer.updatedAt = new Date().toTimeString();
   return customer;

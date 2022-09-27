@@ -1,4 +1,4 @@
-import { Variant } from '../../variants/entities/variant.entity';
+import { Variant } from '../../api/variants/entities/variant.entity';
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
 import { VariantData } from '../data/03_variant.data';

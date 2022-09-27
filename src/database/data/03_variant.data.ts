@@ -1,4 +1,4 @@
-import { Variant } from '../../variants/entities/variant.entity';
+import { Variant } from '../../api/variants/entities/variant.entity';
 import { ProductData } from './02_product.data';
 
 export const VariantData: Variant[] = [

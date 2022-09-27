@@ -1,4 +1,4 @@
-import { Credit } from '../../credits/entities/credit.entity';
+import { Credit } from '../../api/credits/entities/credit.entity';
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
 import { CreditData } from '../data/05_credit.data';

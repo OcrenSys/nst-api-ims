@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
-import { Product } from '../../products/entities/product.entity';
+import { Product } from '../../api/products/entities/product.entity';
 import { ProductData } from '../data/02_product.data';
 
 export default class ProductSeeder implements Seeder {
