@@ -16,6 +16,7 @@ import { PercentsModule } from './percents/percents.module';
 import { RolesModule } from './roles/roles.module';
 import { MembersModule } from './members/members.module';
 import { PersonModule } from './person/person.module';
+import { SubCategoriesModule } from './sub-categories/sub-categories.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { PersonModule } from './person/person.module';
     RolesModule,
     MembersModule,
     PersonModule,
+    SubCategoriesModule,
   ],
   controllers: [],
   providers: [],

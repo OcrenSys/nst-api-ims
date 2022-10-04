@@ -10,11 +10,11 @@ import {
   OneToMany,
   OneToOne,
 } from 'typeorm';
-import { SubCategory } from 'src/api/sub-categories/entities/sub-category.entity';
+import { Category } from 'src/api/categories/entities/category.entity';
 import { IsNumber } from 'class-validator';
 
 @Entity()
-export class Category extends Base {
+export class SubCategory extends Base {
   @Column()
   name: string;
 
@@ -25,16 +25,16 @@ export class Category extends Base {
   @IsNumber()
   order: number;
 
-  @OneToOne(() => Image, (image) => image.category, { nullable: true })
+  @OneToOne(() => Image, (image) => image.subCategory)
   @JoinColumn()
   image: Image;
 
-  @ManyToOne(() => Banner, (banner) => banner.categories)
-  banner?: Banner;
+  @ManyToOne(() => Banner, (banner) => banner.subCategories)
+  banner: Banner;
 
-  @OneToMany(() => Product, (product) => product.category)
-  products?: Product[];
+  @OneToMany(() => Product, (product) => product.subCategory)
+  products: Product[];
 
-  @OneToMany(() => SubCategory, (subCategory) => subCategory.category)
-  subcategories?: SubCategory[];
+  @ManyToOne(() => Category, (category) => category.subcategories)
+  category: Category;
 }

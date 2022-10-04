@@ -7,6 +7,7 @@ import { Section } from '../../sections/entities/section.entity';
 import { Variant } from '../../variants/entities/variant.entity';
 import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 import { Base } from '../../../common/models/base.entity';
+import { SubCategory } from 'src/api/sub-categories/entities/sub-category.entity';
 
 @Entity()
 export class Product extends Base {
@@ -40,6 +41,10 @@ export class Product extends Base {
     nullable: true,
   })
   category?: Category;
+  @ManyToOne(() => SubCategory, (subCategory) => subCategory.products, {
+    nullable: true,
+  })
+  subCategory?: SubCategory;
   @ManyToOne(() => Brand, (brand) => brand.products, { nullable: true })
   brand?: Brand;
   @ManyToOne(() => Section, (section) => section.products, { nullable: true })
