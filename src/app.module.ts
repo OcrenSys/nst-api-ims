@@ -11,11 +11,12 @@ import { ConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
 import { AuthenticationMiddleware } from './middlewares/authentication/authentication.middleware';
 import { AuthenticationService } from './services/authentication/authentication.service';
+import { AuthorizationService } from './services/authorization/authorization.service';
 
 @Module({
   imports: [ConfigModule, DatabaseModule, ApiModule],
   controllers: [AppController],
-  providers: [AppService, AuthenticationService],
+  providers: [AppService, AuthenticationService, AuthorizationService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {

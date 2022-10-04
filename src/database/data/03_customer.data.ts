@@ -1,32 +1,31 @@
-import { Credit } from '../../api/credits/entities/credit.entity';
-import { InvoiceData } from './04_invoice.data';
-import { PercentData } from './04_percent.data';
+import { Customer } from '../../api/customers/entities/customer.entity';
+import { PersonData } from './01_person.data';
 
-export const CreditData: Credit[] = [
+export const CustomerData: Customer[] = [
   {
-    fee: 0,
-    rate: 0,
+    order: 1,
+    avatar: 'https://picsum.photos/200/300',
+    limit: 1000,
+    person: PersonData[3],
     isActive: true,
-    invoice: InvoiceData[0],
-    percent: PercentData[0],
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
   {
-    fee: 0.1,
-    rate: 0,
+    order: 2,
+    avatar: 'https://picsum.photos/200/300',
+    limit: 1000,
+    person: PersonData[4],
     isActive: true,
-    invoice: InvoiceData[1],
-    percent: PercentData[1],
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
   {
-    fee: 0.2,
-    rate: 0,
+    order: 3,
+    avatar: 'https://picsum.photos/200/300',
+    limit: 1000,
+    person: PersonData[5],
     isActive: true,
-    invoice: InvoiceData[2],
-    percent: PercentData[2],
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },

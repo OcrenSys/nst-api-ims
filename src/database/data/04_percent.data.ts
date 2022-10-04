@@ -1,4 +1,4 @@
-import { Percent } from './../../api/percents/entities/percent.entity';
+import { Percent } from '../../api/percents/entities/percent.entity';
 
 export const PercentData: Percent[] = [
   {

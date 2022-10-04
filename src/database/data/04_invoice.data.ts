@@ -1,5 +1,5 @@
 import { Invoice } from '../../api/invoices/entities/invoice.entity';
-import { CustomerData } from './01_customer.data';
+import { CustomerData } from './03_customer.data';
 
 export const InvoiceData: Invoice[] = [
   {

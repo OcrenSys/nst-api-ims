@@ -1,32 +1,30 @@
-import { Credit } from '../../api/credits/entities/credit.entity';
-import { InvoiceData } from './04_invoice.data';
-import { PercentData } from './04_percent.data';
+import { Member } from '../../api/members/entities/member.entity';
+import { PersonData } from './01_person.data';
+import { RoleData } from './01_role.data';
 
-export const CreditData: Credit[] = [
+export const MemberData: Member[] = [
   {
-    fee: 0,
-    rate: 0,
+    avatar: '',
+    roles: [RoleData[0], RoleData[1], RoleData[2]],
+    person: PersonData[0],
     isActive: true,
-    invoice: InvoiceData[0],
-    percent: PercentData[0],
+    createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
+    updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
+  },
+
+  {
+    avatar: '',
+    roles: [RoleData[1]],
+    person: PersonData[1],
+    isActive: true,
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
   {
-    fee: 0.1,
-    rate: 0,
+    avatar: '',
+    roles: [RoleData[2]],
+    person: PersonData[2],
     isActive: true,
-    invoice: InvoiceData[1],
-    percent: PercentData[1],
-    createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-    updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-  },
-  {
-    fee: 0.2,
-    rate: 0,
-    isActive: true,
-    invoice: InvoiceData[2],
-    percent: PercentData[2],
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },

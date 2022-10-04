@@ -1,32 +1,22 @@
-import { Credit } from '../../api/credits/entities/credit.entity';
-import { InvoiceData } from './04_invoice.data';
-import { PercentData } from './04_percent.data';
+import { RoleEnum } from '../../common/enums/roles.enum';
+import { Role } from '../../api/roles/entities/role.entity';
 
-export const CreditData: Credit[] = [
+export const RoleData: Role[] = [
   {
-    fee: 0,
-    rate: 0,
+    name: RoleEnum.Admin,
     isActive: true,
-    invoice: InvoiceData[0],
-    percent: PercentData[0],
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
   {
-    fee: 0.1,
-    rate: 0,
+    name: RoleEnum.Sales,
     isActive: true,
-    invoice: InvoiceData[1],
-    percent: PercentData[1],
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
   {
-    fee: 0.2,
-    rate: 0,
+    name: RoleEnum.User,
     isActive: true,
-    invoice: InvoiceData[2],
-    percent: PercentData[2],
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },

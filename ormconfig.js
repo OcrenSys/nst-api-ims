@@ -25,7 +25,7 @@ module.exports = {
   factories: [path.resolve(__dirname, 'src/database/factories/**/*{.ts,.js}')],
   ...baseConfig,
   ...otherConfig,
-  dropSchema: true,
+  dropSchema: Boolean(process.env.TYPEORM_DROP_SCHEMA_CONFIG) || false,
   synchronize: Boolean(process.env.TYPEORM_SYNCHRONIZE) || false,
   migrationsRun: Boolean(process.env.TYPEORM_MIGRATIONS_RUN) || false,
 };
