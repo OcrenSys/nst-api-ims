@@ -1,5 +1,5 @@
 import { Product } from '../../products/entities/product.entity';
-import { Base } from '../../../utilities/classes/base.entity';
+import { Base } from '../../../common/models/base.entity';
 import { Variant } from '../../variants/entities/variant.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 

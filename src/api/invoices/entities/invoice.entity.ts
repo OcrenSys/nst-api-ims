@@ -2,7 +2,7 @@ import { Credit } from '../../credits/entities/credit.entity';
 import { Customer } from '../../customers/entities/customer.entity';
 import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.entity';
 import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
-import { Base } from '../../../utilities/classes/base.entity';
+import { Base } from '../../../common/models/base.entity';
 
 @Entity()
 export class Invoice extends Base {
