@@ -13,42 +13,58 @@ import { SubCategory } from 'src/api/sub-categories/entities/sub-category.entity
 export class Product extends Base {
   @Column({ unique: true })
   code: string;
+
   @Column()
   name: string;
+
   @Column()
   price: number;
+
   @Column()
   priceCredit: number;
+
   @Column()
   cost: number;
+
   @Column()
   description: string;
+
   @Column()
   stock: number;
+
   @Column()
   order: number;
+
   @Column({ default: false })
   isPublished: boolean;
+
   @OneToMany(() => Image, (image) => image.product, { nullable: true })
   images?: Image[];
+
   @OneToMany(() => Variant, (variant) => variant.product)
   variants?: Variant[];
+
   @OneToOne(() => InvoicesDetail, (invoiceDetails) => invoiceDetails.product, {
     nullable: true,
   })
   invoiceDetail?: InvoicesDetail;
+
   @ManyToOne(() => Category, (category) => category.products, {
     nullable: true,
   })
   category?: Category;
+
   @ManyToOne(() => SubCategory, (subCategory) => subCategory.products, {
     nullable: true,
   })
   subCategory?: SubCategory;
+
   @ManyToOne(() => Brand, (brand) => brand.products, { nullable: true })
   brand?: Brand;
+
   @ManyToOne(() => Section, (section) => section.products, { nullable: true })
   section?: Section;
+
   @ManyToOne(() => Banner, (banner) => banner.products, { nullable: true })
   banner?: Banner;
 }

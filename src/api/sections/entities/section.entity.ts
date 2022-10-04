@@ -6,6 +6,7 @@ import { Column, Entity, OneToMany } from 'typeorm';
 export class Section extends Base {
   @Column()
   name: string;
+
   @OneToMany(() => Product, (product) => product.section)
   products: Product[];
 }

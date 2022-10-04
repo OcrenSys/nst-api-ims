@@ -16,18 +16,24 @@ import {
 export class Credit extends Base {
   @Column()
   fee: number;
+
   @Column()
   rate: number;
+
   @Column({ default: false })
   isExonerated?: boolean;
+
   @OneToMany(() => Payment, (payment) => payment.credit, { nullable: true })
   payments?: Payment[];
+
   @OneToMany(() => PaymentDate, (paymentDate) => paymentDate.credit, {
     nullable: true,
   })
   paymentDates?: PaymentDate[];
+
   @ManyToOne(() => Percent, (percent) => percent.credits)
   percent: Percent;
+
   @OneToOne(() => Invoice, (invoice) => invoice.credit, { nullable: true })
   @JoinColumn()
   invoice?: Invoice;

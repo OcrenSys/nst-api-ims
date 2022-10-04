@@ -7,10 +7,13 @@ import { Column, Entity, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 export class PaymentDate extends Base {
   @Column()
   amount: number;
+
   @Column()
   date: string;
+
   @ManyToOne(() => Credit, (credit) => credit.paymentDates)
   credit: Credit;
+
   @OneToOne(() => Payment, (payment) => payment.paymentDate)
   @JoinColumn()
   payment: Payment;

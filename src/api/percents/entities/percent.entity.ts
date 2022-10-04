@@ -6,8 +6,10 @@ import { Column, Entity, OneToMany } from 'typeorm';
 export class Percent extends Base {
   @Column()
   fee: number;
+
   @Column()
   rate: number;
+
   @OneToMany(() => Credit, (credit) => credit.percent, { nullable: true })
   credits?: Credit[];
 }
