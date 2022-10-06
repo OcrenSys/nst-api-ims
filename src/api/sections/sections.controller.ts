@@ -24,13 +24,11 @@ export class SectionsController {
   }
 
   @Get()
-  @Roles(RoleEnum.Admin, RoleEnum.Sales)
   findAll() {
     return this.sectionsService.findAll();
   }
 
   @Get(':id')
-  @Roles(RoleEnum.Admin, RoleEnum.Sales)
   findOne(@Param('id') id: string) {
     return this.sectionsService.findOne(+id);
   }

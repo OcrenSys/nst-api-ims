@@ -24,13 +24,11 @@ export class VariantsController {
   }
 
   @Get()
-  @Roles(RoleEnum.Admin, RoleEnum.Sales, RoleEnum.User)
   findAll() {
     return this.variantsService.findAll();
   }
 
   @Get(':id')
-  @Roles(RoleEnum.Admin, RoleEnum.Sales, RoleEnum.User)
   findOne(@Param('id') id: string) {
     return this.variantsService.findOne(+id);
   }

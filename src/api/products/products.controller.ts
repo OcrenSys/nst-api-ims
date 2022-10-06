@@ -24,13 +24,11 @@ export class ProductsController {
   }
 
   @Get()
-  @Roles(RoleEnum.Admin, RoleEnum.Sales, RoleEnum.User)
   findAll() {
     return this.productsService.findAll();
   }
 
   @Get(':id')
-  @Roles(RoleEnum.Admin, RoleEnum.Sales, RoleEnum.User)
   findOne(@Param('id') id: string) {
     return this.productsService.findOne(+id);
   }

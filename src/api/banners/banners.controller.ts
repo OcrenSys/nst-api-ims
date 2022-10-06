@@ -24,13 +24,11 @@ export class BannersController {
   }
 
   @Get()
-  @Roles(RoleEnum.Admin)
   findAll() {
     return this.bannersService.findAll();
   }
 
   @Get(':id')
-  @Roles(RoleEnum.Admin)
   findOne(@Param('id') id: string) {
     return this.bannersService.findOne(+id);
   }

@@ -24,13 +24,11 @@ export class SubCategoriesController {
   }
 
   @Get()
-  @Roles(RoleEnum.Admin)
   findAll() {
     return this.subCategoriesService.findAll();
   }
 
   @Get(':id')
-  @Roles(RoleEnum.Admin)
   findOne(@Param('id') id: string) {
     return this.subCategoriesService.findOne(+id);
   }
