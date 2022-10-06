@@ -18,24 +18,25 @@ export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
   @Post()
+  @Roles(RoleEnum.Admin)
   create(@Body() createCustomerDto: CreateCustomerDto) {
     return this.customersService.create(createCustomerDto);
   }
 
   @Get()
-  @Roles(RoleEnum.Admin)
+  @Roles(RoleEnum.Admin, RoleEnum.Sales)
   findAll() {
     return this.customersService.findAll();
   }
 
   @Get(':id')
-  @Roles(RoleEnum.Sales)
+  @Roles(RoleEnum.Admin, RoleEnum.Sales)
   findOne(@Param('id') id: string) {
     return this.customersService.findOne(+id);
   }
 
   @Patch(':id')
-  @Roles(RoleEnum.User)
+  @Roles(RoleEnum.Admin)
   update(
     @Param('id') id: string,
     @Body() updateCustomerDto: UpdateCustomerDto,
@@ -44,6 +45,7 @@ export class CustomersController {
   }
 
   @Delete(':id')
+  @Roles(RoleEnum.Admin)
   remove(@Param('id') id: string) {
     return this.customersService.remove(+id);
   }

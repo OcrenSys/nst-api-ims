@@ -2,6 +2,7 @@ import {
   CanActivate,
   ExecutionContext,
   Injectable,
+  HttpStatus,
   UnauthorizedException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
@@ -40,8 +41,9 @@ export class RoleGuard implements CanActivate {
       return isAuthorized;
     } catch (error) {
       throw new UnauthorizedException({
-        statusCode: 403,
+        statusCode: HttpStatus.FORBIDDEN,
         timestamp: new Date().toISOString(),
+        error: error,
         message: 'No tiene los permisos necesarios para continuar.',
       });
     }

@@ -2,11 +2,10 @@ import { RoleData } from './012_role.data';
 import { UserData } from './013_user.data';
 
 export const UserRoleData: any[] = [
-  // {
-  //   // ocrensys@gmail :: Admin
-  //   userId: UserData[0],
-  //   roleId: RoleData[0],
-  // },
+  {
+    userId: UserData[0],
+    roleId: RoleData[0],
+  },
   {
     userId: UserData[0],
     roleId: RoleData[1],
