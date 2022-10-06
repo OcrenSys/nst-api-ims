@@ -1,15 +1,15 @@
 import { Factory, Seeder } from 'typeorm-seeding';
 import { Connection } from 'typeorm';
-import { Percent } from '../../api/percents/entities/percent.entity';
-import { PercentData } from '../data/04_percent.data';
+import { Member } from '../../api/members/entities/member.entity';
+import { MemberData } from '../data/021_member.data';
 
-export default class PercentSeeder implements Seeder {
+export default class MemberSeeder implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
     await connection
       .createQueryBuilder()
       .insert()
-      .into(Percent)
-      .values(PercentData)
+      .into(Member)
+      .values(MemberData)
       .execute();
   }
 }

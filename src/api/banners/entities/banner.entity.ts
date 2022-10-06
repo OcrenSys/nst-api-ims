@@ -3,7 +3,7 @@ import { Category } from '../../categories/entities/category.entity';
 import { Image } from '../../images/entities/image.entity';
 import { Product } from '../../products/entities/product.entity';
 import { Base } from '../../../common/models/base.entity';
-import { SubCategory } from 'src/api/sub-categories/entities/sub-category.entity';
+import { SubCategory } from '../../sub-categories/entities/sub-category.entity';
 
 @Entity()
 export class Banner extends Base {

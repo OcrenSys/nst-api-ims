@@ -17,6 +17,7 @@ import { RolesModule } from './roles/roles.module';
 import { MembersModule } from './members/members.module';
 import { PersonModule } from './person/person.module';
 import { SubCategoriesModule } from './sub-categories/sub-categories.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { SubCategoriesModule } from './sub-categories/sub-categories.module';
     MembersModule,
     PersonModule,
     SubCategoriesModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],

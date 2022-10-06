@@ -5,6 +5,7 @@ import {
   RequestMethod,
 } from '@nestjs/common';
 import { ApiModule } from './api/api.module';
+import { UsersModule } from './api/users/users.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from './config/config.module';
@@ -14,7 +15,7 @@ import { AuthenticationService } from './services/authentication/authentication.
 import { AuthorizationService } from './services/authorization/authorization.service';
 
 @Module({
-  imports: [ConfigModule, DatabaseModule, ApiModule],
+  imports: [ConfigModule, DatabaseModule, ApiModule, UsersModule],
   controllers: [AppController],
   providers: [AppService, AuthenticationService, AuthorizationService],
 })

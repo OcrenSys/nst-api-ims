@@ -1,15 +1,15 @@
-import { Credit } from '../../api/credits/entities/credit.entity';
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
-import { CreditData } from '../data/05_credit.data';
+import { Person } from '../../api/person/entities/person.entity';
+import { PersonData } from '../data/011_person.data';
 
-export default class CreditSeeder implements Seeder {
+export default class PersonSeeder implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
     await connection
       .createQueryBuilder()
       .insert()
-      .into(Credit)
-      .values(CreditData)
+      .into(Person)
+      .values(PersonData)
       .execute();
   }
 }

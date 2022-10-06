@@ -1,5 +1,5 @@
 import { Customer } from '../../api/customers/entities/customer.entity';
-import { PersonData } from './01_person.data';
+import { PersonData } from './011_person.data';
 
 export const CustomerData: Customer[] = [
   {

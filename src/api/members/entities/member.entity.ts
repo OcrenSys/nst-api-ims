@@ -1,24 +1,16 @@
-import { IsEmail, IsString } from 'class-validator';
-import { Column, Entity, OneToMany, OneToOne, JoinColumn } from 'typeorm';
+import { Column, Entity, OneToOne, JoinColumn } from 'typeorm';
 import { Person } from '../../person/entities/person.entity';
-import { Role } from '../../roles/entities/role.entity';
 import { Base } from '../../../common/models/base.entity';
+import { User } from '../../users/entities/user.entity';
 
 @Entity()
 export class Member extends Base {
   @Column({ nullable: true, default: null })
-  @IsEmail()
-  email?: string;
-
-  @Column({ nullable: true, default: null })
-  @IsString()
-  password?: string;
-
-  @Column({ nullable: true, default: null })
   avatar: string;
 
-  @OneToMany(() => Role, (role) => role.member)
-  roles?: Role[];
+  @OneToOne(() => User, (user) => user.member)
+  @JoinColumn()
+  user: User;
 
   @OneToOne(() => Person, (person) => person.customer)
   @JoinColumn()

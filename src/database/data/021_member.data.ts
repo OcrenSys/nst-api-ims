@@ -1,21 +1,28 @@
-import { RoleEnum } from '../../common/enums/roles.enum';
-import { Role } from '../../api/roles/entities/role.entity';
+import { Member } from '../../api/members/entities/member.entity';
+import { PersonData } from './011_person.data';
+import { UserData } from './013_user.data';
 
-export const RoleData: Role[] = [
+export const MemberData: Member[] = [
   {
-    name: RoleEnum.Admin,
+    avatar: '',
+    person: PersonData[0],
+    user: UserData[0],
     isActive: true,
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
   {
-    name: RoleEnum.Sales,
+    avatar: '',
+    person: PersonData[1],
+    user: UserData[1],
     isActive: true,
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
   {
-    name: RoleEnum.User,
+    avatar: '',
+    person: PersonData[2],
+    user: UserData[2],
     isActive: true,
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),

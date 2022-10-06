@@ -1,9 +1,14 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
-import { User } from '../../common/models/user';
 import { RoleEnum } from '../../common/enums/roles.enum';
 import { ROLES_KEY } from '../../decorators/role.decorator';
+import { Role } from '../../api/roles/entities/role.entity';
 
 @Injectable()
 export class RoleGuard implements CanActivate {
@@ -17,12 +22,28 @@ export class RoleGuard implements CanActivate {
       [context.getHandler(), context.getClass()],
     );
 
-    if (!requiredRoles) {
-      return true;
+    try {
+      let isAuthorized = false;
+
+      if (!requiredRoles) {
+        return true;
+      }
+
+      const {
+        data: { user },
+      } = context.switchToHttp().getRequest();
+
+      isAuthorized = user?.roles.some((role: Role) =>
+        requiredRoles.includes(role.name),
+      );
+
+      return isAuthorized;
+    } catch (error) {
+      throw new UnauthorizedException({
+        statusCode: 403,
+        timestamp: new Date().toISOString(),
+        message: 'No tiene los permisos necesarios para continuar.',
+      });
     }
-
-    const { user }: { user: User } = context.switchToHttp().getRequest();
-
-    return requiredRoles.some((role) => user.role.includes(role));
   }
 }

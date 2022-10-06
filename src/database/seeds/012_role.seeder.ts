@@ -1,15 +1,15 @@
-import { Variant } from '../../api/variants/entities/variant.entity';
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
-import { VariantData } from '../data/03_variant.data';
+import { Role } from '../../api/roles/entities/role.entity';
+import { RoleData } from '../data/012_role.data';
 
-export default class VariantSeeder implements Seeder {
+export default class RoleSeeder implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
     await connection
       .createQueryBuilder()
       .insert()
-      .into(Variant)
-      .values(VariantData)
+      .into(Role)
+      .values(RoleData)
       .execute();
   }
 }

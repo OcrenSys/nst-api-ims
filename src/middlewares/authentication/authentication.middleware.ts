@@ -2,12 +2,15 @@ import { Injectable, NestMiddleware } from '@nestjs/common';
 import * as firebase from 'firebase-admin';
 import { Request, Response } from 'express';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { UsersService } from '../../api/users/users.service';
 
 @Injectable()
 export class AuthenticationMiddleware implements NestMiddleware {
   private auth: firebase.auth.Auth;
-
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(
+    private authenticationService: AuthenticationService,
+    private readonly usersService: UsersService,
+  ) {
     this.auth = authenticationService.getAuth();
   }
 
@@ -18,11 +21,11 @@ export class AuthenticationMiddleware implements NestMiddleware {
       this.auth
         .verifyIdToken(token.replace('Bearer ', ''))
         .then(async (decodedToken) => {
-          req['user'] = {
-            email: decodedToken.email,
-            roles: decodedToken.roles || [],
-            type: decodedToken.type,
-          };
+          const user = await this.usersService.findOne(decodedToken.user_id);
+
+          if (!user) req['data'] = { decodedToken };
+          else req['data'] = { decodedToken, user: user };
+
           next();
         })
         .catch(() => {
@@ -38,7 +41,7 @@ export class AuthenticationMiddleware implements NestMiddleware {
       statusCode: 403,
       timestamp: new Date().toISOString(),
       path: url,
-      message: 'access denied',
+      message: 'Acceso deneado, iniciar sesion para continuar.',
     });
   }
 }

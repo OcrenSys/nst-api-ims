@@ -7,7 +7,7 @@ import { Section } from '../../sections/entities/section.entity';
 import { Variant } from '../../variants/entities/variant.entity';
 import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 import { Base } from '../../../common/models/base.entity';
-import { SubCategory } from 'src/api/sub-categories/entities/sub-category.entity';
+import { SubCategory } from '../../sub-categories/entities/sub-category.entity';
 
 @Entity()
 export class Product extends Base {

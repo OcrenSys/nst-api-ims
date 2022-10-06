@@ -10,7 +10,7 @@ import {
   OneToMany,
   OneToOne,
 } from 'typeorm';
-import { Category } from 'src/api/categories/entities/category.entity';
+import { Category } from '../../categories/entities/category.entity';
 import { IsNumber } from 'class-validator';
 
 @Entity()
