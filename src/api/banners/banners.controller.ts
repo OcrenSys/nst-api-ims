@@ -28,6 +28,16 @@ export class BannersController {
     return this.bannersService.findAll();
   }
 
+  @Get('public')
+  findAllPublic() {
+    return `This PUBLIC action returns all banners`;
+  }
+
+  @Get('public/:id')
+  findOnePublic(@Param('id') id: string) {
+    return `This PUBLIC action returns a #${id} banner`;
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.bannersService.findOne(+id);
