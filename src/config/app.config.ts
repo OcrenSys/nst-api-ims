@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+import * as PackageJSON from '../../package.json';
+
 export default () => ({
   /*
   |--------------------------------------------------------------------------
@@ -8,10 +9,11 @@ export default () => ({
   | This values are defined in the package.json.
   |
   */
-  name: require('../../package.json').name,
-  title: require('../../package.json').title,
-  description: require('../../package.json').description,
-  version: require('../../package.json').version,
+
+  name: PackageJSON.name,
+  title: PackageJSON.title,
+  description: PackageJSON.description,
+  version: PackageJSON.version,
 
   /*
   |--------------------------------------------------------------------------

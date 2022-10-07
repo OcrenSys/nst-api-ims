@@ -1,23 +1,40 @@
 import { Banner } from '../../banners/entities/banner.entity';
 import { Image } from '../../images/entities/image.entity';
 import { Product } from '../../products/entities/product.entity';
-import { Base } from '../../../utilities/classes/base.entity';
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Base } from '../../../common/models/base.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
+import { SubCategory } from '../../sub-categories/entities/sub-category.entity';
+import { IsNumber } from 'class-validator';
 
 @Entity()
 export class Category extends Base {
   @Column()
-  code: string;
-  @Column()
   name: string;
+
   @Column()
   description: string;
-  @Column()
+
+  @Column({ default: 0 })
+  @IsNumber()
   order: number;
-  @OneToMany(() => Image, (image) => image.variant)
-  images: Image[];
+
+  @OneToOne(() => Image, (image) => image.category, { nullable: true })
+  @JoinColumn()
+  image: Image;
+
   @ManyToOne(() => Banner, (banner) => banner.categories)
-  banner: Banner;
+  banner?: Banner;
+
   @OneToMany(() => Product, (product) => product.category)
-  products: Product[];
+  products?: Product[];
+
+  @OneToMany(() => SubCategory, (subCategory) => subCategory.category)
+  subcategories?: SubCategory[];
 }

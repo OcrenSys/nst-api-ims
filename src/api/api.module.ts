@@ -13,6 +13,11 @@ import { PaymentsModule } from './payments/payments.module';
 import { PaymentDatesModule } from './payment-dates/payment-dates.module';
 import { CreditsModule } from './credits/credits.module';
 import { PercentsModule } from './percents/percents.module';
+import { RolesModule } from './roles/roles.module';
+import { MembersModule } from './members/members.module';
+import { PersonModule } from './person/person.module';
+import { SubCategoriesModule } from './sub-categories/sub-categories.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -30,6 +35,11 @@ import { PercentsModule } from './percents/percents.module';
     PaymentDatesModule,
     CreditsModule,
     PercentsModule,
+    RolesModule,
+    MembersModule,
+    PersonModule,
+    SubCategoriesModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],

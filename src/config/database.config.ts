@@ -24,7 +24,8 @@ export default () =>
       charset: 'utf8mb4_unicode_ci',
     },
     synchronize: Boolean(process.env.TYPEORM_SYNCHRONIZE) || false,
-    dropSchema: false,
+    // dropSchema: Boolean(process.env.TYPEORM_DROP_SCHEMA) || false,
+    dropSchema: false, // not allow DELETE TABLES from DATABASE
     migrationsRun: Boolean(process.env.TYPEORM_MIGRATIONS_RUN) || false,
     logging: Boolean(process.env.TYPEORM_LOGGING) || false,
   } as TypeOrmModuleOptions);
