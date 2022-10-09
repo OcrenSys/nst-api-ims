@@ -10,8 +10,8 @@ import {
 import { SectionsService } from './sections.service';
 import { CreateSectionDto } from './dto/create-section.dto';
 import { UpdateSectionDto } from './dto/update-section.dto';
-import { Roles } from 'src/decorators/role.decorator';
-import { RoleEnum } from 'src/common/enums/roles.enum';
+import { Roles } from '../../decorators/role.decorator';
+import { RoleEnum } from '../../common/enums/roles.enum';
 
 @Controller('sections')
 export class SectionsController {

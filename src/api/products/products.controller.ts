@@ -10,8 +10,8 @@ import {
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { Roles } from 'src/decorators/role.decorator';
-import { RoleEnum } from 'src/common/enums/roles.enum';
+import { Roles } from '../../decorators/role.decorator';
+import { RoleEnum } from '../../common/enums/roles.enum';
 
 @Controller('products')
 export class ProductsController {

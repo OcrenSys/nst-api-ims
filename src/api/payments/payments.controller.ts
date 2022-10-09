@@ -10,8 +10,8 @@ import {
 import { PaymentsService } from './payments.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
-import { Roles } from 'src/decorators/role.decorator';
-import { RoleEnum } from 'src/common/enums/roles.enum';
+import { Roles } from '../../decorators/role.decorator';
+import { RoleEnum } from '../../common/enums/roles.enum';
 
 @Controller('payments')
 export class PaymentsController {

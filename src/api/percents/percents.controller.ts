@@ -10,8 +10,8 @@ import {
 import { PercentsService } from './percents.service';
 import { CreatePercentDto } from './dto/create-percent.dto';
 import { UpdatePercentDto } from './dto/update-percent.dto';
-import { Roles } from 'src/decorators/role.decorator';
-import { RoleEnum } from 'src/common/enums/roles.enum';
+import { Roles } from '../../decorators/role.decorator';
+import { RoleEnum } from '../../common/enums/roles.enum';
 
 @Controller('percents')
 export class PercentsController {

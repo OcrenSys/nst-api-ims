@@ -7,8 +7,8 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { RoleEnum } from 'src/common/enums/roles.enum';
-import { Roles } from 'src/decorators/role.decorator';
+import { RoleEnum } from '../../common/enums/roles.enum';
+import { Roles } from '../../decorators/role.decorator';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
