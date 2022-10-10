@@ -7,4 +7,4 @@ export const N100 = 100;
 export const N150 = 150;
 export const N200 = 200;
 export const N250 = 250;
-export const MAX = 10000;
+export const MAX = 100000;

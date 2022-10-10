@@ -81,7 +81,7 @@ export class Product extends Base {
   })
   stock: number;
 
-  @Column()
+  @Column({ default: 0 })
   @IsInt()
   @Min(MIN)
   order: number;

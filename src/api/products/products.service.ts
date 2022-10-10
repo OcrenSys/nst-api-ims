@@ -1,3 +1,4 @@
+import { DataSource, DeleteResult, Repository } from 'typeorm';
 import {
   Injectable,
   HttpStatus,
@@ -7,8 +8,8 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { from, map } from 'rxjs';
 import { ResponseHttp } from 'src/common/interfaces/response.http';
-import { DataSource, Repository } from 'typeorm';
 import { Image } from '../images/entities/image.entity';
 import { Variant } from '../variants/entities/variant.entity';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -183,8 +184,22 @@ export class ProductsService {
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async remove(id: number): Promise<any> {
+    const product: Product = await this.productRepository.findOne({
+      where: { id: id },
+    });
+
+    if (!product)
+      this.handleExceptions(
+        { code: HttpStatus.NOT_FOUND },
+        `Producto con id: "${id}" no pudo ser encontrado`,
+      );
+
+    return from(this.productRepository.delete(id)).pipe(
+      map((result: DeleteResult) => {
+        return { ...result };
+      }),
+    );
   }
 
   handleExceptions(error, message?: string) {
