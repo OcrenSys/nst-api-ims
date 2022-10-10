@@ -103,9 +103,13 @@ export class ProductsService {
     }
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<ResponseHttp> {
+    const filters = { id: id };
+    const relations = ['subCategory'];
+
     const product: Product = await this.productRepository.findOne({
-      where: { id: id },
+      relations: [...relations],
+      where: { ...filters },
     });
 
     if (!product)
@@ -123,7 +127,10 @@ export class ProductsService {
     };
   }
 
-  async update(id: number, updateProductDto: UpdateProductDto) {
+  async update(
+    id: number,
+    updateProductDto: UpdateProductDto,
+  ): Promise<ResponseHttp> {
     const { images, variants, ...toUpdate } = updateProductDto;
     const queryRunner = this.dataSource.createQueryRunner();
 
