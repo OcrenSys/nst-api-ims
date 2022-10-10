@@ -77,8 +77,30 @@ export class ProductsService {
     }
   }
 
-  findAll() {
-    return `This action returns all products`;
+  async findAll(): Promise<ResponseHttp> {
+    let products: Product[] = [];
+    const filters = {};
+    const relations = ['subCategory'];
+
+    try {
+      products = await this.productRepository.find({
+        relations: [...relations],
+        where: { ...filters },
+      });
+
+      return {
+        statusCode: HttpStatus.OK,
+        timestamp: new Date().toISOString(),
+        error: null,
+        data: [...products],
+        message: '¡Productos encontrados exitosamente!',
+      };
+    } catch (error) {
+      this.handleExceptions(
+        error,
+        'Algo salió mal al encontrar los productos.',
+      );
+    }
   }
 
   async findOne(id: number) {
