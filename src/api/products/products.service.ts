@@ -4,6 +4,7 @@ import {
   BadRequestException,
   Logger,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ResponseHttp } from 'src/common/interfaces/response.http';
@@ -100,8 +101,57 @@ export class ProductsService {
     };
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async update(id: number, updateProductDto: UpdateProductDto) {
+    const { images, variants, ...toUpdate } = updateProductDto;
+    const queryRunner = this.dataSource.createQueryRunner();
+
+    try {
+      const product = await this.productRepository.preload({
+        id,
+        ...toUpdate,
+      });
+
+      if (!product)
+        this.handleExceptions(
+          { code: HttpStatus.NOT_FOUND },
+          `Producto con id: "${id}" no pudo ser encontrado`,
+        );
+
+      await queryRunner.connect();
+      await queryRunner.startTransaction();
+
+      if (variants.length) {
+        await queryRunner.manager.delete(Variant, { product: { id } });
+
+        product.variants = variants.map((variant: Variant) =>
+          this.variantRepository.create(variant),
+        );
+      }
+
+      if (images.length) {
+        await queryRunner.manager.delete(Image, { product: { id } });
+
+        product.images = images.map((image: Image) =>
+          this.imageRepository.create(image),
+        );
+      }
+
+      await queryRunner.manager.save(product);
+
+      await queryRunner.commitTransaction();
+      await queryRunner.release();
+
+      return {
+        statusCode: HttpStatus.OK,
+        timestamp: new Date().toISOString(),
+        error: null,
+        data: { ...product },
+        message: '¡Producto actualizado exitosamente!',
+      };
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      throw new BadRequestException();
+    }
   }
 
   remove(id: number) {
@@ -110,20 +160,27 @@ export class ProductsService {
 
   handleExceptions(error, message?: string) {
     this.logger.error(error);
+    const data = {
+      error: error,
+      message: message || 'Ocurrió un error inesperado.',
+      timestamp: new Date().toISOString(),
+    };
+
+    if (error.code === HttpStatus.NOT_FOUND)
+      throw new NotFoundException({
+        ...data,
+        statusCode: HttpStatus.NOT_FOUND,
+      });
 
     if (error.code === HttpStatus.BAD_REQUEST)
       throw new BadRequestException({
+        ...data,
         statusCode: HttpStatus.BAD_REQUEST,
-        timestamp: new Date().toISOString(),
-        error: error,
-        message: message || 'Algo salió mal, verifique los datos.',
       });
 
     throw new InternalServerErrorException({
+      ...data,
       statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-      timestamp: new Date().toISOString(),
-      error: error,
-      message: 'Ocurrió un error inesperado.',
     });
   }
 }
