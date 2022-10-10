@@ -80,8 +80,24 @@ export class ProductsService {
     return `This action returns all products`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: number) {
+    const product: Product = await this.productRepository.findOne({
+      where: { id: id },
+    });
+
+    if (!product)
+      this.handleExceptions(
+        { code: HttpStatus.NOT_FOUND },
+        `Producto con id: "${id}" no pudo ser encontrado`,
+      );
+
+    return {
+      statusCode: HttpStatus.OK,
+      timestamp: new Date().toISOString(),
+      error: null,
+      data: { ...product },
+      message: '¡Producto encontrado exitosamente!',
+    };
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
