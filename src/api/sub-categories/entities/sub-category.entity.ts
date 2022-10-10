@@ -32,7 +32,7 @@ export class SubCategory extends Base {
   @ManyToOne(() => Banner, (banner) => banner.subCategories)
   banner: Banner;
 
-  @OneToMany(() => Product, (product) => product.subCategory)
+  @OneToMany(() => Product, (product) => product.subCategory, { eager: true })
   products: Product[];
 
   @ManyToOne(() => Category, (category) => category.subcategories)
