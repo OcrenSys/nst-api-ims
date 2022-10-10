@@ -7,8 +7,8 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { RoleEnum } from 'src/common/enums/roles.enum';
-import { Roles } from 'src/decorators/role.decorator';
+import { RoleEnum } from '../../common/enums/roles.enum';
+import { Roles } from '../../decorators/role.decorator';
 import { CreditsService } from './credits.service';
 import { CreateCreditDto } from './dto/create-credit.dto';
 import { UpdateCreditDto } from './dto/update-credit.dto';

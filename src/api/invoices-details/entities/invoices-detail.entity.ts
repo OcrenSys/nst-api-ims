@@ -18,11 +18,17 @@ export class InvoicesDetail extends Base {
   @ManyToOne(() => Invoice, (invoice) => invoice.invoiceDetails)
   invoice: Invoice;
 
-  @OneToOne(() => Product, (product) => product.invoiceDetail)
+  @OneToOne(() => Product, (product) => product.invoiceDetail, {
+    nullable: true,
+    eager: true,
+  })
   @JoinColumn()
   product: Product;
 
-  @OneToOne(() => Variant, (variant) => variant.invoiceDetail)
+  @OneToOne(() => Variant, (variant) => variant.invoiceDetail, {
+    nullable: true,
+    eager: true,
+  })
   @JoinColumn()
   variant: Variant;
 }

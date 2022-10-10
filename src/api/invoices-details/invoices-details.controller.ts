@@ -10,8 +10,8 @@ import {
 import { InvoicesDetailsService } from './invoices-details.service';
 import { CreateInvoicesDetailDto } from './dto/create-invoices-detail.dto';
 import { UpdateInvoicesDetailDto } from './dto/update-invoices-detail.dto';
-import { Roles } from 'src/decorators/role.decorator';
-import { RoleEnum } from 'src/common/enums/roles.enum';
+import { Roles } from '../../decorators/role.decorator';
+import { RoleEnum } from '../../common/enums/roles.enum';
 
 @Controller('invoices-details')
 export class InvoicesDetailsController {

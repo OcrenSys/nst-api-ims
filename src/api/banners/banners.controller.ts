@@ -7,8 +7,8 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { RoleEnum } from 'src/common/enums/roles.enum';
-import { Roles } from 'src/decorators/role.decorator';
+import { RoleEnum } from '../../common/enums/roles.enum';
+import { Roles } from '../../decorators/role.decorator';
 import { BannersService } from './banners.service';
 import { CreateBannerDto } from './dto/create-banner.dto';
 import { UpdateBannerDto } from './dto/update-banner.dto';

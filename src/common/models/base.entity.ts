@@ -1,4 +1,5 @@
 import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { IsBoolean, IsDate } from 'class-validator';
 export class Base {
   @PrimaryGeneratedColumn()
   id?: number;
@@ -8,6 +9,7 @@ export class Base {
     nullable: false,
     default: () => 'CURRENT_TIMESTAMP',
   })
+  @IsDate()
   createdAt: string;
 
   @Column({
@@ -16,8 +18,10 @@ export class Base {
     onUpdate: 'NOW()',
     default: () => 'CURRENT_TIMESTAMP',
   })
+  @IsDate()
   updatedAt: string;
 
   @Column({ nullable: false, default: true })
+  @IsBoolean()
   isActive: boolean;
 }

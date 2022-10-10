@@ -18,6 +18,8 @@ import { MembersModule } from './members/members.module';
 import { PersonModule } from './person/person.module';
 import { SubCategoriesModule } from './sub-categories/sub-categories.module';
 import { UsersModule } from './users/users.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RoleGuard } from '../guards/role/role.guard';
 
 @Module({
   imports: [
@@ -42,6 +44,11 @@ import { UsersModule } from './users/users.module';
     UsersModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: RoleGuard,
+    },
+  ],
 })
 export class ApiModule {}

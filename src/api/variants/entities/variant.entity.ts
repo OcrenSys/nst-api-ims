@@ -7,14 +7,14 @@ import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
 @Entity()
 export class Variant extends Base {
-  @Column({ unique: true })
-  code: string;
+  @Column({ unique: true, nullable: true })
+  code?: string;
 
   @Column()
   name: string;
 
-  @Column()
-  description: string;
+  @Column({ nullable: true })
+  description?: string;
 
   @Column()
   price: number;
@@ -28,19 +28,23 @@ export class Variant extends Base {
   @Column()
   stock: number;
 
-  @Column()
-  order: number;
+  @Column({ default: 0 })
+  order?: number;
 
   @Column({ default: false })
-  isPublished: boolean;
+  isPublished?: boolean;
 
-  @OneToOne(() => InvoicesDetail, (invoiceDetails) => invoiceDetails.product)
-  invoiceDetail: InvoicesDetail;
+  @OneToOne(() => InvoicesDetail, (invoiceDetails) => invoiceDetails.variant, {
+    nullable: true,
+  })
+  invoiceDetail?: InvoicesDetail;
 
   @OneToMany(() => Image, (image) => image.variant, { nullable: true })
   images?: Image[];
 
-  @ManyToOne(() => Product, (product) => product.variants, { nullable: true })
+  @ManyToOne(() => Product, (product) => product.variants, {
+    onDelete: 'CASCADE',
+  })
   product?: Product;
 
   @ManyToOne(() => Brand, (brand) => brand.variants, { nullable: true })

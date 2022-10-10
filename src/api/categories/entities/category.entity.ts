@@ -25,16 +25,18 @@ export class Category extends Base {
   @IsNumber()
   order: number;
 
-  @OneToOne(() => Image, (image) => image.category, { nullable: true })
+  @OneToOne(() => Image, (image) => image.category, {
+    nullable: true,
+    eager: true,
+  })
   @JoinColumn()
   image: Image;
 
   @ManyToOne(() => Banner, (banner) => banner.categories)
   banner?: Banner;
 
-  @OneToMany(() => Product, (product) => product.category)
-  products?: Product[];
-
-  @OneToMany(() => SubCategory, (subCategory) => subCategory.category)
+  @OneToMany(() => SubCategory, (subCategory) => subCategory.category, {
+    eager: true,
+  })
   subcategories?: SubCategory[];
 }
