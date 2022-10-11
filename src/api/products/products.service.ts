@@ -63,7 +63,6 @@ export class ProductsService {
       return {
         statusCode: HttpStatus.CREATED,
         timestamp: new Date().toISOString(),
-        error: null,
         data: { ...product },
         message: '¡Producto creado exitosamente!',
       };
