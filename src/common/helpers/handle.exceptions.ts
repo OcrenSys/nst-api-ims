@@ -41,7 +41,7 @@ export class HandleExceptions {
   success({ statusCode = HttpStatus.BAD_REQUEST, data = {}, message = '' }) {
     return {
       statusCode: statusCode,
-      data: { ...data },
+      data: data,
       message: message,
       timestamp: new Date().toISOString(),
     };

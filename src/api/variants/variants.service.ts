@@ -10,6 +10,7 @@ import { Product } from '../products/entities/product.entity';
 import { Variant } from './entities/variant.entity';
 import { CreateVariantDto } from './dto/create-variant.dto';
 import { UpdateVariantDto } from './dto/update-variant.dto';
+import { from, map } from 'rxjs';
 
 @Injectable()
 export class VariantsService {
@@ -72,8 +73,25 @@ export class VariantsService {
     }
   }
 
-  findAll() {
-    return `This action returns all variants`;
+  async findAll(): Promise<any> {
+    let variants: Variant[] = [];
+    const filters = {};
+    const relations = [];
+
+    try {
+      variants = await this.variantRepository.find({
+        where: { ...filters },
+        relations: [...relations],
+      });
+
+      return this.handle.success({
+        data: [...variants],
+        statusCode: HttpStatus.OK,
+        message: 'Variante encontradas exitosamente!',
+      });
+    } catch (error) {
+      this.handle.throw(error, 'Algo salió mal al encontrar las variantes.');
+    }
   }
 
   findOne(id: number) {
