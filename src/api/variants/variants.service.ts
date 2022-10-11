@@ -72,12 +72,50 @@ export class VariantsService {
     }
   }
 
-  findAll() {
-    return `This action returns all variants`;
+  async findAll(): Promise<ResponseHttp> {
+    let variants: Variant[] = [];
+    const filters = {};
+    const relations = [];
+
+    try {
+      variants = await this.variantRepository.find({
+        relations: [...relations],
+        where: { ...filters },
+      });
+
+      return this.handle.success({
+        statusCode: HttpStatus.OK,
+        data: [...variants],
+        message: 'Varaintes encontradas exitosamente!',
+      });
+    } catch (error) {
+      this.handle.throw(error, 'Algo salió mal al encontrar las variates.');
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} variant`;
+  async findOne(id: number): Promise<ResponseHttp> {
+    const filters = { id: id };
+    const relations = [];
+    try {
+      const variant: Variant = await this.variantRepository.findOne({
+        relations: [...relations],
+        where: { ...filters },
+      });
+
+      if (!variant)
+        this.handle.throw(
+          { code: HttpStatus.NOT_FOUND },
+          `Variante con id: "${id}" no pudo ser encontrado`,
+        );
+
+      return this.handle.success({
+        statusCode: HttpStatus.OK,
+        data: { ...variant },
+        message: 'Varainte encontrada exitosamente!',
+      });
+    } catch (error) {
+      this.handle.throw(error, 'Algo salió mal al encontrar la variante.');
+    }
   }
 
   update(id: number, updateVariantDto: UpdateVariantDto) {

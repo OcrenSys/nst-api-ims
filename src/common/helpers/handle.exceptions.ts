@@ -11,8 +11,8 @@ import {
 export class HandleExceptions {
   private readonly logger = new Logger('ProductsService');
 
-  throw(error, message?: string) {
-    this.logger.error(error, message);
+  throw(error: any, message?: string) {
+    this.logger.error('\n\n' + error, `\n\n${message}\n`);
 
     const data = {
       error: error,
