@@ -80,7 +80,7 @@ export class ProductsService {
   async findAll(): Promise<ResponseHttp> {
     let products: Product[] = [];
     const filters = {};
-    const relations = ['subCategory'];
+    const relations = ['subCategory', 'variants'];
 
     try {
       products = await this.productRepository.find({
@@ -105,7 +105,7 @@ export class ProductsService {
 
   async findOne(id: number): Promise<ResponseHttp> {
     const filters = { id: id };
-    const relations = ['subCategory'];
+    const relations = ['subCategory', 'variants'];
 
     const product: Product = await this.productRepository.findOne({
       relations: [...relations],

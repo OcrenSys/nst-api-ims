@@ -1,4 +1,4 @@
-import { DataSource } from 'typeorm';
+import { DataSource, DeleteResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
@@ -10,6 +10,7 @@ import { Product } from '../products/entities/product.entity';
 import { Variant } from './entities/variant.entity';
 import { CreateVariantDto } from './dto/create-variant.dto';
 import { UpdateVariantDto } from './dto/update-variant.dto';
+import { from, map } from 'rxjs';
 
 @Injectable()
 export class VariantsService {
@@ -75,7 +76,7 @@ export class VariantsService {
   async findAll(): Promise<ResponseHttp> {
     let variants: Variant[] = [];
     const filters = {};
-    const relations = [];
+    const relations = ['product'];
 
     try {
       variants = await this.variantRepository.find({
@@ -95,34 +96,86 @@ export class VariantsService {
 
   async findOne(id: number): Promise<ResponseHttp> {
     const filters = { id: id };
-    const relations = [];
+    const relations = { product: true };
+    const variant: Variant = await this.variantRepository.findOne({
+      relations: { ...relations },
+      where: { ...filters },
+    });
+
+    if (!variant)
+      this.handle.throw(
+        { code: HttpStatus.NOT_FOUND },
+        `Variante con id: "${id}" no pudo ser encontrada`,
+      );
+
+    return this.handle.success({
+      statusCode: HttpStatus.OK,
+      data: { ...variant },
+      message: 'Varainte encontrada exitosamente!',
+    });
+  }
+
+  async update(id: number, updateVariantDto: UpdateVariantDto): Promise<any> {
+    const {
+      brand = null,
+      product = null,
+      ...toUpdateVariant
+    } = updateVariantDto;
+    const queryRunner = this.dataSource.createQueryRunner();
+
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
     try {
-      const variant: Variant = await this.variantRepository.findOne({
-        relations: [...relations],
-        where: { ...filters },
+      const variant = await this.variantRepository.preload({
+        id,
+        ...toUpdateVariant,
       });
 
-      if (!variant)
-        this.handle.throw(
-          { code: HttpStatus.NOT_FOUND },
-          `Variante con id: "${id}" no pudo ser encontrado`,
-        );
+      if (brand) variant.brand = this.brandRepository.create(brand);
 
+      if (product) variant.product = this.productRepository.create(product);
+
+      this.variantRepository.save(variant);
+
+      await queryRunner.commitTransaction();
       return this.handle.success({
-        statusCode: HttpStatus.OK,
         data: { ...variant },
-        message: 'Varainte encontrada exitosamente!',
+        statusCode: HttpStatus.OK,
+        message: `Variante ${variant.name} has sido actualizada exitosamente,`,
       });
     } catch (error) {
-      this.handle.throw(error, 'Algo salió mal al encontrar la variante.');
+      await queryRunner.rollbackTransaction();
+      this.handle.throw({
+        statusCode: error.code,
+        message: error.message,
+        stack: error.stack,
+      });
+    } finally {
+      await queryRunner.release();
     }
   }
 
-  update(id: number, updateVariantDto: UpdateVariantDto) {
-    return `This action updates a #${id} variant`;
-  }
+  async remove(id: number): Promise<any> {
+    const variant = this.variantRepository.findOne({
+      where: { id: id },
+    });
 
-  remove(id: number) {
-    return `This action removes a #${id} variant`;
+    if (!variant) {
+      this.handle.throw(
+        { code: HttpStatus.NOT_FOUND },
+        `Variante con id: "${id}" no pudo ser encontrado`,
+      );
+    }
+
+    return from(this.variantRepository.delete(id)).pipe(
+      map((result: DeleteResult) => {
+        return this.handle.success({
+          data: { ...result },
+          statusCode: HttpStatus.OK,
+          message: `Variante ha sido eliminada exitosamente,`,
+        });
+      }),
+    );
   }
 }

@@ -98,7 +98,6 @@ export class Product extends Base {
 
   @OneToMany(() => Variant, (variant) => variant.product, {
     cascade: true,
-    eager: true,
   })
   variants?: Variant[];
 

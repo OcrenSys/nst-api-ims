@@ -6,6 +6,7 @@ import {
   InternalServerErrorException,
   Injectable,
 } from '@nestjs/common';
+import { BaseExceptionFilter } from '@nestjs/core';
 
 @Injectable()
 export class HandleExceptions {
@@ -32,10 +33,13 @@ export class HandleExceptions {
         statusCode: HttpStatus.BAD_REQUEST,
       });
 
-    throw new InternalServerErrorException({
-      ...data,
-      statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-    });
+    if (error?.code === HttpStatus.INTERNAL_SERVER_ERROR)
+      throw new BadRequestException({
+        ...data,
+        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+      });
+
+    throw new HandleExceptions();
   }
 
   success({ statusCode = HttpStatus.BAD_REQUEST, data = {}, message = '' }) {
