@@ -14,12 +14,11 @@ import { EXCLUDED, ROUTES } from './common/constants/routes.constants';
   controllers: [AppController],
   providers: [AppService, AuthenticationService, AuthorizationService],
 })
-export class AppModule {}
-/* implements NestModule {
+export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
     consumer
       .apply(AuthenticationMiddleware)
       .exclude(...EXCLUDED)
       .forRoutes(ROUTES);
   }
-} */
+}

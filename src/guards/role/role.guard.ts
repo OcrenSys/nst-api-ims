@@ -30,13 +30,13 @@ export class RoleGuard implements CanActivate {
         isAuthorized = true;
       }
 
-      /* const {
+      const {
         data: { user },
       } = context.switchToHttp().getRequest();
 
       isAuthorized = user?.roles.some((role: Role) =>
         requiredRoles.includes(role.name),
-      ); */
+      );
 
       return isAuthorized;
     } catch (error) {

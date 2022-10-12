@@ -42,11 +42,11 @@ export class VariantsService {
     try {
       const variant: Variant = await this.variantRepository.create({
         ...toCreateVariant,
+        brand: brand ? this.brandRepository.create(brand) : null,
+        product: product ? this.productRepository.create(product) : null,
         images: images.map((imageToCreate: Image) =>
           this.imageRepository.create(imageToCreate),
         ),
-        product: product ? this.productRepository.create(product) : null,
-        brand: brand ? this.brandRepository.create(brand) : null,
       });
 
       if (!variant) {
@@ -111,7 +111,7 @@ export class VariantsService {
     return this.handle.success({
       statusCode: HttpStatus.OK,
       data: { ...variant },
-      message: 'Varainte encontrada exitosamente!',
+      message: 'Variante encontrada exitosamente!',
     });
   }
 

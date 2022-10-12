@@ -24,11 +24,13 @@ export class CategoriesController {
   }
 
   @Get()
+  @Roles(RoleEnum.Admin)
   findAll() {
     return this.categoriesService.findAll();
   }
 
   @Get(':id')
+  @Roles(RoleEnum.Admin)
   findOne(@Param('id') id: string) {
     return this.categoriesService.findOne(+id);
   }
