@@ -27,16 +27,16 @@ export class RoleGuard implements CanActivate {
       let isAuthorized = false;
 
       if (!requiredRoles) {
-        return true;
+        isAuthorized = true;
       }
 
-      const {
+      /* const {
         data: { user },
       } = context.switchToHttp().getRequest();
 
       isAuthorized = user?.roles.some((role: Role) =>
         requiredRoles.includes(role.name),
-      );
+      ); */
 
       return isAuthorized;
     } catch (error) {
