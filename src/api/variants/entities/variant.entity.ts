@@ -46,7 +46,4 @@ export class Variant extends Base {
     onDelete: 'CASCADE',
   })
   product?: Product;
-
-  @ManyToOne(() => Brand, (brand) => brand.variants, { nullable: true })
-  brand?: Brand;
 }

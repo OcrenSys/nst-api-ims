@@ -19,8 +19,6 @@ export class VariantsService {
     private readonly variantRepository: Repository<Variant>,
     @InjectRepository(Image)
     private readonly imageRepository: Repository<Image>,
-    @InjectRepository(Brand)
-    private readonly brandRepository: Repository<Brand>,
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
     private readonly handle: HandleExceptions,
@@ -31,7 +29,6 @@ export class VariantsService {
     const {
       images = [],
       product = null,
-      brand = null,
       ...toCreateVariant
     } = createVariantDto;
     const queryRunner = this.dataSource.createQueryRunner();
@@ -42,7 +39,6 @@ export class VariantsService {
     try {
       const variant: Variant = await this.variantRepository.create({
         ...toCreateVariant,
-        brand: brand ? this.brandRepository.create(brand) : null,
         product: product ? this.productRepository.create(product) : null,
         images: images.map((imageToCreate: Image) =>
           this.imageRepository.create(imageToCreate),
@@ -131,8 +127,6 @@ export class VariantsService {
         id,
         ...toUpdateVariant,
       });
-
-      if (brand) variant.brand = this.brandRepository.create(brand);
 
       if (product) variant.product = this.productRepository.create(product);
 

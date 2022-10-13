@@ -5,42 +5,58 @@ import {
   BadRequestException,
   InternalServerErrorException,
   Injectable,
+  HttpException,
 } from '@nestjs/common';
 
 @Injectable()
 export class HandleExceptions {
-  private readonly logger = new Logger('ProductsService');
+  private readonly logger = new Logger('Logger');
 
   throw(error: any, message?: string) {
-    this.logger.error('\n\n' + error, `\n\n${message}\n`);
-
-    const data = {
-      error: error,
-      message: message || 'Ocurrió un error inesperado.',
-      timestamp: new Date().toISOString(),
-    };
+    this.logger.error(error);
 
     if (error?.code === HttpStatus.NOT_FOUND)
-      throw new NotFoundException({
-        ...data,
-        statusCode: HttpStatus.NOT_FOUND,
-      });
+      throw new NotFoundException(
+        {
+          ...error,
+          timestamp: new Date().toISOString(),
+          statusCode: HttpStatus.NOT_FOUND,
+          message: message,
+        },
+        message || 'Lo sentimos, no se encontraron los datos.',
+      );
 
     if (error?.code === HttpStatus.BAD_REQUEST)
-      throw new BadRequestException({
-        ...data,
-        statusCode: HttpStatus.BAD_REQUEST,
-      });
-
+      throw new BadRequestException(
+        {
+          ...error,
+          timestamp: new Date().toISOString(),
+          statusCode: HttpStatus.BAD_REQUEST,
+          message: message,
+        },
+        message ||
+          'Ocurrió un error inesperado, revise los datos y vuelva a intentarlo.',
+      );
     if (error?.code === HttpStatus.INTERNAL_SERVER_ERROR)
-      throw new InternalServerErrorException({
-        error: error,
-        message: message || 'Ocurrió un error inesperado.',
+      throw new InternalServerErrorException(
+        {
+          ...error,
+          timestamp: new Date().toISOString(),
+          statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+          message: message,
+        },
+        message || 'Ocurrió un error inesperado.',
+      );
+
+    throw new HttpException(
+      {
+        ...error,
         timestamp: new Date().toISOString(),
         statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-      });
-
-    throw new HandleExceptions();
+        message: message,
+      },
+      HttpStatus.INTERNAL_SERVER_ERROR,
+    );
   }
 
   success({ statusCode = HttpStatus.BAD_REQUEST, data = {}, message = '' }) {

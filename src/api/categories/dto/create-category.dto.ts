@@ -9,8 +9,8 @@ import {
   Min,
   MinLength,
 } from 'class-validator';
-import { Image } from '../../../api/images/entities/image.entity';
 import * as NUMBER from '../../../common/constants/numbers.constants';
+import { Image } from '../../../api/images/entities/image.entity';
 import { SubCategory } from 'src/api/sub-categories/entities/sub-category.entity';
 import { Banner } from 'src/api/banners/entities/banner.entity';
 

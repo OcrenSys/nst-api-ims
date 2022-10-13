@@ -106,7 +106,7 @@ export class CategoriesService {
     }
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<ResponseHttp> {
     const filters = { id: id };
     const relations = ['subcategories', 'banner'];
 
