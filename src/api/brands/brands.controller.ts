@@ -24,11 +24,13 @@ export class BrandsController {
   }
 
   @Get()
+  @Roles(RoleEnum.Admin, RoleEnum.Sales)
   findAll() {
     return this.brandsService.findAll();
   }
 
   @Get(':id')
+  @Roles(RoleEnum.Admin, RoleEnum.Sales)
   findOne(@Param('id') id: string) {
     return this.brandsService.findOne(+id);
   }
