@@ -71,7 +71,7 @@ export class BrandsService {
         statusCode: HttpStatus.OK,
       });
     } catch (error) {
-      this.handle.throw(error);
+      this.handle.throw(error, 'Algo salió mal al encontrar las marcas');
     }
   }
 
@@ -128,11 +128,7 @@ export class BrandsService {
       });
     } catch (error) {
       await queryRunner.rollbackTransaction();
-      this.handle.throw({
-        statusCode: error.code,
-        message: error.message,
-        stack: error.stack,
-      });
+      this.handle.throw(error, 'Algo salió mal al actualizar la marca');
     } finally {
       await queryRunner.release();
     }
@@ -159,7 +155,7 @@ export class BrandsService {
         message: `Marca ha sido eliminada exitosamente,`,
       });
     } catch (error) {
-      this.handle.throw(error);
+      this.handle.throw(error, 'Algo salió mal al eliminar la marca');
     }
   }
 }
