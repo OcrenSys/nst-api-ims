@@ -29,7 +29,7 @@ export class Category extends Base {
     eager: true,
   })
   @JoinColumn()
-  image: Image;
+  image?: Image;
 
   @ManyToOne(() => Banner, (banner) => banner.categories, { nullable: true })
   banner?: Banner;

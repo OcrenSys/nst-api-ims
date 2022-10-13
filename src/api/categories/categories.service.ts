@@ -1,17 +1,11 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
-import {
-  Repository,
-  DataSource,
-  createQueryBuilder,
-  DeleteResult,
-} from 'typeorm';
-import { Product } from '../products/entities/product.entity';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
+import { Repository, DataSource, DeleteResult } from 'typeorm';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { SubCategory } from '../sub-categories/entities/sub-category.entity';
-import { ResponseHttp } from 'src/common/interfaces/response.http';
+import { ResponseHttp } from '../../common/interfaces/response.http';
 import { Category } from './entities/category.entity';
 import { Banner } from '../banners/entities/banner.entity';
 import { Image } from '../images/entities/image.entity';

@@ -13,5 +13,5 @@ export class Brand extends Base {
   @OneToMany(() => Product, (product) => product.brand, {
     nullable: true,
   })
-  products: Product[];
+  products?: Product[];
 }

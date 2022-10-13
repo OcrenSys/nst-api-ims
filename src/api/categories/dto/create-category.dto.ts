@@ -11,8 +11,8 @@ import {
 } from 'class-validator';
 import * as NUMBER from '../../../common/constants/numbers.constants';
 import { Image } from '../../../api/images/entities/image.entity';
-import { SubCategory } from 'src/api/sub-categories/entities/sub-category.entity';
-import { Banner } from 'src/api/banners/entities/banner.entity';
+import { SubCategory } from '../../../api/sub-categories/entities/sub-category.entity';
+import { Banner } from '../../../api/banners/entities/banner.entity';
 
 export class CreateCategoryDto {
   @IsString()

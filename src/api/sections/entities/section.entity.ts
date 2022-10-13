@@ -7,6 +7,6 @@ export class Section extends Base {
   @Column()
   name: string;
 
-  @OneToMany(() => Product, (product) => product.section)
-  products: Product[];
+  @OneToMany(() => Product, (product) => product.section, { nullable: true })
+  products?: Product[];
 }

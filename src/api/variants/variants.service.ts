@@ -1,8 +1,8 @@
 import { DataSource, DeleteResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
-import { ResponseHttp } from 'src/common/interfaces/response.http';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
+import { ResponseHttp } from '../../common/interfaces/response.http';
 import { Repository } from 'typeorm/repository/Repository';
 import { Image } from '../images/entities/image.entity';
 import { Product } from '../products/entities/product.entity';

@@ -6,7 +6,7 @@ import { Category } from './entities/category.entity';
 import { SubCategory } from '../sub-categories/entities/sub-category.entity';
 import { Banner } from '../banners/entities/banner.entity';
 import { Image } from '../images/entities/image.entity';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 
 @Module({
   controllers: [CategoriesController],

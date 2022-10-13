@@ -7,7 +7,7 @@ import {
   MinLength,
 } from 'class-validator';
 import * as NUMBER from '../../../common/constants/numbers.constants';
-import { Product } from 'src/api/products/entities/product.entity';
+import { Product } from '../../../api/products/entities/product.entity';
 export class CreateBrandDto {
   @IsString()
   @MaxLength(NUMBER.N50, {

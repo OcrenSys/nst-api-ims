@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Variant } from './entities/variant.entity';
 import { Image } from '../images/entities/image.entity';
 import { Product } from '../products/entities/product.entity';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 
 @Module({
   controllers: [VariantsController],

@@ -1,4 +1,3 @@
-import { Brand } from '../../brands/entities/brand.entity';
 import { Image } from '../../images/entities/image.entity';
 import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.entity';
 import { Product } from '../../products/entities/product.entity';

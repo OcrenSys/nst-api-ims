@@ -1,5 +1,5 @@
 import { Variant } from '../../api/variants/entities/variant.entity';
-import { ProductData } from './032_product.data';
+import { ProductData } from './033_product.data';
 
 export const VariantData: Variant[] = [
   {
@@ -16,7 +16,7 @@ export const VariantData: Variant[] = [
     priceCredit: 700,
     isActive: true,
     isPublished: true,
-    product: ProductData[0],
+    product: ProductData[2],
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
@@ -34,7 +34,7 @@ export const VariantData: Variant[] = [
     priceCredit: 700,
     isActive: true,
     isPublished: true,
-    product: ProductData[0],
+    product: ProductData[2],
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
@@ -52,7 +52,7 @@ export const VariantData: Variant[] = [
     priceCredit: 700,
     isActive: true,
     isPublished: true,
-    product: ProductData[0],
+    product: ProductData[2],
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
