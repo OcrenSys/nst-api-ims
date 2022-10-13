@@ -24,26 +24,22 @@ export class RoleGuard implements CanActivate {
     );
 
     try {
-      let isAuthorized = false;
-
       if (!requiredRoles) {
-        isAuthorized = true;
+        return true;
       }
 
       const {
         data: { user },
       } = context.switchToHttp().getRequest();
 
-      isAuthorized = user?.roles.some((role: Role) =>
+      return user?.roles.some((role: Role) =>
         requiredRoles.includes(role.name),
       );
-
-      return isAuthorized;
     } catch (error) {
       throw new UnauthorizedException({
+        ...error,
         statusCode: HttpStatus.FORBIDDEN,
         timestamp: new Date().toISOString(),
-        error: error,
         message: 'No tiene los permisos necesarios para continuar.',
       });
     }
