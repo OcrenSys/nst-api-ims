@@ -4,7 +4,6 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
 import { ResponseHttp } from 'src/common/interfaces/response.http';
 import { Repository } from 'typeorm/repository/Repository';
-import { Brand } from '../brands/entities/brand.entity';
 import { Image } from '../images/entities/image.entity';
 import { Product } from '../products/entities/product.entity';
 import { Variant } from './entities/variant.entity';
@@ -112,11 +111,7 @@ export class VariantsService {
   }
 
   async update(id: number, updateVariantDto: UpdateVariantDto): Promise<any> {
-    const {
-      brand = null,
-      product = null,
-      ...toUpdateVariant
-    } = updateVariantDto;
+    const { product = null, ...toUpdateVariant } = updateVariantDto;
     const queryRunner = this.dataSource.createQueryRunner();
 
     await queryRunner.connect();

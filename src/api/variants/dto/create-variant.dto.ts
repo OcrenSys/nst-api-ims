@@ -72,7 +72,6 @@ export class CreateVariantDto {
   stock: number;
 
   @IsNumber()
-  @IsOptional()
   @Min(NUMBER.MIN, {
     message: `El precio de credito de la variante debe ser un numero entero mayor o igual a ${NUMBER.MIN}`,
   })
