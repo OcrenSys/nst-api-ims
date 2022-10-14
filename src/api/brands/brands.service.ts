@@ -111,7 +111,7 @@ export class BrandsService {
     if (!brand) {
       this.handle.throw(
         { code: HttpStatus.BAD_REQUEST },
-        'Lo sentimos, no se ha podido crear la nueva categoria.',
+        'Lo sentimos, no se ha podido crear la nueva marca.',
       );
     }
 
