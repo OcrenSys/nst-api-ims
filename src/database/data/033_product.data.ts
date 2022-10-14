@@ -44,7 +44,7 @@ export const ProductData: Product[] = [
   },
   {
     order: 3,
-    code: '5675675',
+    code: '56756751',
     name: 'Pantalon Kalua S',
     description: '',
     stock: 12,
@@ -63,7 +63,7 @@ export const ProductData: Product[] = [
   },
   {
     order: 3,
-    code: '5675675',
+    code: '56756752',
     name: 'Pantalon Kalua M',
     description: '',
     stock: 12,
@@ -82,7 +82,7 @@ export const ProductData: Product[] = [
   },
   {
     order: 3,
-    code: '5675675',
+    code: '56756753',
     name: 'Pantalon Kalua L',
     description: '',
     stock: 12,
