@@ -9,7 +9,7 @@ export class Member extends Base {
   @Column({ nullable: true, default: null })
   avatar: string;
 
-  @OneToOne(() => User, (user) => user.member, { eager: true })
+  @OneToOne(() => User, (user) => user.member)
   @JoinColumn()
   user: User;
 
