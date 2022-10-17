@@ -7,6 +7,7 @@ import {
   Injectable,
   HttpException,
 } from '@nestjs/common';
+import { ResponseHttp } from '../interfaces/response.http';
 
 @Injectable()
 export class HandleExceptions {
@@ -59,12 +60,18 @@ export class HandleExceptions {
     );
   }
 
-  success({ statusCode = HttpStatus.BAD_REQUEST, data = {}, message = '' }) {
+  success({
+    statusCode = HttpStatus.BAD_REQUEST,
+    data = null,
+    error = null,
+    message = '',
+  }): ResponseHttp {
     return {
       statusCode: statusCode,
+      timestamp: new Date().toISOString(),
+      error: error,
       data: data,
       message: message,
-      timestamp: new Date().toISOString(),
     };
   }
 }

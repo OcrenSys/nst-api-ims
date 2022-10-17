@@ -7,7 +7,6 @@ import { Image } from '../images/entities/image.entity';
 import { Banner } from './entities/banner.entity';
 import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
 import { ResponseHttp } from 'src/common/interfaces/response.http';
-import { query } from 'express';
 
 @Injectable()
 export class BannersService {
@@ -81,13 +80,13 @@ export class BannersService {
     if (!banner)
       this.handle.throw(
         { code: HttpStatus.NOT_FOUND },
-        `Banner con id: "${id}" no pudo ser encontrada`,
+        `Banner con id: "${id}" no pudo ser encontrado`,
       );
 
     return this.handle.success({
       statusCode: HttpStatus.OK,
       data: banner,
-      message: 'Banner encontrada exitosamente!',
+      message: 'Banner encontrado exitosamente!',
     });
   }
 
@@ -106,7 +105,7 @@ export class BannersService {
     if (!banner) {
       this.handle.throw(
         { code: HttpStatus.BAD_REQUEST },
-        'Lo sentimos, no se ha podido crear el nuevo banner.',
+        'Lo sentimos, no se ha podido actualizar los datos del banner.',
       );
     }
 
