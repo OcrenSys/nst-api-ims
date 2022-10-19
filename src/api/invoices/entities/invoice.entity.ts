@@ -13,7 +13,7 @@ export class Invoice extends Base {
   @Column()
   isCompleted: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   comment: string;
 
   @OneToOne(() => Credit, (credit) => credit.invoice, {
@@ -23,12 +23,15 @@ export class Invoice extends Base {
   credit?: Credit;
 
   @OneToMany(() => InvoicesDetail, (invoicesDetail) => invoicesDetail.invoice, {
-    nullable: true,
+    cascade: true,
   })
   invoiceDetails?: InvoicesDetail[];
 
-  @ManyToOne(() => Customer, (customer) => customer.invoices, { eager: true })
-  customer: Customer;
+  @ManyToOne(() => Customer, (customer) => customer.invoices, {
+    eager: true,
+    nullable: true,
+  })
+  customer?: Customer;
 
   @ManyToOne(() => Member, (member) => member.invoices, { eager: true })
   member: Member;

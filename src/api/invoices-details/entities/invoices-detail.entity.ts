@@ -15,11 +15,12 @@ export class InvoicesDetail extends Base {
   @Column()
   amount: number;
 
-  @ManyToOne(() => Invoice, (invoice) => invoice.invoiceDetails)
+  @ManyToOne(() => Invoice, (invoice) => invoice.invoiceDetails, {
+    onDelete: 'CASCADE',
+  })
   invoice: Invoice;
 
   @OneToOne(() => Product, (product) => product.invoiceDetail, {
-    nullable: true,
     eager: true,
   })
   @JoinColumn()
@@ -30,5 +31,5 @@ export class InvoicesDetail extends Base {
     eager: true,
   })
   @JoinColumn()
-  variant: Variant;
+  variant?: Variant;
 }
