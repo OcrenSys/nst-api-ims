@@ -4,7 +4,7 @@ import { BannersController } from './banners.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Banner } from './entities/banner.entity';
 import { Image } from '../images/entities/image.entity';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 
 @Module({
   controllers: [BannersController],
