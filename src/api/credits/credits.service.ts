@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
 import { ResponseHttp } from 'src/common/interfaces/response.http';
 import { Repository, DataSource, DeleteResult } from 'typeorm';
-import { UpdateBrandDto } from '../brands/dto/update-brand.dto';
 import { Invoice } from '../invoices/entities/invoice.entity';
 import { PaymentDate } from '../payment-dates/entities/payment-date.entity';
 import { Payment } from '../payments/entities/payment.entity';
