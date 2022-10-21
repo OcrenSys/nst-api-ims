@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, map } from 'rxjs';
-import { ResponseHttp } from 'src/common/interfaces/response.http';
+import { ResponseHttp } from '../../common/interfaces/response.http';
 import { Image } from '../images/entities/image.entity';
 import { Variant } from '../variants/entities/variant.entity';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -81,7 +81,7 @@ export class ProductsService {
   async findAll(): Promise<ResponseHttp> {
     let products: Product[] = [];
     const filters = {};
-    const relations = ['subCategory'];
+    const relations = ['subCategory', 'variants'];
 
     try {
       products = await this.productRepository.find({
@@ -105,8 +105,8 @@ export class ProductsService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
-    const relations = ['subCategory'];
+    const filters = { id };
+    const relations = ['subCategory', 'variants'];
 
     const product: Product = await this.productRepository.findOne({
       relations: [...relations],
@@ -186,7 +186,7 @@ export class ProductsService {
 
   async remove(id: number): Promise<any> {
     const product: Product = await this.productRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!product)
@@ -205,7 +205,7 @@ export class ProductsService {
   handleExceptions(error, message?: string) {
     this.logger.error(error);
     const data = {
-      error: error,
+      error,
       message: message || 'Ocurrió un error inesperado.',
       timestamp: new Date().toISOString(),
     };

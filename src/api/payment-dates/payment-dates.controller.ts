@@ -10,33 +10,33 @@ import {
 import { PaymentDatesService } from './payment-dates.service';
 import { CreatePaymentDateDto } from './dto/create-payment-date.dto';
 import { UpdatePaymentDateDto } from './dto/update-payment-date.dto';
-import { Roles } from '../../decorators/role.decorator';
 import { RoleEnum } from '../../common/enums/roles.enum';
+import { Auth } from 'src/decorators/auth.decorator';
 
 @Controller('payment-dates')
 export class PaymentDatesController {
   constructor(private readonly paymentDatesService: PaymentDatesService) {}
 
   @Post()
-  @Roles(RoleEnum.Admin, RoleEnum.Sales)
+  @Auth(RoleEnum.Admin, RoleEnum.Sales)
   create(@Body() createPaymentDateDto: CreatePaymentDateDto) {
     return this.paymentDatesService.create(createPaymentDateDto);
   }
 
   @Get()
-  @Roles(RoleEnum.Admin, RoleEnum.Sales)
+  @Auth(RoleEnum.Admin, RoleEnum.Sales)
   findAll() {
     return this.paymentDatesService.findAll();
   }
 
   @Get(':id')
-  @Roles(RoleEnum.Admin, RoleEnum.Sales)
+  @Auth(RoleEnum.Admin, RoleEnum.Sales)
   findOne(@Param('id') id: string) {
     return this.paymentDatesService.findOne(+id);
   }
 
   @Patch(':id')
-  @Roles(RoleEnum.Admin)
+  @Auth(RoleEnum.Admin)
   update(
     @Param('id') id: string,
     @Body() updatePaymentDateDto: UpdatePaymentDateDto,
@@ -45,7 +45,7 @@ export class PaymentDatesController {
   }
 
   @Delete(':id')
-  @Roles(RoleEnum.Admin)
+  @Auth(RoleEnum.Admin)
   remove(@Param('id') id: string) {
     return this.paymentDatesService.remove(+id);
   }

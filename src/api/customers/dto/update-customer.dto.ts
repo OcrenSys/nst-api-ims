@@ -1,5 +1,4 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateCustomerDto } from './create-customer.dto';
 import {
   IsInt,
   IsPositive,
@@ -9,6 +8,7 @@ import {
   MinLength,
   MaxLength,
 } from 'class-validator';
+import { CreateCustomerDto } from './create-customer.dto';
 
 export class UpdateCustomerDto extends PartialType(CreateCustomerDto) {
   @MaxLength(20, {

@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { catchError, from, map, Observable, of } from 'rxjs';
+import { from, map, Observable } from 'rxjs';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
@@ -26,7 +26,7 @@ export class CustomersService {
     const relations = ['invoices'];
 
     return this.customerRepository.find({
-      relations: relations,
+      relations,
       where: {
         ...filters,
       },
@@ -35,12 +35,12 @@ export class CustomersService {
 
   async findOne(id: number) {
     const filters = {
-      id: id,
+      id,
     };
     const relations = ['invoices'];
 
     const customer = await this.customerRepository.findOne({
-      relations: relations,
+      relations,
       where: {
         ...filters,
       },

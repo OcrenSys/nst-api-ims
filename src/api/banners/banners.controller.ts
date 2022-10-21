@@ -7,8 +7,8 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { Auth } from 'src/decorators/auth.decorator';
 import { RoleEnum } from '../../common/enums/roles.enum';
-import { Roles } from '../../decorators/role.decorator';
 import { BannersService } from './banners.service';
 import { CreateBannerDto } from './dto/create-banner.dto';
 import { UpdateBannerDto } from './dto/update-banner.dto';
@@ -18,7 +18,7 @@ export class BannersController {
   constructor(private readonly bannersService: BannersService) {}
 
   @Post()
-  @Roles(RoleEnum.Admin)
+  @Auth(RoleEnum.Admin)
   create(@Body() createBannerDto: CreateBannerDto) {
     return this.bannersService.create(createBannerDto);
   }
@@ -44,13 +44,13 @@ export class BannersController {
   }
 
   @Patch(':id')
-  @Roles(RoleEnum.Admin)
+  @Auth(RoleEnum.Admin)
   update(@Param('id') id: string, @Body() updateBannerDto: UpdateBannerDto) {
     return this.bannersService.update(+id, updateBannerDto);
   }
 
   @Delete(':id')
-  @Roles(RoleEnum.Admin)
+  @Auth(RoleEnum.Admin)
   remove(@Param('id') id: string) {
     return this.bannersService.remove(+id);
   }

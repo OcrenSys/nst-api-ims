@@ -1,9 +1,9 @@
+import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 import { Credit } from '../../credits/entities/credit.entity';
 import { Customer } from '../../customers/entities/customer.entity';
 import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.entity';
-import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 import { Base } from '../../../common/models/base.entity';
-import { Member } from '../../../api/members/entities/member.entity';
+import { Member } from '../../members/entities/member.entity';
 
 @Entity()
 export class Invoice extends Base {
@@ -13,7 +13,7 @@ export class Invoice extends Base {
   @Column()
   isCompleted: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   comment: string;
 
   @OneToOne(() => Credit, (credit) => credit.invoice, {
@@ -23,12 +23,15 @@ export class Invoice extends Base {
   credit?: Credit;
 
   @OneToMany(() => InvoicesDetail, (invoicesDetail) => invoicesDetail.invoice, {
-    nullable: true,
+    cascade: true,
   })
   invoiceDetails?: InvoicesDetail[];
 
-  @ManyToOne(() => Customer, (customer) => customer.invoices, { eager: true })
-  customer: Customer;
+  @ManyToOne(() => Customer, (customer) => customer.invoices, {
+    eager: true,
+    nullable: true,
+  })
+  customer?: Customer;
 
   @ManyToOne(() => Member, (member) => member.invoices, { eager: true })
   member: Member;

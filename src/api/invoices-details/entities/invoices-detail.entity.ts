@@ -1,8 +1,8 @@
+import { Column, Entity, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 import { Invoice } from '../../invoices/entities/invoice.entity';
 import { Product } from '../../products/entities/product.entity';
 import { Base } from '../../../common/models/base.entity';
 import { Variant } from '../../variants/entities/variant.entity';
-import { Column, Entity, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 
 @Entity()
 export class InvoicesDetail extends Base {
@@ -15,11 +15,12 @@ export class InvoicesDetail extends Base {
   @Column()
   amount: number;
 
-  @ManyToOne(() => Invoice, (invoice) => invoice.invoiceDetails)
+  @ManyToOne(() => Invoice, (invoice) => invoice.invoiceDetails, {
+    onDelete: 'CASCADE',
+  })
   invoice: Invoice;
 
   @OneToOne(() => Product, (product) => product.invoiceDetail, {
-    nullable: true,
     eager: true,
   })
   @JoinColumn()
@@ -30,5 +31,5 @@ export class InvoicesDetail extends Base {
     eager: true,
   })
   @JoinColumn()
-  variant: Variant;
+  variant?: Variant;
 }

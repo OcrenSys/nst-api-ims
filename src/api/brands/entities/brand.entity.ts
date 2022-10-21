@@ -1,19 +1,17 @@
+import { Column, Entity, OneToMany } from 'typeorm';
 import { Product } from '../../products/entities/product.entity';
 import { Base } from '../../../common/models/base.entity';
-import { Variant } from '../../variants/entities/variant.entity';
-import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()
 export class Brand extends Base {
   @Column()
   name: string;
 
-  @Column()
-  description: string;
+  @Column({ nullable: true })
+  description?: string;
 
-  @OneToMany(() => Product, (product) => product.brand)
-  products: Product[];
-
-  @OneToMany(() => Variant, (variant) => variant.brand)
-  variants: Variant[];
+  @OneToMany(() => Product, (product) => product.brand, {
+    nullable: true,
+  })
+  products?: Product[];
 }

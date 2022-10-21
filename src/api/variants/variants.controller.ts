@@ -10,15 +10,15 @@ import {
 import { VariantsService } from './variants.service';
 import { CreateVariantDto } from './dto/create-variant.dto';
 import { UpdateVariantDto } from './dto/update-variant.dto';
-import { Roles } from '../../decorators/role.decorator';
 import { RoleEnum } from '../../common/enums/roles.enum';
+import { Auth } from 'src/decorators/auth.decorator';
 
 @Controller('variants')
 export class VariantsController {
   constructor(private readonly variantsService: VariantsService) {}
 
   @Post()
-  @Roles(RoleEnum.Admin)
+  @Auth(RoleEnum.Admin)
   create(@Body() createVariantDto: CreateVariantDto) {
     return this.variantsService.create(createVariantDto);
   }
@@ -34,13 +34,13 @@ export class VariantsController {
   }
 
   @Patch(':id')
-  @Roles(RoleEnum.Admin)
+  @Auth(RoleEnum.Admin)
   update(@Param('id') id: string, @Body() updateVariantDto: UpdateVariantDto) {
     return this.variantsService.update(+id, updateVariantDto);
   }
 
   @Delete(':id')
-  @Roles(RoleEnum.Admin)
+  @Auth(RoleEnum.Admin)
   remove(@Param('id') id: string) {
     return this.variantsService.remove(+id);
   }

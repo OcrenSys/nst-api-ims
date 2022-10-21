@@ -1,15 +1,15 @@
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
-import { Product } from '../../api/products/entities/product.entity';
-import { ProductData } from '../data/032_product.data';
+import { Banner } from '../../api/banners/entities/banner.entity';
+import { BannerData } from '../data/008_banner.data';
 
-export default class ProductSeeder implements Seeder {
+export default class BannerSeeder implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
     await connection
       .createQueryBuilder()
       .insert()
-      .into(Product)
-      .values(ProductData)
+      .into(Banner)
+      .values(BannerData)
       .execute();
   }
 }

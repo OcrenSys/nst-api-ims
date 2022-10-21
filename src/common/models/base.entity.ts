@@ -1,5 +1,6 @@
 import { Column, PrimaryGeneratedColumn } from 'typeorm';
 import { IsBoolean, IsDate } from 'class-validator';
+
 export class Base {
   @PrimaryGeneratedColumn()
   id?: number;

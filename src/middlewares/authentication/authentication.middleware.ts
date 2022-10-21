@@ -7,6 +7,7 @@ import { UsersService } from '../../api/users/users.service';
 @Injectable()
 export class AuthenticationMiddleware implements NestMiddleware {
   private auth: firebase.auth.Auth;
+
   constructor(
     private authenticationService: AuthenticationService,
     private readonly usersService: UsersService,
@@ -20,11 +21,12 @@ export class AuthenticationMiddleware implements NestMiddleware {
     if (token != undefined && token != null && token != '') {
       this.auth
         .verifyIdToken(token.replace('Bearer ', ''))
-        .then(async (decodedToken) => {
-          const user = await this.usersService.findOne(decodedToken.user_id);
+        .then(async (firebaseUser) => {
+          const { data } = await this.usersService.findOne(
+            firebaseUser.user_id,
+          );
 
-          if (!user) req['data'] = { decodedToken };
-          else req['data'] = { decodedToken, user: user };
+          req['data'] = { ...data, firebaseUser };
 
           next();
         })

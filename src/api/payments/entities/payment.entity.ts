@@ -1,7 +1,7 @@
+import { Column, Entity, ManyToOne, OneToOne } from 'typeorm';
 import { Credit } from '../../credits/entities/credit.entity';
 import { PaymentDate } from '../../payment-dates/entities/payment-date.entity';
 import { Base } from '../../../common/models/base.entity';
-import { Column, Entity, ManyToOne, OneToOne } from 'typeorm';
 
 @Entity()
 export class Payment extends Base {

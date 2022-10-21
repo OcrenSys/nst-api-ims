@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { ProductsModule } from './products/products.module';
 import { VariantsModule } from './variants/variants.module';
 import { BrandsModule } from './brands/brands.module';
@@ -18,8 +19,7 @@ import { MembersModule } from './members/members.module';
 import { PersonModule } from './person/person.module';
 import { SubCategoriesModule } from './sub-categories/sub-categories.module';
 import { UsersModule } from './users/users.module';
-import { APP_GUARD } from '@nestjs/core';
-import { RoleGuard } from '../guards/role/role.guard';
+import { AuthGuard } from 'src/guards/auth/auth.guard';
 
 @Module({
   imports: [
@@ -47,7 +47,7 @@ import { RoleGuard } from '../guards/role/role.guard';
   providers: [
     {
       provide: APP_GUARD,
-      useClass: RoleGuard,
+      useClass: AuthGuard,
     },
   ],
 })

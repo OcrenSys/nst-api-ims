@@ -10,21 +10,21 @@ import {
 import { ImagesService } from './images.service';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
-import { Roles } from '../../decorators/role.decorator';
 import { RoleEnum } from '../../common/enums/roles.enum';
+import { Auth } from 'src/decorators/auth.decorator';
 
 @Controller('images')
 export class ImagesController {
   constructor(private readonly imagesService: ImagesService) {}
 
   @Post()
-  @Roles(RoleEnum.Admin, RoleEnum.Sales)
+  @Auth(RoleEnum.Admin, RoleEnum.Sales)
   create(@Body() createImageDto: CreateImageDto) {
     return this.imagesService.create(createImageDto);
   }
 
   @Get()
-  @Roles(RoleEnum.Admin, RoleEnum.Sales)
+  @Auth(RoleEnum.Admin, RoleEnum.Sales)
   findAll() {
     return this.imagesService.findAll();
   }
@@ -35,13 +35,13 @@ export class ImagesController {
   }
 
   @Patch(':id')
-  @Roles(RoleEnum.Admin, RoleEnum.Sales)
+  @Auth(RoleEnum.Admin, RoleEnum.Sales)
   update(@Param('id') id: string, @Body() updateImageDto: UpdateImageDto) {
     return this.imagesService.update(+id, updateImageDto);
   }
 
   @Delete(':id')
-  @Roles(RoleEnum.Admin, RoleEnum.Sales)
+  @Auth(RoleEnum.Admin, RoleEnum.Sales)
   remove(@Param('id') id: string) {
     return this.imagesService.remove(+id);
   }

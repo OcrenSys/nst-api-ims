@@ -10,17 +10,8 @@ export class Banner extends Base {
   @Column()
   name: string;
 
-  @Column()
-  description: string;
-
-  @Column()
-  createdAt: string;
-
-  @Column()
-  updatedAt: string;
-
-  @Column({ default: false })
-  isActive: boolean;
+  @Column({ nullable: true })
+  description?: string;
 
   @OneToOne(() => Image, (image) => image.banner, { nullable: true })
   @JoinColumn()

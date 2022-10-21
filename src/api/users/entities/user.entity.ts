@@ -9,7 +9,7 @@ export class User extends Base {
   @Column()
   user_id: string;
 
-  @OneToOne(() => Member, (member) => member.user)
+  @OneToOne(() => Member, (member) => member.user, { eager: true })
   member?: Member;
 
   @ManyToMany(() => Role, (role) => role.users)

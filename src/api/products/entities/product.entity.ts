@@ -1,12 +1,4 @@
-import { Banner } from '../../banners/entities/banner.entity';
-import { Brand } from '../../brands/entities/brand.entity';
-import { Image } from '../../images/entities/image.entity';
-import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.entity';
-import { Section } from '../../sections/entities/section.entity';
-import { Variant } from '../../variants/entities/variant.entity';
 import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
-import { Base } from '../../../common/models/base.entity';
-import { SubCategory } from '../../sub-categories/entities/sub-category.entity';
 import {
   IsBoolean,
   IsInt,
@@ -18,6 +10,14 @@ import {
   Min,
   MinLength,
 } from 'class-validator';
+import { Banner } from '../../banners/entities/banner.entity';
+import { Brand } from '../../brands/entities/brand.entity';
+import { Image } from '../../images/entities/image.entity';
+import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.entity';
+import { Section } from '../../sections/entities/section.entity';
+import { Variant } from '../../variants/entities/variant.entity';
+import { Base } from '../../../common/models/base.entity';
+import { SubCategory } from '../../sub-categories/entities/sub-category.entity';
 import { MAX, MIN } from '../../../common/constants/numbers.constants';
 
 @Entity()
@@ -98,7 +98,6 @@ export class Product extends Base {
 
   @OneToMany(() => Variant, (variant) => variant.product, {
     cascade: true,
-    eager: true,
   })
   variants?: Variant[];
 

@@ -1,8 +1,3 @@
-import { Invoice } from '../../invoices/entities/invoice.entity';
-import { PaymentDate } from '../../payment-dates/entities/payment-date.entity';
-import { Payment } from '../../payments/entities/payment.entity';
-import { Percent } from '../../percents/entities/percent.entity';
-import { Base } from '../../../common/models/base.entity';
 import {
   Column,
   Entity,
@@ -11,6 +6,11 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
+import { Invoice } from '../../invoices/entities/invoice.entity';
+import { PaymentDate } from '../../payment-dates/entities/payment-date.entity';
+import { Payment } from '../../payments/entities/payment.entity';
+import { Percent } from '../../percents/entities/percent.entity';
+import { Base } from '../../../common/models/base.entity';
 
 @Entity()
 export class Credit extends Base {

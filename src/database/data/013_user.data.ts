@@ -14,13 +14,13 @@ export const UserData: User[] = [
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
   {
-    user_id: '0JnJkLOf8UTJtWfWKVEeXw07P6b2', //+50584081496
+    user_id: '0JnJkLOf8UTJtWfWKVEeXw07P6b2', // +50584081496
     isActive: true,
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
   {
-    user_id: 'kEe6Wqfna5OTIfbYLUjUJ33CNCT2', //+50575082830
+    user_id: 'kEe6Wqfna5OTIfbYLUjUJ33CNCT2', // +50575082830
     isActive: true,
     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
