@@ -26,7 +26,7 @@ export class AuthenticationMiddleware implements NestMiddleware {
             firebaseUser.user_id,
           );
 
-          req.data = { ...data, firebaseUser };
+          req['data'] = { ...data, firebaseUser };
 
           next();
         })

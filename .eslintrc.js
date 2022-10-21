@@ -40,6 +40,20 @@ module.exports = {
     'eslint-disable-next-line': 0,
     '@typescript-eslint/triple-slash-reference': 0,
 
+    // unused-imoprts
+
+    '@typescript-eslint/no-unused-vars': 'off', // OR 'no-unused-vars': 'off',
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': [
+      'warn',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+      },
+    ],
+
     // Typescript
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
@@ -62,5 +76,5 @@ module.exports = {
     // },
   },
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  plugins: ['unused-imports', '@typescript-eslint'],
 };

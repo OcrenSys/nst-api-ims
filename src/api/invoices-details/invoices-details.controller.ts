@@ -10,8 +10,8 @@ import {
 import { InvoicesDetailsService } from './invoices-details.service';
 import { CreateInvoicesDetailDto } from './dto/create-invoices-detail.dto';
 import { UpdateInvoicesDetailDto } from './dto/update-invoices-detail.dto';
-import { Roles } from '../../decorators/role.decorator';
 import { RoleEnum } from '../../common/enums/roles.enum';
+import { Auth } from 'src/decorators/auth.decorator';
 
 @Controller('invoices-details')
 export class InvoicesDetailsController {
@@ -20,25 +20,25 @@ export class InvoicesDetailsController {
   ) {}
 
   @Post()
-  @Roles(RoleEnum.Admin, RoleEnum.Sales)
+  @Auth(RoleEnum.Admin, RoleEnum.Sales)
   create(@Body() createInvoicesDetailDto: CreateInvoicesDetailDto) {
     return this.invoicesDetailsService.create(createInvoicesDetailDto);
   }
 
   @Get()
-  @Roles(RoleEnum.Admin, RoleEnum.Sales)
+  @Auth(RoleEnum.Admin, RoleEnum.Sales)
   findAll() {
     return this.invoicesDetailsService.findAll();
   }
 
   @Get(':id')
-  @Roles(RoleEnum.Admin, RoleEnum.Sales)
+  @Auth(RoleEnum.Admin, RoleEnum.Sales)
   findOne(@Param('id') id: string) {
     return this.invoicesDetailsService.findOne(+id);
   }
 
   @Patch(':id')
-  @Roles(RoleEnum.Admin)
+  @Auth(RoleEnum.Admin)
   update(
     @Param('id') id: string,
     @Body() updateInvoicesDetailDto: UpdateInvoicesDetailDto,
@@ -47,7 +47,7 @@ export class InvoicesDetailsController {
   }
 
   @Delete(':id')
-  @Roles(RoleEnum.Admin)
+  @Auth(RoleEnum.Admin)
   remove(@Param('id') id: string) {
     return this.invoicesDetailsService.remove(+id);
   }

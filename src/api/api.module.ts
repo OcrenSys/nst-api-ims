@@ -19,7 +19,7 @@ import { MembersModule } from './members/members.module';
 import { PersonModule } from './person/person.module';
 import { SubCategoriesModule } from './sub-categories/sub-categories.module';
 import { UsersModule } from './users/users.module';
-import { RoleGuard } from '../guards/role/role.guard';
+import { AuthGuard } from 'src/guards/auth/auth.guard';
 
 @Module({
   imports: [
@@ -47,7 +47,7 @@ import { RoleGuard } from '../guards/role/role.guard';
   providers: [
     {
       provide: APP_GUARD,
-      useClass: RoleGuard,
+      useClass: AuthGuard,
     },
   ],
 })

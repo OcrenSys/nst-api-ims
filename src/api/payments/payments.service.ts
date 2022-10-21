@@ -1,8 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource, DeleteResult } from 'typeorm';
-import { HandleExceptions } from '../..common/helpers/handle.exceptions';
-import { ResponseHttp } from '../..common/interfaces/response.http';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
+import { ResponseHttp } from '../../common/interfaces/response.http';
 import { Credit } from '../credits/entities/credit.entity';
 import { PaymentDate } from '../payment-dates/entities/payment-date.entity';
 import { CreatePaymentDto } from './dto/create-payment.dto';

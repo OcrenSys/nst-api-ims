@@ -10,15 +10,15 @@ import {
 import { SubCategoriesService } from './sub-categories.service';
 import { CreateSubCategoryDto } from './dto/create-sub-category.dto';
 import { UpdateSubCategoryDto } from './dto/update-sub-category.dto';
-import { Roles } from '../../decorators/role.decorator';
 import { RoleEnum } from '../../common/enums/roles.enum';
+import { Auth } from 'src/decorators/auth.decorator';
 
 @Controller('sub-categories')
 export class SubCategoriesController {
   constructor(private readonly subCategoriesService: SubCategoriesService) {}
 
   @Post()
-  @Roles(RoleEnum.Admin)
+  @Auth(RoleEnum.Admin)
   create(@Body() createSubCategoryDto: CreateSubCategoryDto) {
     return this.subCategoriesService.create(createSubCategoryDto);
   }
@@ -34,7 +34,7 @@ export class SubCategoriesController {
   }
 
   @Patch(':id')
-  @Roles(RoleEnum.Admin)
+  @Auth(RoleEnum.Admin)
   update(
     @Param('id') id: string,
     @Body() updateSubCategoryDto: UpdateSubCategoryDto,
@@ -43,7 +43,7 @@ export class SubCategoriesController {
   }
 
   @Delete(':id')
-  @Roles(RoleEnum.Admin)
+  @Auth(RoleEnum.Admin)
   remove(@Param('id') id: string) {
     return this.subCategoriesService.remove(+id);
   }

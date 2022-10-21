@@ -9,6 +9,7 @@ import { InvoicesDetail } from '../invoices-details/entities/invoices-detail.ent
 import { Customer } from '../customers/entities/customer.entity';
 import { Member } from '../members/entities/member.entity';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
+import { Credit } from '../credits/entities/credit.entity';
 
 @Module({
   controllers: [InvoicesController],
@@ -18,6 +19,7 @@ import { HandleExceptions } from '../../common/helpers/handle.exceptions';
       Invoice,
       Product,
       Variant,
+      Credit,
       InvoicesDetail,
       Customer,
       Member,

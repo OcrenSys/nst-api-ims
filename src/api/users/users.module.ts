@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { HandleExceptions } from '../..common/helpers/handle.exceptions';
-import { FirebaseUser } from '../..common/models/firebase-user';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
+import { FirebaseUser } from '../../common/models/firebase-user';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { User } from './entities/user.entity';

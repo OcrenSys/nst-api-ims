@@ -1,8 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource, DeleteResult } from 'typeorm';
-import { HandleExceptions } from '../..common/helpers/handle.exceptions';
-import { ResponseHttp } from '../..common/interfaces/response.http';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
+import { ResponseHttp } from '../../common/interfaces/response.http';
 import { Customer } from '../customers/entities/customer.entity';
 import { Member } from '../members/entities/member.entity';
 import { CreatePersonDto } from './dto/create-person.dto';

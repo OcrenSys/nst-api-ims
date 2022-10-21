@@ -1,4 +1,4 @@
-import { InvoicesDetail } from 'src/api/invoices-details/entities/invoices-detail.entity';
+import { InvoicesDetail } from '../../api/invoices-details/entities/invoices-detail.entity';
 import { ProductData } from './033_product.data';
 import { InvoiceData } from './041_invoice.data';
 

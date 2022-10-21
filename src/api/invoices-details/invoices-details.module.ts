@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { HandleExceptions } from '../..common/helpers/handle.exceptions';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { InvoicesDetailsService } from './invoices-details.service';
 import { InvoicesDetailsController } from './invoices-details.controller';
 import { Invoice } from '../invoices/entities/invoice.entity';
