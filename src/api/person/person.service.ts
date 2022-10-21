@@ -1,8 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
-import { ResponseHttp } from 'src/common/interfaces/response.http';
 import { Repository, DataSource, DeleteResult } from 'typeorm';
+import { HandleExceptions } from '../..common/helpers/handle.exceptions';
+import { ResponseHttp } from '../..common/interfaces/response.http';
 import { Customer } from '../customers/entities/customer.entity';
 import { Member } from '../members/entities/member.entity';
 import { CreatePersonDto } from './dto/create-person.dto';
@@ -63,7 +63,7 @@ export class PersonService {
     try {
       const persons: Person[] = await this.personRepository.find({
         where: filters,
-        relations: relations,
+        relations,
       });
 
       return this.handle.success({
@@ -77,11 +77,11 @@ export class PersonService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
+    const filters = { id };
     const relations = ['customer', 'member'];
 
     const person: Person = await this.personRepository.findOne({
-      relations: relations,
+      relations,
       where: filters,
     });
 
@@ -142,7 +142,7 @@ export class PersonService {
 
   async remove(id: number): Promise<ResponseHttp> {
     const person: Person = await this.personRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!person) {

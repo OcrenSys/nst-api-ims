@@ -6,9 +6,9 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { Member } from 'src/api/members/entities/member.entity';
-import { Role } from 'src/api/roles/entities/role.entity';
-import { FirebaseUser } from 'src/common/models/firebase-user';
+import { Member } from '../../../api/members/entities/member.entity';
+import { Role } from '../../../api/roles/entities/role.entity';
+import { FirebaseUser } from '../../../common/models/firebase-user';
 import * as NUMBER from '../../../common/constants/numbers.constants';
 
 export class CreateUserDto {

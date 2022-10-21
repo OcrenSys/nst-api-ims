@@ -1,26 +1,18 @@
-import {
-  HttpStatus,
-  Inject,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entities/user.entity';
 import { DataSource, Repository } from 'typeorm';
-import { Member } from '../members/entities/member.entity';
-import { FirebaseUser } from 'src/common/models/firebase-user';
+import { FirebaseUser } from '../../common/models/firebase-user';
+import { ResponseHttp } from '../../common/interfaces/response.http';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { Role } from '../roles/entities/role.entity';
-import { ResponseHttp } from 'src/common/interfaces/response.http';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
-import { REQUEST } from '@nestjs/core';
-import { Request } from 'express';
+import { Member } from '../members/entities/member.entity';
+import { User } from './entities/user.entity';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject(REQUEST) private readonly request: Request,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     @InjectRepository(Member)
@@ -40,8 +32,12 @@ export class UsersService {
     await queryRunner.connect();
     await queryRunner.startTransaction();
 
-    const user: User = await this.userRepository.create({
+    const user: User = this.userRepository.create({
       ...toCreateUser,
+      member: member ? this.memberRepository.create(member) : null,
+      roles: roles.length
+        ? roles.map((r: Role) => this.roleRepository.create(r))
+        : [],
     });
 
     if (!user) {
@@ -52,11 +48,6 @@ export class UsersService {
     }
 
     try {
-      if (member) user.member = this.memberRepository.create(member);
-
-      if (roles.length)
-        user.roles = roles.map((r: Role) => this.roleRepository.create(r));
-
       await this.userRepository.save(user);
 
       await queryRunner.commitTransaction();
@@ -80,7 +71,7 @@ export class UsersService {
     try {
       const users = await this.userRepository.find({
         where: filters,
-        relations: relations,
+        relations,
       });
 
       return this.handle.success({
@@ -95,12 +86,12 @@ export class UsersService {
 
   async findOne(user_id: string): Promise<ResponseHttp> {
     const filters = {
-      user_id: user_id,
+      user_id,
     };
     const relations = ['roles'];
 
     const user = await this.userRepository.findOne({
-      relations: relations,
+      relations,
       where: {
         ...filters,
       },
@@ -163,7 +154,7 @@ export class UsersService {
 
   async remove(id: number): Promise<any> {
     const user = await this.userRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!user) {

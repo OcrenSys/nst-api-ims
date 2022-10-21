@@ -1,6 +1,6 @@
-import { Invoice } from '../../api/invoices/entities/invoice.entity';
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
+import { Invoice } from '../../api/invoices/entities/invoice.entity';
 import { InvoiceData } from '../data/041_invoice.data';
 
 export default class InvoiceSeeder implements Seeder {

@@ -18,8 +18,8 @@ export default () =>
     username: process.env.DATABASE_USERNAME,
     database: process.env.DATABASE_NAME,
     password: process.env.DATABASE_PASSWORD,
-    entities: [__dirname + '/../**/*.entity.{js,ts}'],
-    migrations: [__dirname + '/../database/migrations/*{.ts,.js}'],
+    entities: [`${__dirname}/../**/*.entity.{js,ts}`],
+    migrations: [`${__dirname}/../database/migrations/*{.ts,.js}`],
     extra: {
       charset: 'utf8mb4_unicode_ci',
     },
@@ -37,8 +37,8 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   username: process.env.DATABASE_USERNAME,
   database: process.env.DATABASE_NAME,
   password: process.env.DATABASE_PASSWORD,
-  entities: [__dirname + '/../**/*.entity.{js,ts}'],
-  migrations: [__dirname + '/../database/migrations/*{.ts,.js}'],
+  entities: [`${__dirname}/../**/*.entity.{js,ts}`],
+  migrations: [`${__dirname}/../database/migrations/*{.ts,.js}`],
   extra: {
     charset: 'utf8mb4_unicode_ci',
   },

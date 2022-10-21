@@ -2,7 +2,7 @@ import { Column, Entity, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Person } from '../../person/entities/person.entity';
 import { Base } from '../../../common/models/base.entity';
 import { User } from '../../users/entities/user.entity';
-import { Invoice } from '../../../api/invoices/entities/invoice.entity';
+import { Invoice } from '../../invoices/entities/invoice.entity';
 
 @Entity()
 export class Member extends Base {

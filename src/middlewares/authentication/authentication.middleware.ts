@@ -7,6 +7,7 @@ import { UsersService } from '../../api/users/users.service';
 @Injectable()
 export class AuthenticationMiddleware implements NestMiddleware {
   private auth: firebase.auth.Auth;
+
   constructor(
     private authenticationService: AuthenticationService,
     private readonly usersService: UsersService,
@@ -25,7 +26,7 @@ export class AuthenticationMiddleware implements NestMiddleware {
             firebaseUser.user_id,
           );
 
-          req['data'] = { ...data, firebaseUser };
+          req.data = { ...data, firebaseUser };
 
           next();
         })

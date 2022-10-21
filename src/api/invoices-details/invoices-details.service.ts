@@ -1,8 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
-import { ResponseHttp } from 'src/common/interfaces/response.http';
 import { Repository, DataSource } from 'typeorm';
+import { HandleExceptions } from '../..common/helpers/handle.exceptions';
+import { ResponseHttp } from '../..common/interfaces/response.http';
 import { Invoice } from '../invoices/entities/invoice.entity';
 import { Product } from '../products/entities/product.entity';
 import { Variant } from '../variants/entities/variant.entity';
@@ -71,7 +71,7 @@ export class InvoicesDetailsService {
       const invoiceDetails: InvoicesDetail[] =
         await this.invoiceDetailsRepository.find({
           where: filters,
-          relations: relations,
+          relations,
         });
 
       return this.handle.success({
@@ -85,12 +85,12 @@ export class InvoicesDetailsService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
+    const filters = { id };
     const relations = ['product', 'variant', 'invoice'];
 
     const invoiceDetail: InvoicesDetail =
       await this.invoiceDetailsRepository.findOne({
-        relations: relations,
+        relations,
         where: filters,
       });
 
@@ -161,7 +161,7 @@ export class InvoicesDetailsService {
 
   async remove(id: number): Promise<any> {
     const invoiceDetail = await this.invoiceDetailsRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!invoiceDetail) {

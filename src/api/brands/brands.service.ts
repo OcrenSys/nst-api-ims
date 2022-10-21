@@ -61,7 +61,7 @@ export class BrandsService {
     try {
       const brands = await this.brandRepository.find({
         where: filters,
-        relations: relations,
+        relations,
       });
 
       return this.handle.success({
@@ -75,11 +75,11 @@ export class BrandsService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
+    const filters = { id };
     const relations = [];
 
     const brand: Brand = await this.brandRepository.findOne({
-      relations: relations,
+      relations,
       where: filters,
     });
 
@@ -135,7 +135,7 @@ export class BrandsService {
 
   async remove(id: number): Promise<any> {
     const brand = await this.brandRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!brand) {

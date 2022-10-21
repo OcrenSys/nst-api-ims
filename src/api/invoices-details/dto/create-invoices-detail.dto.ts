@@ -1,20 +1,16 @@
 import {
-  IsArray,
   IsInt,
   IsNumber,
   IsObject,
   IsOptional,
-  IsString,
-  Length,
   Max,
-  MaxLength,
   Min,
-  MinLength,
 } from 'class-validator';
-import { Invoice } from '../../../api/invoices/entities/invoice.entity';
-import { Product } from '../../../api/products/entities/product.entity';
-import { Variant } from '../../../api/variants/entities/variant.entity';
+import { Invoice } from '../../invoices/entities/invoice.entity';
+import { Product } from '../../products/entities/product.entity';
+import { Variant } from '../../variants/entities/variant.entity';
 import * as NUMBER from '../../../common/constants/numbers.constants';
+
 export class CreateInvoicesDetailDto {
   @IsNumber()
   @Min(NUMBER.MIN, {

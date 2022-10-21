@@ -1,15 +1,15 @@
 import { DataSource, DeleteResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { HttpStatus, Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm/repository/Repository';
+import { from, map } from 'rxjs';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ResponseHttp } from '../../common/interfaces/response.http';
-import { Repository } from 'typeorm/repository/Repository';
 import { Image } from '../images/entities/image.entity';
 import { Product } from '../products/entities/product.entity';
 import { Variant } from './entities/variant.entity';
 import { CreateVariantDto } from './dto/create-variant.dto';
 import { UpdateVariantDto } from './dto/update-variant.dto';
-import { from, map } from 'rxjs';
 
 @Injectable()
 export class VariantsService {
@@ -90,7 +90,7 @@ export class VariantsService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
+    const filters = { id };
     const relations = { product: true };
     const variant: Variant = await this.variantRepository.findOne({
       relations: { ...relations },
@@ -147,7 +147,7 @@ export class VariantsService {
 
   async remove(id: number): Promise<any> {
     const variant = this.variantRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!variant) {

@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { HandleExceptions } from '../..common/helpers/handle.exceptions';
+import { FirebaseUser } from '../..common/models/firebase-user';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
 import { Member } from '../members/entities/member.entity';
 import { Role } from '../roles/entities/role.entity';
-import { FirebaseUser } from 'src/common/models/firebase-user';
 
 @Module({
   controllers: [UsersController],

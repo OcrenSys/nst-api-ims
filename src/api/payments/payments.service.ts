@@ -1,8 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
-import { ResponseHttp } from 'src/common/interfaces/response.http';
 import { Repository, DataSource, DeleteResult } from 'typeorm';
+import { HandleExceptions } from '../..common/helpers/handle.exceptions';
+import { ResponseHttp } from '../..common/interfaces/response.http';
 import { Credit } from '../credits/entities/credit.entity';
 import { PaymentDate } from '../payment-dates/entities/payment-date.entity';
 import { CreatePaymentDto } from './dto/create-payment.dto';
@@ -65,7 +65,7 @@ export class PaymentsService {
     try {
       const payments: Payment[] = await this.paymentRepository.find({
         where: filters,
-        relations: relations,
+        relations,
       });
 
       return this.handle.success({
@@ -79,11 +79,11 @@ export class PaymentsService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
+    const filters = { id };
     const relations = ['credit', 'paymentDate'];
 
     const payment: Payment = await this.paymentRepository.findOne({
-      relations: relations,
+      relations,
       where: filters,
     });
 
@@ -143,7 +143,7 @@ export class PaymentsService {
 
   async remove(id: number): Promise<any> {
     const payment: Payment = await this.paymentRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!payment) {

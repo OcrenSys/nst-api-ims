@@ -1,8 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
-import { ResponseHttp } from 'src/common/interfaces/response.http';
 import { Repository, DataSource } from 'typeorm';
+import { HandleExceptions } from '../..common/helpers/handle.exceptions';
+import { ResponseHttp } from '../..common/interfaces/response.http';
 import { Credit } from '../credits/entities/credit.entity';
 import { Customer } from '../customers/entities/customer.entity';
 import { InvoicesDetail } from '../invoices-details/entities/invoices-detail.entity';
@@ -77,7 +77,7 @@ export class InvoicesService {
     try {
       const invoices = await this.invoiceRepository.find({
         where: filters,
-        relations: relations,
+        relations,
       });
 
       return this.handle.success({
@@ -91,11 +91,11 @@ export class InvoicesService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
+    const filters = { id };
     const relations = ['credit', 'customer', 'invoiceDetails', 'member'];
 
     const invoice: Invoice = await this.invoiceRepository.findOne({
-      relations: relations,
+      relations,
       where: filters,
     });
 
@@ -172,7 +172,7 @@ export class InvoicesService {
 
   async remove(id: number): Promise<any> {
     const invoice = await this.invoiceRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!invoice) {

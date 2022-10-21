@@ -9,6 +9,7 @@ import { AuthenticationMiddleware } from './middlewares/authentication/authentic
 import { AuthenticationService } from './services/authentication/authentication.service';
 import { AuthorizationService } from './services/authorization/authorization.service';
 import { EXCLUDED, ROUTES } from './common/constants/routes.constants';
+
 @Module({
   imports: [ConfigModule, DatabaseModule, ApiModule, UsersModule],
   controllers: [AppController],

@@ -12,13 +12,13 @@ import {
   Min,
   MinLength,
 } from 'class-validator';
-import { Banner } from '../../../api/banners/entities/banner.entity';
-import { Brand } from '../../../api/brands/entities/brand.entity';
-import { Image } from '../../../api/images/entities/image.entity';
-import { InvoicesDetail } from '../../../api/invoices-details/entities/invoices-detail.entity';
-import { Section } from '../../../api/sections/entities/section.entity';
-import { SubCategory } from '../../../api/sub-categories/entities/sub-category.entity';
-import { Variant } from '../../../api/variants/entities/variant.entity';
+import { Banner } from '../../banners/entities/banner.entity';
+import { Brand } from '../../brands/entities/brand.entity';
+import { Image } from '../../images/entities/image.entity';
+import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.entity';
+import { Section } from '../../sections/entities/section.entity';
+import { SubCategory } from '../../sub-categories/entities/sub-category.entity';
+import { Variant } from '../../variants/entities/variant.entity';
 import * as NUMBER from '../../../common/constants/numbers.constants';
 
 export class CreateProductDto {

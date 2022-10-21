@@ -1,9 +1,9 @@
+import { Column, Entity, ManyToOne, OneToOne } from 'typeorm';
 import { Banner } from '../../banners/entities/banner.entity';
 import { Category } from '../../categories/entities/category.entity';
 import { Product } from '../../products/entities/product.entity';
 import { Base } from '../../../common/models/base.entity';
 import { Variant } from '../../variants/entities/variant.entity';
-import { Column, Entity, ManyToOne, OneToOne } from 'typeorm';
 import { SubCategory } from '../../sub-categories/entities/sub-category.entity';
 
 @Entity()

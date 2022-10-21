@@ -1,8 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, DataSource, DeleteResult } from 'typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ResponseHttp } from '../../common/interfaces/response.http';
-import { Repository, DataSource, DeleteResult } from 'typeorm';
 import { Category } from '../categories/entities/category.entity';
 import { CreateSubCategoryDto } from './dto/create-sub-category.dto';
 import { UpdateSubCategoryDto } from './dto/update-sub-category.dto';
@@ -18,6 +18,7 @@ export class SubCategoriesService {
     private readonly handle: HandleExceptions,
     private readonly dataSource: DataSource,
   ) {}
+
   async create(
     createSubCategoryDto: CreateSubCategoryDto,
   ): Promise<ResponseHttp> {
@@ -63,7 +64,7 @@ export class SubCategoriesService {
     try {
       const subCategories = await this.subCategoryRepository.find({
         where: filters,
-        relations: relations,
+        relations,
       });
 
       return this.handle.success({
@@ -77,11 +78,11 @@ export class SubCategoriesService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
+    const filters = { id };
     const relations = [];
 
     const subCategory: SubCategory = await this.subCategoryRepository.findOne({
-      relations: relations,
+      relations,
       where: filters,
     });
 
@@ -142,7 +143,7 @@ export class SubCategoriesService {
 
   async remove(id: number): Promise<any> {
     const subCategory = this.subCategoryRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!subCategory) {

@@ -12,10 +12,10 @@ import {
   Min,
   MinLength,
 } from 'class-validator';
-import { Brand } from '../../../api/brands/entities/brand.entity';
-import { Image } from '../../../api/images/entities/image.entity';
-import { Product } from '../../../api/products/entities/product.entity';
-import { InvoicesDetail } from '../../../api/invoices-details/entities/invoices-detail.entity';
+import { Brand } from '../../brands/entities/brand.entity';
+import { Image } from '../../images/entities/image.entity';
+import { Product } from '../../products/entities/product.entity';
+import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.entity';
 import * as NUMBER from '../../../common/constants/numbers.constants';
 
 export class CreateVariantDto {

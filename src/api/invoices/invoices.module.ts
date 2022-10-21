@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { InvoicesService } from './invoices.service';
 import { InvoicesController } from './invoices.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Invoice } from '../invoices/entities/invoice.entity';
+import { Invoice } from './entities/invoice.entity';
 import { Product } from '../products/entities/product.entity';
 import { Variant } from '../variants/entities/variant.entity';
 import { InvoicesDetail } from '../invoices-details/entities/invoices-detail.entity';

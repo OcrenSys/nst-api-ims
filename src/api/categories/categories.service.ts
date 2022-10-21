@@ -1,7 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { Repository, DataSource, DeleteResult } from 'typeorm';
+import { from, map } from 'rxjs';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { SubCategory } from '../sub-categories/entities/sub-category.entity';
@@ -9,7 +10,6 @@ import { ResponseHttp } from '../../common/interfaces/response.http';
 import { Category } from './entities/category.entity';
 import { Banner } from '../banners/entities/banner.entity';
 import { Image } from '../images/entities/image.entity';
-import { from, map } from 'rxjs';
 
 @Injectable()
 export class CategoriesService {
@@ -79,7 +79,7 @@ export class CategoriesService {
     try {
       const categories = await this.categoryRepository.find({
         where: filters,
-        relations: relations,
+        relations,
       });
 
       /* const categories = await this.dataSource
@@ -101,11 +101,11 @@ export class CategoriesService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
+    const filters = { id };
     const relations = ['subcategories', 'banner'];
 
     const category: Category = await this.categoryRepository.findOne({
-      relations: relations,
+      relations,
       where: filters,
     });
 
@@ -178,7 +178,7 @@ export class CategoriesService {
 
   async remove(id: number): Promise<any> {
     const category = this.categoryRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!category) {

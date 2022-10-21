@@ -6,11 +6,12 @@ import {
   IsOptional,
   Min,
 } from 'class-validator';
-import { Invoice } from 'src/api/invoices/entities/invoice.entity';
-import { PaymentDate } from 'src/api/payment-dates/entities/payment-date.entity';
-import { Payment } from 'src/api/payments/entities/payment.entity';
-import { Percent } from 'src/api/percents/entities/percent.entity';
+import { Invoice } from '../../../api/invoices/entities/invoice.entity';
+import { PaymentDate } from '../../../api/payment-dates/entities/payment-date.entity';
+import { Payment } from '../../../api/payments/entities/payment.entity';
+import { Percent } from '../../../api/percents/entities/percent.entity';
 import * as NUMBER from '../../../common/constants/numbers.constants';
+
 export class CreateCreditDto {
   @IsDecimal()
   @Min(NUMBER.MIN, {

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { CreditsService } from './credits.service';
 import { CreditsController } from './credits.controller';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { Credit } from './entities/credit.entity';
 import { Invoice } from '../invoices/entities/invoice.entity';
 import { Payment } from '../payments/entities/payment.entity';

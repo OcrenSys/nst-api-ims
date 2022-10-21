@@ -105,7 +105,7 @@ export class ProductsService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
+    const filters = { id };
     const relations = ['subCategory', 'variants'];
 
     const product: Product = await this.productRepository.findOne({
@@ -186,7 +186,7 @@ export class ProductsService {
 
   async remove(id: number): Promise<any> {
     const product: Product = await this.productRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!product)
@@ -205,7 +205,7 @@ export class ProductsService {
   handleExceptions(error, message?: string) {
     this.logger.error(error);
     const data = {
-      error: error,
+      error,
       message: message || 'Ocurrió un error inesperado.',
       timestamp: new Date().toISOString(),
     };

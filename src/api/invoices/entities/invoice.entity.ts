@@ -1,9 +1,9 @@
+import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 import { Credit } from '../../credits/entities/credit.entity';
 import { Customer } from '../../customers/entities/customer.entity';
 import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.entity';
-import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 import { Base } from '../../../common/models/base.entity';
-import { Member } from '../../../api/members/entities/member.entity';
+import { Member } from '../../members/entities/member.entity';
 
 @Entity()
 export class Invoice extends Base {

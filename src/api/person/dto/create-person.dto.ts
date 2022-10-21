@@ -6,8 +6,8 @@ import {
   MinLength,
 } from 'class-validator';
 import * as NUMBER from '../../../common/constants/numbers.constants';
-import { Customer } from '../../../api/customers/entities/customer.entity';
-import { Member } from '../../../api/members/entities/member.entity';
+import { Customer } from '../../customers/entities/customer.entity';
+import { Member } from '../../members/entities/member.entity';
 
 export class CreatePersonDto {
   @IsString()
@@ -41,6 +41,7 @@ export class CreatePersonDto {
   lastName?: string;
 
   phone?: string;
+
   @IsString()
   @IsOptional()
   @MaxLength(NUMBER.N50, {

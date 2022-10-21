@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ImagesService } from './images.service';
 import { ImagesController } from './images.controller';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { Image } from './entities/image.entity';
 import { Category } from '../categories/entities/category.entity';
 import { SubCategory } from '../sub-categories/entities/sub-category.entity';

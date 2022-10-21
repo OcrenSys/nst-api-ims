@@ -1,8 +1,8 @@
+import { Column, Entity, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 import { Invoice } from '../../invoices/entities/invoice.entity';
 import { Product } from '../../products/entities/product.entity';
 import { Base } from '../../../common/models/base.entity';
 import { Variant } from '../../variants/entities/variant.entity';
-import { Column, Entity, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 
 @Entity()
 export class InvoicesDetail extends Base {

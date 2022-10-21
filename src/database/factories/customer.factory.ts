@@ -1,7 +1,7 @@
-import { Customer } from '../../api/customers/entities/customer.entity';
 import { setSeederFactory } from 'typeorm-extension';
+import { Customer } from '../../api/customers/entities/customer.entity';
 
-export default setSeederFactory(Customer, (faker) => {
+export default setSeederFactory(Customer, () => {
   const customer = new Customer();
   // customer.order = parseInt(faker.finance.amount());
   // customer.nickName = faker.name.firstName('male');

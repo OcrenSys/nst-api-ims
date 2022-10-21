@@ -1,5 +1,5 @@
 import { IsDecimal, IsInt, IsObject, IsOptional } from 'class-validator';
-import { Credit } from 'src/api/credits/entities/credit.entity';
+import { Credit } from '../../../api/credits/entities/credit.entity';
 
 export class CreatePercentDto {
   @IsInt()

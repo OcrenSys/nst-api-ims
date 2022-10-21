@@ -5,7 +5,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { Product } from 'src/api/products/entities/product.entity';
+import { Product } from '../../api/products/entities/product.entity';
 import * as NUMBER from '../../../common/constants/numbers.constants';
 
 export class CreateSectionDto {

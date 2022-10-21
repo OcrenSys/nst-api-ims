@@ -1,9 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, DataSource } from 'typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ResponseHttp } from '../../common/interfaces/response.http';
-import { Repository, DataSource } from 'typeorm';
-import { Brand } from '../brands/entities/brand.entity';
 import { Invoice } from '../invoices/entities/invoice.entity';
 import { Person } from '../person/entities/person.entity';
 import { User } from '../users/entities/user.entity';
@@ -81,7 +80,7 @@ export class MembersService {
     try {
       const brands = await this.memberRepository.find({
         where: filters,
-        relations: relations,
+        relations,
       });
 
       return this.handle.success({
@@ -95,11 +94,11 @@ export class MembersService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
+    const filters = { id };
     const relations = ['user', 'person', 'invoices'];
 
     const member: Member = await this.memberRepository.findOne({
-      relations: relations,
+      relations,
       where: filters,
     });
 
@@ -170,7 +169,7 @@ export class MembersService {
 
   async remove(id: number): Promise<any> {
     const member: Member = await this.memberRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!member) {

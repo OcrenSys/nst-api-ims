@@ -1,8 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
-import { ResponseHttp } from 'src/common/interfaces/response.http';
 import { Repository, DataSource } from 'typeorm';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
+import { ResponseHttp } from '../../common/interfaces/response.http';
 import { Banner } from '../banners/entities/banner.entity';
 import { Category } from '../categories/entities/category.entity';
 import { Product } from '../products/entities/product.entity';
@@ -87,7 +87,7 @@ export class ImagesService {
     try {
       const images = await this.imageRepository.find({
         where: filters,
-        relations: relations,
+        relations,
       });
 
       return this.handle.success({
@@ -101,7 +101,7 @@ export class ImagesService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
+    const filters = { id };
     const relations = [
       'banner',
       'category',
@@ -111,7 +111,7 @@ export class ImagesService {
     ];
 
     const image: Image = await this.imageRepository.findOne({
-      relations: relations,
+      relations,
       where: filters,
     });
 
@@ -190,7 +190,7 @@ export class ImagesService {
 
   async remove(id: number): Promise<ResponseHttp> {
     const image = await this.imageRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!image) {

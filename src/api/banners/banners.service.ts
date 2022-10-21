@@ -1,12 +1,12 @@
 import { DataSource, Repository } from 'typeorm';
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
+import { ResponseHttp } from '../../common/interfaces/response.http';
 import { CreateBannerDto } from './dto/create-banner.dto';
 import { UpdateBannerDto } from './dto/update-banner.dto';
 import { Image } from '../images/entities/image.entity';
 import { Banner } from './entities/banner.entity';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
-import { ResponseHttp } from 'src/common/interfaces/response.http';
 
 @Injectable()
 export class BannersService {
@@ -55,7 +55,7 @@ export class BannersService {
     try {
       const banners = await this.bannerRepository.find({
         where: filters,
-        relations: relations,
+        relations,
       });
 
       return this.handle.success({
@@ -69,11 +69,11 @@ export class BannersService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
+    const filters = { id };
     const relations = [];
 
     const banner: Banner = await this.bannerRepository.findOne({
-      relations: relations,
+      relations,
       where: filters,
     });
 
@@ -129,7 +129,7 @@ export class BannersService {
 
   async remove(id: number): Promise<any> {
     const banner = await this.bannerRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!banner) {

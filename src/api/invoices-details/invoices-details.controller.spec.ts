@@ -11,7 +11,9 @@ describe('InvoicesDetailsController', () => {
       providers: [InvoicesDetailsService],
     }).compile();
 
-    controller = module.get<InvoicesDetailsController>(InvoicesDetailsController);
+    controller = module.get<InvoicesDetailsController>(
+      InvoicesDetailsController,
+    );
   });
 
   it('should be defined', () => {

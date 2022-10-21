@@ -1,10 +1,9 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
-import { ResponseHttp } from 'src/common/interfaces/response.http';
 import { Repository, DataSource, DeleteResult } from 'typeorm';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
+import { ResponseHttp } from '../../common/interfaces/response.http';
 import { Credit } from '../credits/entities/credit.entity';
-import { Payment } from '../payments/entities/payment.entity';
 import { CreatePercentDto } from './dto/create-percent.dto';
 import { UpdatePercentDto } from './dto/update-percent.dto';
 import { Percent } from './entities/percent.entity';
@@ -60,7 +59,7 @@ export class PercentsService {
     try {
       const percents: Percent[] = await this.percentRepository.find({
         where: filters,
-        relations: relations,
+        relations,
       });
 
       return this.handle.success({
@@ -74,11 +73,11 @@ export class PercentsService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
+    const filters = { id };
     const relations = ['credits'];
 
     const percent: Percent = await this.percentRepository.findOne({
-      relations: relations,
+      relations,
       where: filters,
     });
 
@@ -135,7 +134,7 @@ export class PercentsService {
 
   async remove(id: number): Promise<any> {
     const percent: Percent = await this.percentRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!percent) {

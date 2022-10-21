@@ -9,7 +9,7 @@ export class AuthorizationService {
     allowSameUser?: boolean;
   }) {
     return (req: Request, res: Response, next) => {
-      const { role, email, uid } = res.locals;
+      const { role, uid } = res.locals;
       const { id } = req.params;
 
       if (opts.allowSameUser && id && uid === id) return next();
@@ -34,16 +34,15 @@ export class AuthorizationService {
       if (!currentUser) {
         const { uid } = currentUser;
         return res.status(201).send({ uid });
-      } else {
-        const { uid } = await firebase.auth().createUser({
-          displayName,
-          password,
-          email,
-        });
-        await firebase.auth().setCustomUserClaims(uid, { role });
-
-        return res.status(201).send({ uid });
       }
+      const { uid } = await firebase.auth().createUser({
+        displayName,
+        password,
+        email,
+      });
+      await firebase.auth().setCustomUserClaims(uid, { role });
+
+      return res.status(201).send({ uid });
     } catch (err) {
       return this.handleError(res, err);
     }

@@ -1,9 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
-import { ResponseHttp } from 'src/common/interfaces/response.http';
 import { Repository, DataSource } from 'typeorm';
-import { Brand } from '../brands/entities/brand.entity';
+import { HandleExceptions } from '../../common/helpers/handle.exceptions';
+import { ResponseHttp } from '../../common/interfaces/response.http';
 import { User } from '../users/entities/user.entity';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
@@ -65,7 +64,7 @@ export class RolesService {
     try {
       const roles: Role[] = await this.roleRepository.find({
         where: filters,
-        relations: relations,
+        relations,
       });
 
       return this.handle.success({
@@ -82,11 +81,11 @@ export class RolesService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
+    const filters = { id };
     const relations = [];
 
     const role: Role = await this.roleRepository.findOne({
-      relations: relations,
+      relations,
       where: filters,
     });
 
@@ -148,7 +147,7 @@ export class RolesService {
 
   async remove(id: number): Promise<any> {
     const role: Role = await this.roleRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!role) {

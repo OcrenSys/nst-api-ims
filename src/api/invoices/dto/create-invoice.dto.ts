@@ -7,10 +7,10 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { Credit } from 'src/api/credits/entities/credit.entity';
-import { Customer } from 'src/api/customers/entities/customer.entity';
-import { InvoicesDetail } from 'src/api/invoices-details/entities/invoices-detail.entity';
-import { Member } from 'src/api/members/entities/member.entity';
+import { Credit } from '../../../api/credits/entities/credit.entity';
+import { Customer } from '../../../api/customers/entities/customer.entity';
+import { InvoicesDetail } from '../../../api/invoices-details/entities/invoices-detail.entity';
+import { Member } from '../../../api/members/entities/member.entity';
 import * as NUMBER from '../../../common/constants/numbers.constants';
 
 export class CreateInvoiceDto {

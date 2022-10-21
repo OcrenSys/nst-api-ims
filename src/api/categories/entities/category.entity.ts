@@ -1,6 +1,3 @@
-import { Banner } from '../../banners/entities/banner.entity';
-import { Image } from '../../images/entities/image.entity';
-import { Base } from '../../../common/models/base.entity';
 import {
   Column,
   Entity,
@@ -9,8 +6,11 @@ import {
   OneToMany,
   OneToOne,
 } from 'typeorm';
-import { SubCategory } from '../../sub-categories/entities/sub-category.entity';
 import { IsNumber } from 'class-validator';
+import { Banner } from '../../banners/entities/banner.entity';
+import { Image } from '../../images/entities/image.entity';
+import { Base } from '../../../common/models/base.entity';
+import { SubCategory } from '../../sub-categories/entities/sub-category.entity';
 
 @Entity()
 export class Category extends Base {

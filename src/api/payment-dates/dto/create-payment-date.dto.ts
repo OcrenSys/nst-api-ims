@@ -1,6 +1,6 @@
 import { IsDate, IsInt, IsObject, Max, Min } from 'class-validator';
-import { Credit } from 'src/api/credits/entities/credit.entity';
-import { Payment } from 'src/api/payments/entities/payment.entity';
+import { Credit } from '../../../api/credits/entities/credit.entity';
+import { Payment } from '../../../api/payments/entities/payment.entity';
 import * as NUMBER from '../../../common/constants/numbers.constants';
 
 export class CreatePaymentDateDto {

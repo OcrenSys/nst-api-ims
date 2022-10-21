@@ -1,8 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { HandleExceptions } from 'src/common/helpers/handle.exceptions';
-import { ResponseHttp } from 'src/common/interfaces/response.http';
 import { Repository, DataSource } from 'typeorm';
+import { HandleExceptions } from '../..common/helpers/handle.exceptions';
+import { ResponseHttp } from '../..common/interfaces/response.http';
 import { Product } from '../products/entities/product.entity';
 import { CreateSectionDto } from './dto/create-section.dto';
 import { UpdateSectionDto } from './dto/update-section.dto';
@@ -58,7 +58,7 @@ export class SectionsService {
     try {
       const section = await this.sectionRepository.find({
         where: filters,
-        relations: relations,
+        relations,
       });
 
       return this.handle.success({
@@ -72,11 +72,11 @@ export class SectionsService {
   }
 
   async findOne(id: number): Promise<ResponseHttp> {
-    const filters = { id: id };
+    const filters = { id };
     const relations = [];
 
     const section: Section = await this.sectionRepository.findOne({
-      relations: relations,
+      relations,
       where: filters,
     });
 
@@ -137,7 +137,7 @@ export class SectionsService {
 
   async remove(id: number): Promise<any> {
     const section = await this.sectionRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (!section) {
