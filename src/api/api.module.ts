@@ -19,7 +19,7 @@ import { MembersModule } from './members/members.module';
 import { PersonModule } from './person/person.module';
 import { SubCategoriesModule } from './sub-categories/sub-categories.module';
 import { UsersModule } from './users/users.module';
-import { AuthGuard } from 'src/guards/auth/auth.guard';
+import { AuthGuard } from '../guards/auth/auth.guard';
 
 @Module({
   imports: [
