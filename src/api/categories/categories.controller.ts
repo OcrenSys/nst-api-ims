@@ -7,7 +7,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { Auth } from 'src/decorators/auth.decorator';
+import { Auth } from '../../decorators/auth.decorator';
 import { RoleEnum } from '../../common/enums/roles.enum';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';

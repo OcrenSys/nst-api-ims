@@ -11,7 +11,7 @@ import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
-import { Auth } from 'src/decorators/auth.decorator';
+import { Auth } from '../../decorators/auth.decorator';
 
 @Controller('products')
 export class ProductsController {

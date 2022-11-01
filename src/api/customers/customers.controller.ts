@@ -11,7 +11,7 @@ import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
-import { Auth } from 'src/decorators/auth.decorator';
+import { Auth } from '../../decorators/auth.decorator';
 
 @Controller('customers')
 export class CustomersController {

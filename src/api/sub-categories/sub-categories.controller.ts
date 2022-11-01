@@ -11,7 +11,7 @@ import { SubCategoriesService } from './sub-categories.service';
 import { CreateSubCategoryDto } from './dto/create-sub-category.dto';
 import { UpdateSubCategoryDto } from './dto/update-sub-category.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
-import { Auth } from 'src/decorators/auth.decorator';
+import { Auth } from '../../decorators/auth.decorator';
 
 @Controller('sub-categories')
 export class SubCategoriesController {

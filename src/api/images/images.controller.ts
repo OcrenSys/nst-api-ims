@@ -11,7 +11,7 @@ import { ImagesService } from './images.service';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
-import { Auth } from 'src/decorators/auth.decorator';
+import { Auth } from '../../decorators/auth.decorator';
 
 @Controller('images')
 export class ImagesController {
