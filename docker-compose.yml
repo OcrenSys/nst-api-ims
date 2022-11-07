@@ -37,8 +37,7 @@ services:
       - 9229:9229
     environment:
       WAIT_HOSTS: mysql:${DATABASE_PORT}
-      NODE_ENV: development
-
+ 
   phpmyadmin:
     container_name: '${CONTAINER_NAME}_phpmyadmin'
     image: phpmyadmin/phpmyadmin

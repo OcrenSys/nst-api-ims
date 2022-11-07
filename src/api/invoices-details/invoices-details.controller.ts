@@ -11,7 +11,7 @@ import { InvoicesDetailsService } from './invoices-details.service';
 import { CreateInvoicesDetailDto } from './dto/create-invoices-detail.dto';
 import { UpdateInvoicesDetailDto } from './dto/update-invoices-detail.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
-import { Auth } from 'src/decorators/auth.decorator';
+import { Auth } from '../../decorators/auth.decorator';
 
 @Controller('invoices-details')
 export class InvoicesDetailsController {

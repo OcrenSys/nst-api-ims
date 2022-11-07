@@ -11,7 +11,7 @@ import { PaymentDatesService } from './payment-dates.service';
 import { CreatePaymentDateDto } from './dto/create-payment-date.dto';
 import { UpdatePaymentDateDto } from './dto/update-payment-date.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
-import { Auth } from 'src/decorators/auth.decorator';
+import { Auth } from '../../decorators/auth.decorator';
 
 @Controller('payment-dates')
 export class PaymentDatesController {

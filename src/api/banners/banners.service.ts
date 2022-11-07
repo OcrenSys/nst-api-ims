@@ -1,5 +1,9 @@
 import { DataSource, Repository } from 'typeorm';
-import { HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpStatus,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ResponseHttp } from '../../common/interfaces/response.http';
@@ -42,7 +46,10 @@ export class BannersService {
         message: 'Banner creado exitosamente.',
       });
     } catch (error) {
-      this.handle.throw(error);
+      throw new InternalServerErrorException(
+        error,
+        'No se ha podido crear el banner.',
+      );
     } finally {
       queryRunner.release();
     }
@@ -64,7 +71,7 @@ export class BannersService {
         message: 'Banners encontrados con exito.',
       });
     } catch (error) {
-      this.handle.throw(error);
+      this.handle.throw(error, 'Ocurrió un error al encontrar los banners.');
     }
   }
 
@@ -72,22 +79,26 @@ export class BannersService {
     const filters = { id };
     const relations = [];
 
-    const banner: Banner = await this.bannerRepository.findOne({
-      relations,
-      where: filters,
-    });
+    try {
+      const banner: Banner = await this.bannerRepository.findOne({
+        relations,
+        where: filters,
+      });
 
-    if (!banner)
-      this.handle.throw(
-        { code: HttpStatus.NOT_FOUND },
-        `Banner con id: "${id}" no pudo ser encontrado`,
-      );
+      if (!banner)
+        this.handle.throw(
+          { code: HttpStatus.NOT_FOUND },
+          `Banner con id: "${id}" no pudo ser encontrado`,
+        );
 
-    return this.handle.success({
-      statusCode: HttpStatus.OK,
-      data: banner,
-      message: 'Banner encontrado exitosamente!',
-    });
+      return this.handle.success({
+        statusCode: HttpStatus.OK,
+        data: banner,
+        message: 'Banner encontrado exitosamente!',
+      });
+    } catch (error) {
+      this.handle.throw(error, 'Ocurrió un error al encontrar el banner.');
+    }
   }
 
   async update(id: number, updateBannerDto: UpdateBannerDto): Promise<any> {
