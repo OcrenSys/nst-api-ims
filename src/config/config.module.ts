@@ -7,10 +7,8 @@ import MailConfig from './mail.config';
 @Module({
   imports: [
     NestConfigModule.forRoot({
+      envFilePath: ['.env'],
       isGlobal: true,
-      envFilePath: `.env${
-        process.env.NODE_ENV ? `.${process.env.NODE_ENV}` : ''
-      }`,
       load: [
         () => ({ app: AppConfig() }),
         () => ({ test: TestConfig() }),
