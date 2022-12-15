@@ -1,45 +1,70 @@
-version: "3"
+version: "3.8"
 
 services:
-  mysql:
-    container_name: '${CONTAINER_NAME}_mysql'
-    image: mysql:8.0.29
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: '${DATABASE_PASSWORD}'
-      MYSQL_PASSWORD: '${DATABASE_PASSWORD}'
-      MYSQL_DATABASE: '${DATABASE_NAME}'
-    volumes:
-      - mysqldata:/var/lib/mysql
-      - ./mysqlconfig:/etc/mysql/conf.d
-    env_file:
-      - .env
-    command: --default-authentication-plugin=mysql_native_password
-    ports:
-      - '${DATABASE_PORT}:${DATABASE_PORT}'
-
-  nestjs:
-    container_name: '${CONTAINER_NAME}_api'
+  api:
+    container_name: '${CONTAINER_NAME}-api'
     env_file:
       - .env
     build:
       context: .
       dockerfile: Dockerfile
+      # Only will build development stage from our dockerfile
+      target: development
     depends_on:
       - mysql
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     command: >
-      sh -c "yarn && yarn run seed:run && yarn start:debug"
+      sh -c "yarn && yarn migration:run && yarn seed:run && yarn start:dev"
     ports:
-      - '${API_PORT}:${API_PORT}'
-      - 9229:9229
+      - '${API_PORT_DEV}:${API_PORT_DEV}'
+      - '${API_PORT_DEBUG}:${API_PORT_DEBUG}'
     environment:
       WAIT_HOSTS: mysql:${DATABASE_PORT}
- 
+    networks:
+      - boutique
+    deploy:
+      resources:
+        limits:
+          cpus: '0.70'
+          memory: 1000M
+        reservations:
+          cpus: '0.5'
+          memory: 400M
+
+  mysql:
+    container_name: '${CONTAINER_NAME}-mysql'
+    image: mariadb:10.5.5
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DATABASE_ROOT_PASSWORD}'
+      MYSQL_USER: '${DATABASE_USERNAME}'
+      MYSQL_PASSWORD: '${DATABASE_PASSWORD}'
+      MYSQL_DATABASE: '${DATABASE_NAME}'
+      MYSQL_HOST: '${DATABASE_HOST}'
+    volumes:
+      - mysqldata:/var/lib/mysql
+      - ./mysqlconfig:/etc/mysql/conf.d
+      - ./init/01.sql:/docker-entrypoint-initdb.d/01.sql
+    env_file:
+      - .env
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - '${DATABASE_PORT}:${DATABASE_PORT}'
+    networks:
+      - boutique
+    deploy:
+      resources:
+        limits:
+          cpus: '0.70'
+          memory: 1000M
+        reservations:
+          cpus: '0.5'
+          memory: 400M
+
   phpmyadmin:
-    container_name: '${CONTAINER_NAME}_phpmyadmin'
+    container_name: '${CONTAINER_NAME}-phpmyadmin'
     image: phpmyadmin/phpmyadmin
     env_file:
       - .env
@@ -52,6 +77,19 @@ services:
       - '${PHP_MYADMIN_PORT}:${PHP_MYADMIN_PORT}'
     depends_on:
       - mysql
+    networks:
+      - boutique
+    deploy:
+      resources:
+        limits:
+          cpus: '0.70'
+          memory: 1000M
+        reservations:
+          cpus: '0.5'
+          memory: 400M
 
 volumes:
   mysqldata: {}
+
+networks:
+  boutique:

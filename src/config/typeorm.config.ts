@@ -6,6 +6,8 @@ import {
 import { DataSourceOptions } from 'typeorm';
 import { SeederOptions } from 'typeorm-extension';
 
+export default () => ({ ...typeOrmConfigAsync });
+
 export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
   inject: [ConfigService],
@@ -22,9 +24,9 @@ export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {
       extra: {
         charset: 'utf8mb4_unicode_ci',
       },
-      synchronize: true,
+      synchronize: false,
       dropSchema: false,
-      migrationsRun: true,
+      migrationsRun: false,
       logging: true,
     };
     return dataSourceAndSeederOptions;
@@ -44,5 +46,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
     charset: 'utf8mb4_unicode_ci',
   },
   synchronize: false,
+  dropSchema: false,
+  migrationsRun: false,
   logging: true,
 };
