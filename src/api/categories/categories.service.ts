@@ -6,7 +6,7 @@ import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { SubCategory } from '../sub-categories/entities/sub-category.entity';
-import { ResponseHttp } from '../../common/interfaces/response.http';
+import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
 import { Category } from './entities/category.entity';
 import { Banner } from '../banners/entities/banner.entity';
 import { Image } from '../images/entities/image.entity';
@@ -197,5 +197,11 @@ export class CategoriesService {
         });
       }),
     );
+  }
+
+  async reorder(categories: Category[]): Promise<any> {
+    return new Promise((resolve, reject) => {
+      resolve([]);
+    });
   }
 }

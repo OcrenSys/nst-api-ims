@@ -5,10 +5,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
-import { AuthenticationMiddleware } from './middlewares/authentication/authentication.middleware';
+import { AuthenticationMiddleware } from './common/middlewares/authentication/authentication.middleware';
 import { AuthenticationService } from './services/authentication/authentication.service';
 import { AuthorizationService } from './services/authorization/authorization.service';
 import { EXCLUDED, ROUTES } from './common/constants/routes.constants';
+import { AuthenticationModule } from './api/authentication/authentication.module';
 
 @Module({
   imports: [ConfigModule, DatabaseModule, ApiModule, UsersModule],

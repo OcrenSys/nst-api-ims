@@ -2,7 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource, DeleteResult } from 'typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
-import { ResponseHttp } from '../../common/interfaces/response.http';
+import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
 import { Credit } from '../credits/entities/credit.entity';
 import { CreatePercentDto } from './dto/create-percent.dto';
 import { UpdatePercentDto } from './dto/update-percent.dto';

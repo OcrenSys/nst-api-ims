@@ -11,7 +11,7 @@ import { VariantsService } from './variants.service';
 import { CreateVariantDto } from './dto/create-variant.dto';
 import { UpdateVariantDto } from './dto/update-variant.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
-import { Auth } from '../../decorators/auth.decorator';
+import { Auth } from '../../common/decorators/auth.decorator';
 
 @Controller('variants')
 export class VariantsController {

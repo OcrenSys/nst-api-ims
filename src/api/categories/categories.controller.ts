@@ -6,12 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
-import { Auth } from '../../decorators/auth.decorator';
+import { Auth } from '../../common/decorators/auth.decorator';
 import { RoleEnum } from '../../common/enums/roles.enum';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { Category } from './entities/category.entity';
 
 @Controller('categories')
 export class CategoriesController {
@@ -29,7 +31,7 @@ export class CategoriesController {
   }
 
   @Get(':id')
-  @Auth(RoleEnum.Sales)
+  @Auth(RoleEnum.Sales, RoleEnum.Admin)
   findOne(@Param('id') id: string) {
     return this.categoriesService.findOne(+id);
   }
@@ -47,5 +49,10 @@ export class CategoriesController {
   @Auth(RoleEnum.Admin)
   remove(@Param('id') id: string) {
     return this.categoriesService.remove(+id);
+  }
+
+  @Post()
+  reorder(@Body() categories: Category[]) {
+    return this.categoriesService.reorder(categories);
   }
 }

@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
-import { ResponseHttp } from '../../common/interfaces/response.http';
+import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
 import { CreateBannerDto } from './dto/create-banner.dto';
 import { UpdateBannerDto } from './dto/update-banner.dto';
 import { Image } from '../images/entities/image.entity';

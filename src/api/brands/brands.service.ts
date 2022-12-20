@@ -2,7 +2,7 @@ import { Repository, DataSource } from 'typeorm';
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
-import { ResponseHttp } from '../../common/interfaces/response.http';
+import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
 import { Product } from '../products/entities/product.entity';
 import { CreateBrandDto } from './dto/create-brand.dto';
 import { UpdateBrandDto } from './dto/update-brand.dto';

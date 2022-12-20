@@ -11,7 +11,7 @@ import { MembersService } from './members.service';
 import { CreateMemberDto } from './dto/create-member.dto';
 import { UpdateMemberDto } from './dto/update-member.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
-import { Auth } from '../../decorators/auth.decorator';
+import { Auth } from '../../common/decorators/auth.decorator';
 
 @Controller('members')
 export class MembersController {

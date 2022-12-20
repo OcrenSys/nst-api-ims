@@ -16,7 +16,7 @@ services:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     command: >
-      sh -c "yarn && yarn migration:run && yarn seed:run && yarn start:dev"
+      sh -c "yarn && yarn seed:run && yarn start:debug"
     ports:
       - '${API_PORT_DEV}:${API_PORT_DEV}'
       - '${API_PORT_DEBUG}:${API_PORT_DEBUG}'

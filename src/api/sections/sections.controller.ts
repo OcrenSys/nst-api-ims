@@ -11,7 +11,7 @@ import { SectionsService } from './sections.service';
 import { CreateSectionDto } from './dto/create-section.dto';
 import { UpdateSectionDto } from './dto/update-section.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
-import { Auth } from '../../decorators/auth.decorator';
+import { Auth } from '../../common/decorators/auth.decorator';
 
 @Controller('sections')
 export class SectionsController {

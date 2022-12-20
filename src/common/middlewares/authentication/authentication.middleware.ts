@@ -1,8 +1,8 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import * as firebase from 'firebase-admin';
 import { Request, Response } from 'express';
-import { AuthenticationService } from '../../services/authentication/authentication.service';
-import { UsersService } from '../../api/users/users.service';
+import { AuthenticationService } from '../../../services/authentication/authentication.service';
+import { UsersService } from '../../../api/users/users.service';
 
 @Injectable()
 export class AuthenticationMiddleware implements NestMiddleware {
@@ -18,12 +18,13 @@ export class AuthenticationMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: () => void) {
     const token = req.headers.authorization;
 
-    if (token != undefined && token != null && token != '') {
+    if (token != undefined && token != null && token != '') { 
+      const cleanToken: string = token.replace('Bearer ', '');
       this.auth
-        .verifyIdToken(token.replace('Bearer ', ''))
+        .verifyIdToken(cleanToken)
         .then(async (firebaseUser) => {
           const { data } = await this.usersService.findOne(
-            firebaseUser.user_id,
+            firebaseUser?.user_id || firebaseUser?.sub,
           );
 
           req['data'] = { ...data, firebaseUser };

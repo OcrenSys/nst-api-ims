@@ -4,7 +4,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm/repository/Repository';
 import { from, map } from 'rxjs';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
-import { ResponseHttp } from '../../common/interfaces/response.http';
+import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
 import { Image } from '../images/entities/image.entity';
 import { Product } from '../products/entities/product.entity';
 import { Variant } from './entities/variant.entity';

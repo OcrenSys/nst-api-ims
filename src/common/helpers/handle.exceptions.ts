@@ -7,7 +7,7 @@ import {
   Injectable,
   HttpException,
 } from '@nestjs/common';
-import { ResponseHttp } from '../interfaces/response.http';
+import { ResponseHttp } from './interfaces/response.http';
 
 @Injectable()
 export class HandleExceptions {

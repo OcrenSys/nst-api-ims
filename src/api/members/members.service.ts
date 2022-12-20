@@ -2,7 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
-import { ResponseHttp } from '../../common/interfaces/response.http';
+import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
 import { Invoice } from '../invoices/entities/invoice.entity';
 import { Person } from '../person/entities/person.entity';
 import { User } from '../users/entities/user.entity';

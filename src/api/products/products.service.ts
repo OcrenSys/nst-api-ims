@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, map } from 'rxjs';
-import { ResponseHttp } from '../../common/interfaces/response.http';
+import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
 import { Image } from '../images/entities/image.entity';
 import { Variant } from '../variants/entities/variant.entity';
 import { CreateProductDto } from './dto/create-product.dto';

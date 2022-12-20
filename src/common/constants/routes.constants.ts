@@ -30,4 +30,6 @@ export const EXCLUDED = [
 
   { path: `api/v1/variants/public`, method: RequestMethod.GET },
   { path: `api/v1/variants/public/:id`, method: RequestMethod.GET },
+
+  { path: `api/v1/authentication`, method: RequestMethod.ALL },
 ];

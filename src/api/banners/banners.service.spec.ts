@@ -14,7 +14,7 @@ import { Logger } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { CreateBannerDto } from './dto/create-banner.dto';
 import { faker } from '@faker-js/faker';
-import { ResponseHttp } from 'src/common/interfaces/response.http';
+import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
 import { UpdateBannerDto } from './dto/update-banner.dto';
 
 describe('BannersService', () => {

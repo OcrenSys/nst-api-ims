@@ -1,4 +1,5 @@
 const path = require('path'); // eslint-disable-line
+const { retrieveSourceMap } = require('source-map-support');
 
 module.exports = {
   type: 'mysql',
@@ -19,6 +20,6 @@ module.exports = {
   factories: [path.resolve(__dirname, 'src/database/factories/**/*{.ts,.js}')],
 
   dropSchema: false,
-  synchronize: false,
+  synchronize: true,
   migrationsRun: true,
 };

@@ -19,7 +19,8 @@ import { MembersModule } from './members/members.module';
 import { PersonModule } from './person/person.module';
 import { SubCategoriesModule } from './sub-categories/sub-categories.module';
 import { UsersModule } from './users/users.module';
-import { AuthGuard } from '../guards/auth/auth.guard';
+import { AuthGuard } from '../././common/guards/auth/auth.guard';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { AuthGuard } from '../guards/auth/auth.guard';
     PersonModule,
     SubCategoriesModule,
     UsersModule,
+    AuthenticationModule,
   ],
   controllers: [],
   providers: [

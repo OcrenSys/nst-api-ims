@@ -11,7 +11,7 @@ import { PercentsService } from './percents.service';
 import { CreatePercentDto } from './dto/create-percent.dto';
 import { UpdatePercentDto } from './dto/update-percent.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
-import { Auth } from '../../decorators/auth.decorator';
+import { Auth } from '../../common/decorators/auth.decorator';
 
 @Controller('percents')
 export class PercentsController {

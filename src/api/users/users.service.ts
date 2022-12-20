@@ -2,7 +2,7 @@ import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { FirebaseUser } from '../../common/models/firebase-user';
-import { ResponseHttp } from '../../common/interfaces/response.http';
+import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { Role } from '../roles/entities/role.entity';
 import { Member } from '../members/entities/member.entity';
@@ -87,6 +87,27 @@ export class UsersService {
   async findOne(user_id: string): Promise<ResponseHttp> {
     const filters = {
       user_id,
+    };
+    const relations = ['roles'];
+
+    const user = await this.userRepository.findOne({
+      relations,
+      where: {
+        ...filters,
+      },
+    });
+    if (!user) throw new NotFoundException();
+
+    return this.handle.success({
+      data: user,
+      statusCode: HttpStatus.OK,
+      message: 'Usuario encontrado exitosamente!',
+    });
+  }
+
+  async findByEmail(email: string): Promise<ResponseHttp> {
+    const filters = {
+      email,
     };
     const relations = ['roles'];
 
