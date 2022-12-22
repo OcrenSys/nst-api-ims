@@ -7,8 +7,8 @@ import { Credit } from '../../database/models/credit.entity';
 import { Customer } from '../../database/models/customer.entity';
 import { OrderDetail } from '../../database/models/order-detail.entity';
 import { Member } from '../../database/models/member.entity';
-import { CreateInvoiceDto } from './dto/create-order.dto';
-import { UpdateInvoiceDto } from './dto/update-order.dto';
+import { CreateorderDto } from './dto/create-order.dto';
+import { UpdateorderDto } from './dto/update-order.dto';
 import { Order } from '../../database/models/order.entity';
 
 @Injectable()
@@ -19,47 +19,47 @@ export class OrdersService {
     @InjectRepository(Customer)
     private readonly customerRepository: Repository<Customer>,
     @InjectRepository(Order)
-    private readonly invoiceRepository: Repository<Order>,
+    private readonly orderRepository: Repository<Order>,
     @InjectRepository(OrderDetail)
-    private readonly invoiceDetailRepository: Repository<OrderDetail>,
+    private readonly orderDetailRepository: Repository<OrderDetail>,
     @InjectRepository(Member)
     private readonly memberRepository: Repository<Member>,
     private readonly handle: HandleExceptions,
     private readonly dataSource: DataSource,
   ) {}
 
-  async create(createInvoiceDto: CreateInvoiceDto): Promise<ResponseHttp> {
+  async create(createorderDto: CreateorderDto): Promise<ResponseHttp> {
     const {
       credit = null,
       customer = null,
-      invoiceDetails = [],
+      orderDetails = [],
       member = null,
-      ...toCreateInvoice
-    } = createInvoiceDto;
+      ...toCreateorder
+    } = createorderDto;
     const queryRunner = this.dataSource.createQueryRunner();
 
     await queryRunner.connect();
     await queryRunner.startTransaction();
 
     try {
-      const invoice = this.invoiceRepository.create({
-        ...toCreateInvoice,
+      const order = this.orderRepository.create({
+        ...toCreateorder,
         credit: credit ? this.creditRepository.create(credit) : null,
         member: member ? this.memberRepository.create(member) : null,
         customer: customer ? this.customerRepository.create(customer) : null,
-        orderDetails: invoiceDetails
-          ? invoiceDetails.map((invoiceDetail: OrderDetail) =>
-              this.invoiceDetailRepository.create(invoiceDetail),
+        orderDetails: orderDetails
+          ? orderDetails.map((orderDetail: OrderDetail) =>
+              this.orderDetailRepository.create(orderDetail),
             )
           : [],
       });
 
-      this.invoiceRepository.save(invoice);
+      this.orderRepository.save(order);
 
       await queryRunner.commitTransaction();
 
       return this.handle.success({
-        data: invoice,
+        data: order,
         statusCode: HttpStatus.OK,
         message: 'Factura creada exitosamente.',
       });
@@ -72,16 +72,16 @@ export class OrdersService {
 
   async findAll(): Promise<ResponseHttp> {
     const filters = {};
-    const relations = ['credit', 'customer', 'invoiceDetails', 'member'];
+    const relations = ['credit', 'customer', 'orderDetails', 'member'];
 
     try {
-      const invoices = await this.invoiceRepository.find({
+      const orders = await this.orderRepository.find({
         where: filters,
         relations,
       });
 
       return this.handle.success({
-        data: invoices,
+        data: orders,
         statusCode: HttpStatus.OK,
         message: 'Facturas encontradas con exito.',
       });
@@ -92,14 +92,14 @@ export class OrdersService {
 
   async findOne(id: number): Promise<ResponseHttp> {
     const filters = { id };
-    const relations = ['credit', 'customer', 'invoiceDetails', 'member'];
+    const relations = ['credit', 'customer', 'orderDetails', 'member'];
 
-    const invoice: Order = await this.invoiceRepository.findOne({
+    const order: Order = await this.orderRepository.findOne({
       relations,
       where: filters,
     });
 
-    if (!invoice)
+    if (!order)
       this.handle.throw(
         { code: HttpStatus.NOT_FOUND },
         `Factura con id: "${id}" no pudo ser encontrada`,
@@ -107,30 +107,30 @@ export class OrdersService {
 
     return this.handle.success({
       statusCode: HttpStatus.OK,
-      data: invoice,
+      data: order,
       message: 'Datos de la factura encontrados exitosamente!',
     });
   }
 
-  async update(id: number, updateInvoiceDto: UpdateInvoiceDto): Promise<any> {
+  async update(id: number, updateorderDto: UpdateorderDto): Promise<any> {
     const {
       credit = null,
       customer = null,
-      invoiceDetails = [],
+      orderDetails = [],
       member = null,
-      ...toUpdateInvoice
-    } = updateInvoiceDto;
+      ...toUpdateorder
+    } = updateorderDto;
     const queryRunner = this.dataSource.createQueryRunner();
 
     await queryRunner.connect();
     await queryRunner.startTransaction();
 
-    const invoice: Order = await this.invoiceRepository.preload({
+    const order: Order = await this.orderRepository.preload({
       id,
-      ...toUpdateInvoice,
+      ...toUpdateorder,
     });
 
-    if (!invoice) {
+    if (!order) {
       this.handle.throw(
         { code: HttpStatus.BAD_REQUEST },
         'Lo sentimos, no se ha podido actualizar los datos de la factura.',
@@ -138,24 +138,24 @@ export class OrdersService {
     }
 
     try {
-      const invoice = this.invoiceRepository.create({
-        ...toUpdateInvoice,
+      const order = this.orderRepository.create({
+        ...toUpdateorder,
         credit: credit ? this.creditRepository.create(credit) : null,
         member: member ? this.memberRepository.create(member) : null,
         customer: customer ? this.customerRepository.create(customer) : null,
-        orderDetails: invoiceDetails
-          ? invoiceDetails.map((invoiceDetail: OrderDetail) =>
-              this.invoiceDetailRepository.create(invoiceDetail),
+        orderDetails: orderDetails
+          ? orderDetails.map((orderDetail: OrderDetail) =>
+              this.orderDetailRepository.create(orderDetail),
             )
           : [],
       });
 
-      this.invoiceRepository.save(invoice);
+      this.orderRepository.save(order);
 
       await queryRunner.commitTransaction();
 
       return this.handle.success({
-        data: invoice,
+        data: order,
         statusCode: HttpStatus.OK,
         message: `Los datos de la factura han sido actualizados exitosamente.`,
       });
@@ -171,11 +171,11 @@ export class OrdersService {
   }
 
   async remove(id: number): Promise<any> {
-    const invoice = await this.invoiceRepository.findOne({
+    const order = await this.orderRepository.findOne({
       where: { id },
     });
 
-    if (!invoice) {
+    if (!order) {
       this.handle.throw(
         { code: HttpStatus.NOT_FOUND },
         `Los datos de la factura no pudieron ser encontrados.`,
@@ -183,7 +183,7 @@ export class OrdersService {
     }
 
     try {
-      const result = await this.invoiceRepository.delete(id);
+      const result = await this.orderRepository.delete(id);
 
       return this.handle.success({
         data: result,

@@ -93,7 +93,7 @@ export class CreateProductDto {
 
   @IsOptional()
   @IsObject()
-  invoiceDetail?: OrderDetail;
+  orderDetail?: OrderDetail;
 
   @IsOptional()
   @IsObject()

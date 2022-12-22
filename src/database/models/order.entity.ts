@@ -22,7 +22,7 @@ export class Order extends Base {
   })
   credit?: Credit;
 
-  @OneToMany(() => OrderDetail, (invoicesDetail) => invoicesDetail.order, {
+  @OneToMany(() => OrderDetail, (ordersDetail) => ordersDetail.order, {
     cascade: true,
   })
   orderDetails?: OrderDetail[];

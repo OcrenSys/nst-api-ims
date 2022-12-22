@@ -8,42 +8,42 @@ import {
   Delete,
 } from '@nestjs/common';
 import { OrdersService } from './order.service';
-import { CreateInvoiceDto } from './dto/create-order.dto';
-import { UpdateInvoiceDto } from './dto/update-order.dto';
+import { CreateorderDto } from './dto/create-order.dto';
+import { UpdateorderDto } from './dto/update-order.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
 import { Auth } from '../../common/decorators/auth.decorator';
 
-@Controller('invoices')
+@Controller('orders')
 export class OrdersController {
-  constructor(private readonly invoicesService: OrdersService) {}
+  constructor(private readonly ordersService: OrdersService) {}
 
   @Post()
   @Auth(RoleEnum.Admin, RoleEnum.Sales)
-  create(@Body() createInvoiceDto: CreateInvoiceDto) {
-    return this.invoicesService.create(createInvoiceDto);
+  create(@Body() createorderDto: CreateorderDto) {
+    return this.ordersService.create(createorderDto);
   }
 
   @Get()
   @Auth(RoleEnum.Admin, RoleEnum.Sales)
   findAll() {
-    return this.invoicesService.findAll();
+    return this.ordersService.findAll();
   }
 
   @Get(':id')
   @Auth(RoleEnum.Admin, RoleEnum.Sales)
   findOne(@Param('id') id: string) {
-    return this.invoicesService.findOne(+id);
+    return this.ordersService.findOne(+id);
   }
 
   @Patch(':id')
   @Auth(RoleEnum.Admin)
-  update(@Param('id') id: string, @Body() updateInvoiceDto: UpdateInvoiceDto) {
-    return this.invoicesService.update(+id, updateInvoiceDto);
+  update(@Param('id') id: string, @Body() updateorderDto: UpdateorderDto) {
+    return this.ordersService.update(+id, updateorderDto);
   }
 
   @Delete(':id')
   @Auth(RoleEnum.Admin)
   remove(@Param('id') id: string) {
-    return this.invoicesService.remove(+id);
+    return this.ordersService.remove(+id);
   }
 }

@@ -13,7 +13,7 @@ import { OrderDetail } from '../../../database/models/order-detail.entity';
 import { Member } from '../../../database/models/member.entity';
 import * as NUMBER from '../../../common/constants/numbers.constants';
 
-export class CreateInvoiceDto {
+export class CreateorderDto {
   @IsBoolean()
   isAnulated: boolean;
 
@@ -35,7 +35,7 @@ export class CreateInvoiceDto {
   credit?: Credit;
 
   @IsArray()
-  invoiceDetails: OrderDetail[];
+  orderDetails: OrderDetail[];
 
   @IsObject()
   @IsOptional()

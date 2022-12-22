@@ -83,7 +83,7 @@ export class CreateVariantDto {
 
   @IsOptional()
   @IsObject()
-  invoiceDetail?: OrderDetail;
+  orderDetail?: OrderDetail;
 
   @IsArray()
   @IsOptional()

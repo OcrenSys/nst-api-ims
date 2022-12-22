@@ -41,7 +41,7 @@ export class CreateOrdersDetailDto {
 
   @IsOptional()
   @IsObject()
-  invoice: Order;
+  order: Order;
 
   @IsOptional()
   @IsObject()

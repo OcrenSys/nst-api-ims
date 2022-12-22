@@ -14,9 +14,9 @@ import { OrderDetail } from '../../database/models/order-detail.entity';
 export class OrdersDetailsService {
   constructor(
     @InjectRepository(Order)
-    private readonly invoiceRepository: Repository<Order>,
+    private readonly orderRepository: Repository<Order>,
     @InjectRepository(OrderDetail)
-    private readonly invoiceDetailsRepository: Repository<OrderDetail>,
+    private readonly orderDetailsRepository: Repository<OrderDetail>,
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
     @InjectRepository(Variant)
@@ -26,33 +26,33 @@ export class OrdersDetailsService {
   ) {}
 
   async create(
-    createInvoiceDetailsDto: CreateOrdersDetailDto,
+    createorderDetailsDto: CreateOrdersDetailDto,
   ): Promise<ResponseHttp> {
     const {
       product = null,
       variant = null,
-      invoice = null,
-      ...toCreateInvoiceDetails
-    } = createInvoiceDetailsDto;
+      order = null,
+      ...toCreateorderDetails
+    } = createorderDetailsDto;
     const queryRunner = this.dataSource.createQueryRunner();
 
     await queryRunner.connect();
     await queryRunner.startTransaction();
 
     try {
-      const invoiceDetails = this.invoiceDetailsRepository.create({
-        ...toCreateInvoiceDetails,
+      const orderDetails = this.orderDetailsRepository.create({
+        ...toCreateorderDetails,
         product: product ? this.productRepository.create(product) : null,
         variant: variant ? this.variantRepository.create(variant) : null,
-        order: invoice ? this.invoiceRepository.create(invoice) : null,
+        order: order ? this.orderRepository.create(order) : null,
       });
 
-      this.invoiceDetailsRepository.save(invoiceDetails);
+      this.orderDetailsRepository.save(orderDetails);
 
       await queryRunner.commitTransaction();
 
       return this.handle.success({
-        data: invoiceDetails,
+        data: orderDetails,
         statusCode: HttpStatus.OK,
         message: 'Detalle de factura creado exitosamente.',
       });
@@ -65,17 +65,17 @@ export class OrdersDetailsService {
 
   async findAll(): Promise<ResponseHttp> {
     const filters = {};
-    const relations = ['product', 'variant', 'invoice'];
+    const relations = ['product', 'variant', 'order'];
 
     try {
-      const invoiceDetails: OrderDetail[] =
-        await this.invoiceDetailsRepository.find({
+      const orderDetails: OrderDetail[] =
+        await this.orderDetailsRepository.find({
           where: filters,
           relations,
         });
 
       return this.handle.success({
-        data: invoiceDetails,
+        data: orderDetails,
         statusCode: HttpStatus.OK,
         message: 'Detalles de facturas encontrados con exito.',
       });
@@ -86,15 +86,15 @@ export class OrdersDetailsService {
 
   async findOne(id: number): Promise<ResponseHttp> {
     const filters = { id };
-    const relations = ['product', 'variant', 'invoice'];
+    const relations = ['product', 'variant', 'order'];
 
-    const invoiceDetail: OrderDetail =
-      await this.invoiceDetailsRepository.findOne({
+    const orderDetail: OrderDetail =
+      await this.orderDetailsRepository.findOne({
         relations,
         where: filters,
       });
 
-    if (!invoiceDetail)
+    if (!orderDetail)
       this.handle.throw(
         { code: HttpStatus.NOT_FOUND },
         `Detalle de factura con id: "${id}" no pudo ser encontrado.`,
@@ -102,36 +102,36 @@ export class OrdersDetailsService {
 
     return this.handle.success({
       statusCode: HttpStatus.OK,
-      data: invoiceDetail,
+      data: orderDetail,
       message: 'Detalle de factura encontrado exitosamente!',
     });
   }
 
   async update(
     id: number,
-    updateInvoiceDetailsDto: UpdateOrdersDetailDto,
+    updateorderDetailsDto: UpdateOrdersDetailDto,
   ): Promise<any> {
     const {
       product = null,
       variant = null,
-      invoice = null,
-      ...toUpdateinvoiceDetail
-    } = updateInvoiceDetailsDto;
+      order = null,
+      ...toUpdateorderDetail
+    } = updateorderDetailsDto;
     const queryRunner = this.dataSource.createQueryRunner();
 
     await queryRunner.connect();
     await queryRunner.startTransaction();
 
-    const invoiceDetail: OrderDetail =
-      await this.invoiceDetailsRepository.preload({
+    const orderDetail: OrderDetail =
+      await this.orderDetailsRepository.preload({
         id,
-        ...toUpdateinvoiceDetail,
+        ...toUpdateorderDetail,
         product: product ? this.productRepository.create(product) : null,
         variant: variant ? this.variantRepository.create(variant) : null,
-        order: invoice ? this.invoiceRepository.create(invoice) : null,
+        order: order ? this.orderRepository.create(order) : null,
       });
 
-    if (!invoiceDetail) {
+    if (!orderDetail) {
       this.handle.throw(
         { code: HttpStatus.BAD_REQUEST },
         'Lo sentimos, no se ha podido actualizar los datos del detalle de factura.',
@@ -139,12 +139,12 @@ export class OrdersDetailsService {
     }
 
     try {
-      this.invoiceDetailsRepository.save(invoiceDetail);
+      this.orderDetailsRepository.save(orderDetail);
 
       await queryRunner.commitTransaction();
 
       return this.handle.success({
-        data: invoiceDetail,
+        data: orderDetail,
         statusCode: HttpStatus.OK,
         message: `Detalle de factura ha sido actualizado exitosamente.`,
       });
@@ -160,11 +160,11 @@ export class OrdersDetailsService {
   }
 
   async remove(id: number): Promise<any> {
-    const invoiceDetail = await this.invoiceDetailsRepository.findOne({
+    const orderDetail = await this.orderDetailsRepository.findOne({
       where: { id },
     });
 
-    if (!invoiceDetail) {
+    if (!orderDetail) {
       this.handle.throw(
         { code: HttpStatus.NOT_FOUND },
         `Detalle de factura con id: "${id}" no pudo ser encontrado.`,
@@ -172,7 +172,7 @@ export class OrdersDetailsService {
     }
 
     try {
-      const result = await this.invoiceDetailsRepository.delete(id);
+      const result = await this.orderDetailsRepository.delete(id);
 
       return this.handle.success({
         data: result,

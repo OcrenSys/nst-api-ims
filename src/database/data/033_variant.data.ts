@@ -8,7 +8,7 @@ export const VariantData: Variant[] = [
     description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
     images: [],
-    invoiceDetail: null,
+    orderDetail: null,
     name: 'PK-123456',
     stock: 3,
     cost: 450,
@@ -25,7 +25,7 @@ export const VariantData: Variant[] = [
     description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
     images: [],
-    invoiceDetail: null,
+    orderDetail: null,
     name: 'PK-987654',
     stock: 3,
     cost: 450,
@@ -42,7 +42,7 @@ export const VariantData: Variant[] = [
     description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
     images: [],
-    invoiceDetail: null,
+    orderDetail: null,
     name: 'PK-990090',
     stock: 3,
     cost: 450,

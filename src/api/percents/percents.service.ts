@@ -20,7 +20,7 @@ export class PercentsService {
   ) {}
 
   async create(createPercentDto: CreatePercentDto): Promise<ResponseHttp> {
-    const { credits = [], ...toCreateInvoice } = createPercentDto;
+    const { credits = [], ...toCreateorder } = createPercentDto;
     const queryRunner = this.dataSource.createQueryRunner();
 
     await queryRunner.connect();
@@ -28,7 +28,7 @@ export class PercentsService {
 
     try {
       const percent: Percent = this.percentRepository.create({
-        ...toCreateInvoice,
+        ...toCreateorder,
         credits: credits.length
           ? credits.map((_credit: Credit) =>
               this.creditRepository.create(_credit),
@@ -95,7 +95,7 @@ export class PercentsService {
   }
 
   async update(id: number, updatePaymentDto: UpdatePercentDto): Promise<any> {
-    const { credits = [], ...toUpdateInvoice } = updatePaymentDto;
+    const { credits = [], ...toUpdateorder } = updatePaymentDto;
     const queryRunner = this.dataSource.createQueryRunner();
 
     await queryRunner.connect();
@@ -104,7 +104,7 @@ export class PercentsService {
     try {
       const percent: Percent = await this.percentRepository.preload({
         id,
-        ...toUpdateInvoice,
+        ...toUpdateorder,
         credits: credits.length
           ? credits.map((_credit: Credit) =>
               this.creditRepository.create(_credit),

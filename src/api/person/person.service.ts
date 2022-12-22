@@ -26,7 +26,7 @@ export class PersonService {
     const {
       customer = null,
       member = null,
-      ...toCreateInvoice
+      ...toCreateorder
     } = createPersonDto;
     const queryRunner = this.dataSource.createQueryRunner();
 
@@ -35,7 +35,7 @@ export class PersonService {
 
     try {
       const person: Person = this.personRepository.create({
-        ...toCreateInvoice,
+        ...toCreateorder,
         customer: customer ? this.customerRepository.create(customer) : null,
         member: member ? this.memberRepository.create(member) : null,
       });

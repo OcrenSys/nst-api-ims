@@ -33,10 +33,10 @@ export class Variant extends Base {
   @Column({ default: false })
   isPublished?: boolean;
 
-  @OneToOne(() => OrderDetail, (invoiceDetails) => invoiceDetails.variant, {
+  @OneToOne(() => OrderDetail, (orderDetails) => orderDetails.variant, {
     nullable: true,
   })
-  invoiceDetail?: OrderDetail;
+  orderDetail?: OrderDetail;
 
   @OneToMany(() => Image, (image) => image.variant, { nullable: true })
   images?: Image[];

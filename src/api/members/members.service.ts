@@ -20,7 +20,7 @@ export class MembersService {
     @InjectRepository(Person)
     private readonly personRepository: Repository<Person>,
     @InjectRepository(Order)
-    private readonly invoiceRepository: Repository<Order>,
+    private readonly orderRepository: Repository<Order>,
 
     private readonly handle: HandleExceptions,
     private readonly dataSource: DataSource,
@@ -30,7 +30,7 @@ export class MembersService {
     const {
       person = null,
       user = null,
-      invoices = [],
+      orders = [],
       ...toCreateBrand
     } = createMemberDto;
     const queryRunner = this.dataSource.createQueryRunner();
@@ -42,9 +42,9 @@ export class MembersService {
       ...toCreateBrand,
       person: person ? this.personRepository.create(person) : null,
       user: user ? this.userRepository.create(user) : null,
-      orders: invoices.length
-        ? invoices.map((_invoice: Order) =>
-            this.invoiceRepository.create(_invoice),
+      orders: orders.length
+        ? orders.map((_order: Order) =>
+            this.orderRepository.create(_order),
           )
         : [],
     });
@@ -76,7 +76,7 @@ export class MembersService {
 
   async findAll(): Promise<ResponseHttp> {
     const filters = {};
-    const relations = ['user', 'person', 'invoices'];
+    const relations = ['user', 'person', 'orders'];
     try {
       const brands = await this.memberRepository.find({
         where: filters,
@@ -95,7 +95,7 @@ export class MembersService {
 
   async findOne(id: number): Promise<ResponseHttp> {
     const filters = { id };
-    const relations = ['user', 'person', 'invoices'];
+    const relations = ['user', 'person', 'orders'];
 
     const member: Member = await this.memberRepository.findOne({
       relations,
@@ -119,7 +119,7 @@ export class MembersService {
     const {
       person = null,
       user = null,
-      invoices = [],
+      orders = [],
       ...toUpdateBrand
     } = updateMemberDto;
     const queryRunner = this.dataSource.createQueryRunner();
@@ -132,9 +132,9 @@ export class MembersService {
       ...toUpdateBrand,
       person: person ? this.personRepository.create(person) : null,
       user: user ? this.userRepository.create(user) : null,
-      orders: invoices.length
-        ? invoices.map((_invoice: Order) =>
-            this.invoiceRepository.create(_invoice),
+      orders: orders.length
+        ? orders.map((_order: Order) =>
+            this.orderRepository.create(_order),
           )
         : [],
     });

@@ -26,7 +26,7 @@ export class PaymentDatesService {
     const {
       credit = null,
       payment = null,
-      ...toCreateInvoice
+      ...toCreateorder
     } = createPaymentDto;
     const queryRunner = this.dataSource.createQueryRunner();
 
@@ -35,7 +35,7 @@ export class PaymentDatesService {
 
     try {
       const paymentDate: PaymentDate = this.paymentDateRepository.create({
-        ...toCreateInvoice,
+        ...toCreateorder,
         credit: credit ? this.creditRepository.create(credit) : null,
         payment: payment ? this.paymentRepository.create(payment) : null,
       });
@@ -107,7 +107,7 @@ export class PaymentDatesService {
     const {
       credit = null,
       payment = null,
-      ...toUpdateInvoice
+      ...toUpdateorder
     } = updatePaymentDateDto;
     const queryRunner = this.dataSource.createQueryRunner();
 
@@ -118,7 +118,7 @@ export class PaymentDatesService {
       const paymentDate: PaymentDate = await this.paymentDateRepository.preload(
         {
           id,
-          ...toUpdateInvoice,
+          ...toUpdateorder,
           credit: credit ? this.creditRepository.create(credit) : null,
           payment: payment ? this.paymentRepository.create(payment) : null,
         },

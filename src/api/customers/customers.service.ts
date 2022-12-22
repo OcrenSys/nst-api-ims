@@ -37,7 +37,7 @@ export class CustomersService {
     const filters = {
       id,
     };
-    const relations = ['invoices'];
+    const relations = ['orders'];
 
     const customer = await this.customerRepository.findOne({
       relations,

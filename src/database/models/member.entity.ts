@@ -17,7 +17,7 @@ export class Member extends Base {
   @JoinColumn()
   person: Person;
 
-  @OneToMany(() => Order, (invoice) => invoice.customer, {
+  @OneToMany(() => Order, (order) => order.customer, {
     nullable: true,
   })
   orders?: Order[];

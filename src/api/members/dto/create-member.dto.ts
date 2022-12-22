@@ -15,5 +15,5 @@ export class CreateMemberDto {
 
   @IsArray()
   @IsOptional()
-  invoices?: Order[];
+  orders?: Order[];
 }

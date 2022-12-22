@@ -91,7 +91,7 @@ export class Product extends Base {
   })
   variants?: Variant[];
 
-  @OneToOne(() => OrderDetail, (invoiceDetails) => invoiceDetails.product, {
+  @OneToOne(() => OrderDetail, (orderDetails) => orderDetails.product, {
     nullable: true,
   })
   orderDetail?: OrderDetail;

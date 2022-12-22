@@ -15,7 +15,7 @@ export class OrderDetail extends Base {
   @Column()
   amount: number;
 
-  @ManyToOne(() => Order, (invoice) => invoice.orderDetails, {
+  @ManyToOne(() => Order, (order) => order.orderDetails, {
     onDelete: 'CASCADE',
   })
   order: Order;
@@ -26,7 +26,7 @@ export class OrderDetail extends Base {
   @JoinColumn()
   product: Product;
 
-  @OneToOne(() => Variant, (variant) => variant.invoiceDetail, {
+  @OneToOne(() => Variant, (variant) => variant.orderDetail, {
     nullable: true,
     eager: true,
   })

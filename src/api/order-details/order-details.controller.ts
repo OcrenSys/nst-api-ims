@@ -13,42 +13,42 @@ import { UpdateOrdersDetailDto } from './dto/update-order-detail.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
 import { Auth } from '../../common/decorators/auth.decorator';
 
-@Controller('invoices-details')
+@Controller('orders-details')
 export class OrdersDetailsController {
   constructor(
-    private readonly invoicesDetailsService: OrdersDetailsService,
+    private readonly ordersDetailsService: OrdersDetailsService,
   ) {}
 
   @Post()
   @Auth(RoleEnum.Admin, RoleEnum.Sales)
-  create(@Body() createInvoicesDetailDto: CreateOrdersDetailDto) {
-    return this.invoicesDetailsService.create(createInvoicesDetailDto);
+  create(@Body() createordersDetailDto: CreateOrdersDetailDto) {
+    return this.ordersDetailsService.create(createordersDetailDto);
   }
 
   @Get()
   @Auth(RoleEnum.Admin, RoleEnum.Sales)
   findAll() {
-    return this.invoicesDetailsService.findAll();
+    return this.ordersDetailsService.findAll();
   }
 
   @Get(':id')
   @Auth(RoleEnum.Admin, RoleEnum.Sales)
   findOne(@Param('id') id: string) {
-    return this.invoicesDetailsService.findOne(+id);
+    return this.ordersDetailsService.findOne(+id);
   }
 
   @Patch(':id')
   @Auth(RoleEnum.Admin)
   update(
     @Param('id') id: string,
-    @Body() updateInvoicesDetailDto: UpdateOrdersDetailDto,
+    @Body() updateordersDetailDto: UpdateOrdersDetailDto,
   ) {
-    return this.invoicesDetailsService.update(+id, updateInvoicesDetailDto);
+    return this.ordersDetailsService.update(+id, updateordersDetailDto);
   }
 
   @Delete(':id')
   @Auth(RoleEnum.Admin)
   remove(@Param('id') id: string) {
-    return this.invoicesDetailsService.remove(+id);
+    return this.ordersDetailsService.remove(+id);
   }
 }

@@ -17,7 +17,7 @@ export class Customer extends Base {
   @Column({ default: 0 })
   limit: number;
 
-  @OneToMany(() => Order, (invoice) => invoice.customer, { nullable: true })
+  @OneToMany(() => Order, (order) => order.customer, { nullable: true })
   orders?: Order[];
 
   @OneToOne(() => Person, (person) => person.customer)
