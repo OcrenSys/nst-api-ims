@@ -1,4 +1,4 @@
-import { User } from '../../api/users/entities/user.entity';
+import { User } from '../../database/models/user.entity';
 
 export class FirebaseUser {
   name: string;

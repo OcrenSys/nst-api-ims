@@ -3,8 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { PercentsService } from './percents.service';
 import { PercentsController } from './percents.controller';
-import { Percent } from './entities/percent.entity';
-import { Credit } from '../credits/entities/credit.entity';
+import { Percent } from '../../database/models/percent.entity';
+import { Credit } from '../../database/models/credit.entity';
 
 @Module({
   controllers: [PercentsController],

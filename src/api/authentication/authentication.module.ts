@@ -8,9 +8,9 @@ import { JwtStrategy } from './jwt.strategy';
 import { UsersService } from '../users/users.service';
 import { UsersModule } from '../users/users.module';
 import { FirebaseUser } from 'src/common/models/firebase-user';
-import { Member } from '../members/entities/member.entity';
-import { Role } from '../roles/entities/role.entity';
-import { User } from '../users/entities/user.entity';
+import { Member } from '../../database/models/member.entity';
+import { Role } from '../../database/models/role.entity';
+import { User } from '../../database/models/user.entity';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 
 @Module({

@@ -1,5 +1,5 @@
 import { setSeederFactory } from 'typeorm-extension';
-import { Percent } from '../../api/percents/entities/percent.entity';
+import { Percent } from '../models/percent.entity';
 
 export default setSeederFactory(Percent, () => {
   const percent = new Percent();

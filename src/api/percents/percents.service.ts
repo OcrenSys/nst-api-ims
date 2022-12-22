@@ -3,10 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource, DeleteResult } from 'typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
-import { Credit } from '../credits/entities/credit.entity';
+import { Credit } from '../../database/models/credit.entity';
 import { CreatePercentDto } from './dto/create-percent.dto';
 import { UpdatePercentDto } from './dto/update-percent.dto';
-import { Percent } from './entities/percent.entity';
+import { Percent } from '../../database/models/percent.entity';
 
 @Injectable()
 export class PercentsService {

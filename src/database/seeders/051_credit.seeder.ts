@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
-import { Credit } from '../../api/credits/entities/credit.entity';
+import { Credit } from '../models/credit.entity';
 import { CreditData } from '../data/051_credit.data';
 
 export default class CreditSeeder implements Seeder {

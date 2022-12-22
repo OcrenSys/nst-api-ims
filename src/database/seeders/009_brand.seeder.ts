@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
-import { Brand } from '../../api/brands/entities/brand.entity';
+import { Brand } from '../models/brand.entity';
 import { BrandData } from '../data/009_brand.data';
 
 export default class BrandSeeder implements Seeder {

@@ -3,8 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { SectionsService } from './sections.service';
 import { SectionsController } from './sections.controller';
-import { Product } from '../products/entities/product.entity';
-import { Section } from './entities/section.entity';
+import { Product } from '../../database/models/product.entity';
+import { Section } from '../../database/models/section.entity';
 
 @Module({
   controllers: [SectionsController],

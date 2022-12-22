@@ -10,9 +10,9 @@ import {
   MinLength,
 } from 'class-validator';
 import * as NUMBER from '../../../common/constants/numbers.constants';
-import { Image } from '../../images/entities/image.entity';
-import { SubCategory } from '../../sub-categories/entities/sub-category.entity';
-import { Banner } from '../../banners/entities/banner.entity';
+import { Image } from '../../../database/models/image.entity';
+import { SubCategory } from '../../../database/models/sub-category.entity';
+import { Banner } from '../../../database/models/banner.entity';
 
 export class CreateCategoryDto {
   @IsString()

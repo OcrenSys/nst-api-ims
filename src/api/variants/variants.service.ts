@@ -5,9 +5,9 @@ import { Repository } from 'typeorm/repository/Repository';
 import { from, map } from 'rxjs';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
-import { Image } from '../images/entities/image.entity';
-import { Product } from '../products/entities/product.entity';
-import { Variant } from './entities/variant.entity';
+import { Image } from '../../database/models/image.entity';
+import { Product } from '../../database/models/product.entity';
+import { Variant } from '../../database/models/variant.entity';
 import { CreateVariantDto } from './dto/create-variant.dto';
 import { UpdateVariantDto } from './dto/update-variant.dto';
 

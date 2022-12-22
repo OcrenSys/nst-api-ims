@@ -4,7 +4,7 @@ import { from, map, Observable } from 'rxjs';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
-import { Customer } from './entities/customer.entity';
+import { Customer } from '../../database/models/customer.entity';
 
 @Injectable()
 export class CustomersService {
@@ -23,7 +23,7 @@ export class CustomersService {
 
   findAll() {
     const filters = {};
-    const relations = ['invoices'];
+    const relations = ['orders'];
 
     return this.customerRepository.find({
       relations,

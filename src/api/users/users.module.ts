@@ -4,9 +4,9 @@ import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { FirebaseUser } from '../../common/models/firebase-user';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
-import { User } from './entities/user.entity';
-import { Member } from '../members/entities/member.entity';
-import { Role } from '../roles/entities/role.entity';
+import { User } from '../../database/models/user.entity';
+import { Member } from '../../database/models/member.entity';
+import { Role } from '../../database/models/role.entity';
 
 @Module({
   controllers: [UsersController],

@@ -3,10 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource, DeleteResult } from 'typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
-import { Category } from '../categories/entities/category.entity';
+import { Category } from '../../database/models/category.entity';
 import { CreateSubCategoryDto } from './dto/create-sub-category.dto';
 import { UpdateSubCategoryDto } from './dto/update-sub-category.dto';
-import { SubCategory } from './entities/sub-category.entity';
+import { SubCategory } from '../../database/models/sub-category.entity';
 
 @Injectable()
 export class SubCategoriesService {

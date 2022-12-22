@@ -7,10 +7,10 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { Category } from '../../../api/categories/entities/category.entity';
-import { Image } from '../../../api/images/entities/image.entity';
-import { Product } from '../../../api/products/entities/product.entity';
-import { SubCategory } from '../../../api/sub-categories/entities/sub-category.entity';
+import { Category } from '../../../database/models/category.entity';
+import { Image } from '../../../database/models/image.entity';
+import { Product } from '../../../database/models/product.entity';
+import { SubCategory } from '../../../database/models/sub-category.entity';
 import * as NUMBER from '../../../common/constants/numbers.constants';
 
 export class CreateBannerDto {

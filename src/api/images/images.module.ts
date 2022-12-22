@@ -3,12 +3,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ImagesService } from './images.service';
 import { ImagesController } from './images.controller';
-import { Image } from './entities/image.entity';
-import { Category } from '../categories/entities/category.entity';
-import { SubCategory } from '../sub-categories/entities/sub-category.entity';
-import { Product } from '../products/entities/product.entity';
-import { Variant } from '../variants/entities/variant.entity';
-import { Banner } from '../banners/entities/banner.entity';
+import { Image } from '../../database/models/image.entity';
+import { Category } from '../../database/models/category.entity';
+import { SubCategory } from '../../database/models/sub-category.entity';
+import { Product } from '../../database/models/product.entity';
+import { Variant } from '../../database/models/variant.entity';
+import { Banner } from '../../database/models/banner.entity';
 
 @Module({
   controllers: [ImagesController],

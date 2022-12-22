@@ -1,6 +1,6 @@
 import { Factory, Seeder } from 'typeorm-seeding';
 import { Connection } from 'typeorm';
-import { Member } from '../../api/members/entities/member.entity';
+import { Member } from '../models/member.entity';
 import { MemberData } from '../data/021_member.data';
 
 export default class MemberSeeder implements Seeder {

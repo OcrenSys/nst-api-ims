@@ -3,8 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { RolesService } from './roles.service';
 import { RolesController } from './roles.controller';
-import { Role } from './entities/role.entity';
-import { User } from '../users/entities/user.entity';
+import { Role } from '../../database/models/role.entity';
+import { User } from '../../database/models/user.entity';
 
 @Module({
   controllers: [RolesController],

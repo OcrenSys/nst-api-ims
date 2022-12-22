@@ -1,5 +1,5 @@
 import { setSeederFactory } from 'typeorm-extension';
-import { Customer } from '../../api/customers/entities/customer.entity';
+import { Customer } from '../models/customer.entity';
 
 export default setSeederFactory(Customer, () => {
   const customer = new Customer();

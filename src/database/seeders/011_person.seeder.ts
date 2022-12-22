@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
-import { Person } from '../../api/person/entities/person.entity';
+import { Person } from '../models/person.entity';
 import { PersonData } from '../data/011_person.data';
 
 export default class PersonSeeder implements Seeder {

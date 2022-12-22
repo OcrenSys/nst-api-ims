@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
-import { Variant } from '../../api/variants/entities/variant.entity';
+import { Variant } from '../models/variant.entity';
 import { VariantData } from '../data/033_variant.data';
 
 export default class VariantSeeder implements Seeder {

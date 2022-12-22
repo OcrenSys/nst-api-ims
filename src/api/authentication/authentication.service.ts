@@ -1,12 +1,10 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Role } from 'src/api/roles/entities/role.entity';
-import { User } from 'src/api/users/entities/user.entity';
+import { Role } from '../../database/models/role.entity';
 import { UsersService } from 'src/api/users/users.service';
-import { RoleEnum } from 'src/common/enums/roles.enum';
-import { CreateAuthenticationDto } from './dto/create-authentication.dto';
-import { UpdateAuthenticationDto } from './dto/update-authentication.dto';
+import { RoleEnum } from '../../common/enums/roles.enum';
 import * as bcrypt from 'bcrypt';
+import { User } from '../../database/models/user.entity';
 
 @Injectable()
 export class AuthenticationService {
@@ -15,8 +13,10 @@ export class AuthenticationService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateUser({email, password}): Promise<User | null> {
-    const {data: {user}} = await this.usersService.findByEmail(email);
+  async validateUser({ email, password }): Promise<User | null> {
+    const {
+      data: { user },
+    } = await this.usersService.findByEmail(email);
     if (!user) return null;
     const match = await bcrypt.compare(password, user.password);
     if (match) {
@@ -25,7 +25,7 @@ export class AuthenticationService {
     return null;
   }
 
-  async login({email, sub}) {
+  async login({ email, sub }) {
     const payload = { username: email, sub: sub };
     return {
       access_token: this.jwtService.sign(payload),

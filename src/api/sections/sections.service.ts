@@ -3,10 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
-import { Product } from '../products/entities/product.entity';
+import { Product } from '../../database/models/product.entity';
 import { CreateSectionDto } from './dto/create-section.dto';
 import { UpdateSectionDto } from './dto/update-section.dto';
-import { Section } from './entities/section.entity';
+import { Section } from '../../database/models/section.entity';
 
 @Injectable()
 export class SectionsService {

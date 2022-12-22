@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductsService } from './products.service';
 import { ProductsController } from './products.controller';
-import { Product } from './entities/product.entity';
-import { Variant } from '../variants/entities/variant.entity';
-import { Image } from '../images/entities/image.entity';
+import { Product } from '../../database/models/product.entity';
+import { Variant } from '../../database/models/variant.entity';
+import { Image } from '../../database/models/image.entity';
 
 @Module({
   controllers: [ProductsController],

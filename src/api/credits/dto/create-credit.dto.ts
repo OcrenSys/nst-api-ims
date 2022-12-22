@@ -6,10 +6,10 @@ import {
   IsOptional,
   Min,
 } from 'class-validator';
-import { Invoice } from '../../../api/invoices/entities/invoice.entity';
-import { PaymentDate } from '../../../api/payment-dates/entities/payment-date.entity';
-import { Payment } from '../../../api/payments/entities/payment.entity';
-import { Percent } from '../../../api/percents/entities/percent.entity';
+import { Order } from '../../../database/models/order.entity';
+import { PaymentDate } from '../../../database/models/payment-date.entity';
+import { Payment } from '../../../database/models/payment.entity';
+import { Percent } from '../../../database/models/percent.entity';
 import * as NUMBER from '../../../common/constants/numbers.constants';
 
 export class CreateCreditDto {
@@ -43,5 +43,5 @@ export class CreateCreditDto {
 
   @IsObject()
   @IsOptional()
-  invoice?: Invoice;
+  order?: Order;
 }

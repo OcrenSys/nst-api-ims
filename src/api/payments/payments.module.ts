@@ -3,9 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { PaymentsService } from './payments.service';
 import { PaymentsController } from './payments.controller';
-import { Payment } from './entities/payment.entity';
-import { PaymentDate } from '../payment-dates/entities/payment-date.entity';
-import { Credit } from '../credits/entities/credit.entity';
+import { Payment } from '../../database/models/payment.entity';
+import { PaymentDate } from '../../database/models/payment-date.entity';
+import { Credit } from '../../database/models/credit.entity';
 
 @Module({
   controllers: [PaymentsController],

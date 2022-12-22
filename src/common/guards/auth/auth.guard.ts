@@ -8,7 +8,7 @@ import {
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 import { RoleEnum } from '../../../common/enums/roles.enum';
-import { Role } from '../../../api/roles/entities/role.entity';
+import { Role } from '../../../database/models/role.entity';
 import { ROLES_KEY } from '../../../common/decorators/auth.decorator';
 
 @Injectable()

@@ -9,8 +9,8 @@ import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
 import { CreateBannerDto } from './dto/create-banner.dto';
 import { UpdateBannerDto } from './dto/update-banner.dto';
-import { Image } from '../images/entities/image.entity';
-import { Banner } from './entities/banner.entity';
+import { Image } from '../../database/models/image.entity';
+import { Banner } from '../../database/models/banner.entity';
 
 @Injectable()
 export class BannersService {

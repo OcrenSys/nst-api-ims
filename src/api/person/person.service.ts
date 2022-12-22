@@ -3,11 +3,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource, DeleteResult } from 'typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
-import { Customer } from '../customers/entities/customer.entity';
-import { Member } from '../members/entities/member.entity';
+import { Customer } from '../../database/models/customer.entity';
+import { Member } from '../../database/models/member.entity';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
-import { Person } from './entities/person.entity';
+import { Person } from '../../database/models/person.entity';
 
 @Injectable()
 export class PersonService {

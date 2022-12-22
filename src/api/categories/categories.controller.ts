@@ -13,7 +13,7 @@ import { RoleEnum } from '../../common/enums/roles.enum';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { Category } from './entities/category.entity';
+import { Category } from '../../database/models/category.entity';
 
 @Controller('categories')
 export class CategoriesController {

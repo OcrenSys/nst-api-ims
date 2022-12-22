@@ -6,8 +6,8 @@ import {
   MinLength,
 } from 'class-validator';
 import * as NUMBER from '../../../common/constants/numbers.constants';
-import { Customer } from '../../customers/entities/customer.entity';
-import { Member } from '../../members/entities/member.entity';
+import { Customer } from '../../../database/models/customer.entity';
+import { Member } from '../../../database/models/member.entity';
 
 export class CreatePersonDto {
   @IsString()

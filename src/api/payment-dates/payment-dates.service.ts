@@ -3,11 +3,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource, DeleteResult } from 'typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
-import { Credit } from '../credits/entities/credit.entity';
-import { Payment } from '../payments/entities/payment.entity';
+import { Credit } from '../../database/models/credit.entity';
+import { Payment } from '../../database/models/payment.entity';
 import { CreatePaymentDateDto } from './dto/create-payment-date.dto';
 import { UpdatePaymentDateDto } from './dto/update-payment-date.dto';
-import { PaymentDate } from './entities/payment-date.entity';
+import { PaymentDate } from '../../database/models/payment-date.entity';
 
 @Injectable()
 export class PaymentDatesService {

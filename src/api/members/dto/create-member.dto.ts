@@ -1,7 +1,7 @@
 import { IsArray, IsObject, IsOptional, IsString } from 'class-validator';
-import { Invoice } from '../../../api/invoices/entities/invoice.entity';
-import { Person } from '../../../api/person/entities/person.entity';
-import { User } from '../../../api/users/entities/user.entity';
+import { Order } from '../../../database/models/order.entity';
+import { Person } from '../../../database/models/person.entity';
+import { User } from '../../../database/models/user.entity';
 
 export class CreateMemberDto {
   @IsString()
@@ -15,5 +15,5 @@ export class CreateMemberDto {
 
   @IsArray()
   @IsOptional()
-  invoices?: Invoice[];
+  invoices?: Order[];
 }

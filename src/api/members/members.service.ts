@@ -3,12 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
-import { Invoice } from '../invoices/entities/invoice.entity';
-import { Person } from '../person/entities/person.entity';
-import { User } from '../users/entities/user.entity';
+import { Order } from '../../database/models/order.entity';
+import { Person } from '../../database/models/person.entity';
+import { User } from '../../database/models/user.entity';
 import { CreateMemberDto } from './dto/create-member.dto';
 import { UpdateMemberDto } from './dto/update-member.dto';
-import { Member } from './entities/member.entity';
+import { Member } from '../../database/models/member.entity';
 
 @Injectable()
 export class MembersService {
@@ -19,8 +19,8 @@ export class MembersService {
     private readonly userRepository: Repository<User>,
     @InjectRepository(Person)
     private readonly personRepository: Repository<Person>,
-    @InjectRepository(Invoice)
-    private readonly invoiceRepository: Repository<Invoice>,
+    @InjectRepository(Order)
+    private readonly invoiceRepository: Repository<Order>,
 
     private readonly handle: HandleExceptions,
     private readonly dataSource: DataSource,
@@ -42,8 +42,8 @@ export class MembersService {
       ...toCreateBrand,
       person: person ? this.personRepository.create(person) : null,
       user: user ? this.userRepository.create(user) : null,
-      invoices: invoices.length
-        ? invoices.map((_invoice: Invoice) =>
+      orders: invoices.length
+        ? invoices.map((_invoice: Order) =>
             this.invoiceRepository.create(_invoice),
           )
         : [],
@@ -132,8 +132,8 @@ export class MembersService {
       ...toUpdateBrand,
       person: person ? this.personRepository.create(person) : null,
       user: user ? this.userRepository.create(user) : null,
-      invoices: invoices.length
-        ? invoices.map((_invoice: Invoice) =>
+      orders: invoices.length
+        ? invoices.map((_invoice: Order) =>
             this.invoiceRepository.create(_invoice),
           )
         : [],

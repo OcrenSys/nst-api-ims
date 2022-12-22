@@ -1,9 +1,9 @@
-import { Variant } from '../../api/variants/entities/variant.entity';
+import { Variant } from '../models/variant.entity';
 import { ProductData } from './033_product.data';
 
 export const VariantData: Variant[] = [
   {
-    order: 1,
+    position: 1,
     code: '1232323',
     description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -17,11 +17,10 @@ export const VariantData: Variant[] = [
     isActive: true,
     isPublished: true,
     product: ProductData[2],
-    createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-    updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
+    
   },
   {
-    order: 2,
+    position: 2,
     code: '4354545545',
     description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -35,11 +34,10 @@ export const VariantData: Variant[] = [
     isActive: true,
     isPublished: true,
     product: ProductData[2],
-    createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-    updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
+    
   },
   {
-    order: 3,
+    position: 3,
     code: '1212112',
     description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -53,7 +51,6 @@ export const VariantData: Variant[] = [
     isActive: true,
     isPublished: true,
     product: ProductData[2],
-    createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-    updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
+    
   },
 ];

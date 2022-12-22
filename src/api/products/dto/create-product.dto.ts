@@ -12,13 +12,13 @@ import {
   Min,
   MinLength,
 } from 'class-validator';
-import { Banner } from '../../banners/entities/banner.entity';
-import { Brand } from '../../brands/entities/brand.entity';
-import { Image } from '../../images/entities/image.entity';
-import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.entity';
-import { Section } from '../../sections/entities/section.entity';
-import { SubCategory } from '../../sub-categories/entities/sub-category.entity';
-import { Variant } from '../../variants/entities/variant.entity';
+import { Banner } from '../../../database/models/banner.entity';
+import { Brand } from '../../../database/models/brand.entity';
+import { Image } from '../../../database/models/image.entity';
+import { OrderDetail } from '../../../database/models/order-detail.entity';
+import { Section } from '../../../database/models/section.entity';
+import { SubCategory } from '../../../database/models/sub-category.entity';
+import { Variant } from '../../../database/models/variant.entity';
 import * as NUMBER from '../../../common/constants/numbers.constants';
 
 export class CreateProductDto {
@@ -93,7 +93,7 @@ export class CreateProductDto {
 
   @IsOptional()
   @IsObject()
-  invoiceDetail?: InvoicesDetail;
+  invoiceDetail?: OrderDetail;
 
   @IsOptional()
   @IsObject()

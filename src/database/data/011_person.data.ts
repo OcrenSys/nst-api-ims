@@ -1,4 +1,4 @@
-import { Person } from '../../api/person/entities/person.entity';
+import { Person } from '../models/person.entity';
 
 export const PersonData: Person[] = [
   {
@@ -8,9 +8,6 @@ export const PersonData: Person[] = [
     phone: '88878889',
     address:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    isActive: true,
-    createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-    updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
   {
     nickName: 'Juan',
@@ -19,9 +16,6 @@ export const PersonData: Person[] = [
     phone: '88878889',
     address:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    isActive: true,
-    createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-    updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
   {
     nickName: 'La Glory',
@@ -30,9 +24,6 @@ export const PersonData: Person[] = [
     phone: '88878889',
     address:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    isActive: true,
-    createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-    updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
   {
     nickName: 'Alex',
@@ -41,9 +32,6 @@ export const PersonData: Person[] = [
     phone: '88878889',
     address:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    isActive: true,
-    createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-    updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
   {
     nickName: 'Enriqueto',
@@ -52,9 +40,6 @@ export const PersonData: Person[] = [
     phone: '88878889',
     address:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    isActive: true,
-    createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-    updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
   {
     nickName: 'Chapulin',
@@ -63,8 +48,5 @@ export const PersonData: Person[] = [
     phone: '88878889',
     address:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    isActive: true,
-    createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-    updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
   },
 ];

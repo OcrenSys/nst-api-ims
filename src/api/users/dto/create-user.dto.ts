@@ -6,8 +6,8 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { Member } from '../../../api/members/entities/member.entity';
-import { Role } from '../../../api/roles/entities/role.entity';
+import { Member } from '../../../database/models/member.entity';
+import { Role } from '../../../database/models/role.entity';
 import { FirebaseUser } from '../../../common/models/firebase-user';
 import * as NUMBER from '../../../common/constants/numbers.constants';
 

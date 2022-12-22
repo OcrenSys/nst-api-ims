@@ -1,5 +1,5 @@
-import { Credit } from '../../api/credits/entities/credit.entity';
-import { InvoiceData } from './041_invoice.data';
+import { Credit } from '../models/credit.entity';
+import { OrderData } from './041_order.data';
 import { PercentData } from './042_percent.data';
 
 export const CreditData: Credit[] = [
@@ -7,27 +7,24 @@ export const CreditData: Credit[] = [
     fee: 0,
     rate: 0,
     isActive: true,
-    invoice: InvoiceData[0],
+    order: OrderData[0],
     percent: PercentData[0],
-    createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-    updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
+    
   },
   {
     fee: 0.1,
     rate: 0,
     isActive: true,
-    invoice: InvoiceData[1],
+    order: OrderData[1],
     percent: PercentData[1],
-    createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-    updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
+    
   },
   {
     fee: 0.2,
     rate: 0,
     isActive: true,
-    invoice: InvoiceData[2],
+    order: OrderData[2],
     percent: PercentData[2],
-    createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-    updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
+    
   },
 ];

@@ -10,11 +10,11 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, map } from 'rxjs';
 import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
-import { Image } from '../images/entities/image.entity';
-import { Variant } from '../variants/entities/variant.entity';
+import { Image } from '../../database/models/image.entity';
+import { Variant } from '../../database/models/variant.entity';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { Product } from './entities/product.entity';
+import { Product } from '../../database/models/product.entity';
 
 @Injectable()
 export class ProductsService {

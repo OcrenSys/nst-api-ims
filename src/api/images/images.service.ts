@@ -3,12 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
-import { Banner } from '../banners/entities/banner.entity';
-import { Category } from '../categories/entities/category.entity';
-import { Product } from '../products/entities/product.entity';
-import { SubCategory } from '../sub-categories/entities/sub-category.entity';
-import { Variant } from '../variants/entities/variant.entity';
-import { Image } from './entities/image.entity';
+import { Banner } from '../../database/models/banner.entity';
+import { Category } from '../../database/models/category.entity';
+import { Product } from '../../database/models/product.entity';
+import { SubCategory } from '../../database/models/sub-category.entity';
+import { Variant } from '../../database/models/variant.entity';
+import { Image } from '../../database/models/image.entity';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
 

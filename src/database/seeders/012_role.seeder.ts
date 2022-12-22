@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
-import { Role } from '../../api/roles/entities/role.entity';
+import { Role } from '../models/role.entity';
 import { RoleData } from '../data/012_role.data';
 
 export default class RoleSeeder implements Seeder {

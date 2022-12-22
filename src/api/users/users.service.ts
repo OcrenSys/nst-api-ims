@@ -4,9 +4,9 @@ import { DataSource, Repository } from 'typeorm';
 import { FirebaseUser } from '../../common/models/firebase-user';
 import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
-import { Role } from '../roles/entities/role.entity';
-import { Member } from '../members/entities/member.entity';
-import { User } from './entities/user.entity';
+import { Role } from '../../database/models/role.entity';
+import { Member } from '../../database/models/member.entity';
+import { User } from '../../database/models/user.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 

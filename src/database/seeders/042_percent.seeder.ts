@@ -1,6 +1,6 @@
 import { Factory, Seeder } from 'typeorm-seeding';
 import { Connection } from 'typeorm';
-import { Percent } from '../../api/percents/entities/percent.entity';
+import { Percent } from '../models/percent.entity';
 import { PercentData } from '../data/042_percent.data';
 
 export default class PercentSeeder implements Seeder {

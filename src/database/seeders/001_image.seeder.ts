@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
-import { Image } from '../../api/images/entities/image.entity';
+import { Image } from '../models/image.entity';
 import { ImageData } from '../data/001_image.data';
 
 export default class ImageSeeder implements Seeder {

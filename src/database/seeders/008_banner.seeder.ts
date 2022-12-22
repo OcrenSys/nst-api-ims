@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
-import { Banner } from '../../api/banners/entities/banner.entity';
+import { Banner } from '../models/banner.entity';
 import { BannerData } from '../data/008_banner.data';
 
 export default class BannerSeeder implements Seeder {

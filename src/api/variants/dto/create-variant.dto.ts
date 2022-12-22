@@ -12,10 +12,10 @@ import {
   Min,
   MinLength,
 } from 'class-validator';
-import { Brand } from '../../brands/entities/brand.entity';
-import { Image } from '../../images/entities/image.entity';
-import { Product } from '../../products/entities/product.entity';
-import { InvoicesDetail } from '../../invoices-details/entities/invoices-detail.entity';
+import { Brand } from '../../../database/models/brand.entity';
+import { Image } from '../../../database/models/image.entity';
+import { Product } from '../../../database/models/product.entity';
+import { OrderDetail } from '../../../database/models/order-detail.entity';
 import * as NUMBER from '../../../common/constants/numbers.constants';
 
 export class CreateVariantDto {
@@ -83,7 +83,7 @@ export class CreateVariantDto {
 
   @IsOptional()
   @IsObject()
-  invoiceDetail?: InvoicesDetail;
+  invoiceDetail?: OrderDetail;
 
   @IsArray()
   @IsOptional()

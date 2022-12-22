@@ -8,8 +8,8 @@ import { CategoriesModule } from './categories/categories.module';
 import { BannersModule } from './banners/banners.module';
 import { SectionsModule } from './sections/sections.module';
 import { ImagesModule } from './images/images.module';
-import { InvoicesModule } from './invoices/invoices.module';
-import { InvoicesDetailsModule } from './invoices-details/invoices-details.module';
+import { OrdersModule } from './order/order.module';
+import { OrdersDetailsModule } from './order-details/order-details.module';
 import { PaymentsModule } from './payments/payments.module';
 import { PaymentDatesModule } from './payment-dates/payment-dates.module';
 import { CreditsModule } from './credits/credits.module';
@@ -32,8 +32,8 @@ import { AuthenticationModule } from './authentication/authentication.module';
     ImagesModule,
     BannersModule,
     SectionsModule,
-    InvoicesModule,
-    InvoicesDetailsModule,
+    OrdersModule,
+    OrdersDetailsModule,
     PaymentsModule,
     PaymentDatesModule,
     CreditsModule,

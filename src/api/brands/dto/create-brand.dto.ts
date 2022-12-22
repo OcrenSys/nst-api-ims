@@ -7,7 +7,7 @@ import {
   MinLength,
 } from 'class-validator';
 import * as NUMBER from '../../../common/constants/numbers.constants';
-import { Product } from '../../products/entities/product.entity';
+import { Product } from '../../../database/models/product.entity';
 
 export class CreateBrandDto {
   @IsString()

@@ -3,21 +3,21 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource, DeleteResult } from 'typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
-import { Invoice } from '../invoices/entities/invoice.entity';
-import { PaymentDate } from '../payment-dates/entities/payment-date.entity';
-import { Payment } from '../payments/entities/payment.entity';
-import { Percent } from '../percents/entities/percent.entity';
+import { Order } from '../../database/models/order.entity';
+import { PaymentDate } from '../../database/models/payment-date.entity';
+import { Payment } from '../../database/models/payment.entity';
+import { Percent } from '../../database/models/percent.entity';
 import { CreateCreditDto } from './dto/create-credit.dto';
 import { UpdateCreditDto } from './dto/update-credit.dto';
-import { Credit } from './entities/credit.entity';
+import { Credit } from '../../database/models/credit.entity';
 
 @Injectable()
 export class CreditsService {
   constructor(
     @InjectRepository(Credit)
     private readonly creditRepository: Repository<Credit>,
-    @InjectRepository(Invoice)
-    private readonly invoiceRepository: Repository<Invoice>,
+    @InjectRepository(Order)
+    private readonly OrderRepository: Repository<Order>,
     @InjectRepository(Percent)
     private readonly percentRepository: Repository<Percent>,
     @InjectRepository(PaymentDate)
@@ -30,7 +30,7 @@ export class CreditsService {
 
   async create(createCreditDto: CreateCreditDto): Promise<ResponseHttp> {
     const {
-      invoice = null,
+      order = null,
       percent = null,
       payments = [],
       paymentDates = [],
@@ -53,7 +53,7 @@ export class CreditsService {
     }
 
     try {
-      if (invoice) credit.invoice = this.invoiceRepository.create(invoice);
+      if (order) credit.order = this.OrderRepository.create(order);
 
       if (percent) credit.percent = this.percentRepository.create(percent);
 
@@ -86,7 +86,7 @@ export class CreditsService {
 
   async findAll(): Promise<ResponseHttp> {
     const filters = {};
-    const relations = ['invoice', 'payments', 'paymentDates', 'percent'];
+    const relations = ['order', 'payments', 'paymentDates', 'percent'];
     try {
       const credits: Credit[] = await this.creditRepository.find({
         where: filters,
@@ -105,7 +105,7 @@ export class CreditsService {
 
   async findOne(id: number): Promise<ResponseHttp> {
     const filters = { id };
-    const relations = ['invoice', 'payments', 'paymentDates', 'percent'];
+    const relations = ['order', 'payments', 'paymentDates', 'percent'];
 
     const credit: Credit = await this.creditRepository.findOne({
       relations,
@@ -130,7 +130,7 @@ export class CreditsService {
     updateCreditDto: UpdateCreditDto,
   ): Promise<ResponseHttp> {
     const {
-      invoice = null,
+      order = null,
       percent = null,
       payments = [],
       paymentDates = [],
@@ -154,7 +154,7 @@ export class CreditsService {
     }
 
     try {
-      if (invoice) credit.invoice = this.invoiceRepository.create(invoice);
+      if (order) credit.order = this.OrderRepository.create(order);
 
       if (percent) credit.percent = this.percentRepository.create(percent);
 

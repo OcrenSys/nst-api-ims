@@ -5,11 +5,11 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { Banner } from '../../../api/banners/entities/banner.entity';
-import { Category } from '../../../api/categories/entities/category.entity';
-import { Product } from '../../../api/products/entities/product.entity';
-import { SubCategory } from '../../../api/sub-categories/entities/sub-category.entity';
-import { Variant } from '../../../api/variants/entities/variant.entity';
+import { Banner } from '../../../database/models/banner.entity';
+import { Category } from '../../../database/models/category.entity';
+import { Product } from '../../../database/models/product.entity';
+import { SubCategory } from '../../../database/models/sub-category.entity';
+import { Variant } from '../../../database/models/variant.entity';
 import * as NUMBER from '../../../common/constants/numbers.constants';
 
 export class CreateImageDto {
