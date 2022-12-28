@@ -14,14 +14,14 @@ import * as NUMBER from '../../../common/constants/numbers.constants';
 
 export class CreateCreditDto {
   @IsDecimal()
-  @Min(NUMBER.MIN, {
-    message: `El monto de la cuota debe ser un numero entero mayor o igual a ${NUMBER.MIN}`,
+  @Min(NUMBER.N00, {
+    message: `El monto de la cuota debe ser un numero entero mayor o igual a ${NUMBER.N00}`,
   })
   fee: number;
 
   @IsDecimal()
-  @Min(NUMBER.MIN, {
-    message: `La tasa de interes debe ser un numero entero mayor o igual a ${NUMBER.MIN}`,
+  @Min(NUMBER.N00, {
+    message: `La tasa de interes debe ser un numero entero mayor o igual a ${NUMBER.N00}`,
   })
   rate: number;
 

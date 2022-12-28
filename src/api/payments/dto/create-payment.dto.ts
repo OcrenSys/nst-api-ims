@@ -8,8 +8,8 @@ export class CreatePaymentDto {
   date: string;
 
   @IsInt()
-  @Min(NUMBER.MIN, {
-    message: `El monto del pago debe ser un numero entero mayor o igual a ${NUMBER.MIN}`,
+  @Min(NUMBER.N00, {
+    message: `El monto del pago debe ser un numero entero mayor o igual a ${NUMBER.N00}`,
   })
   @Max(NUMBER.MAX, {
     message: `El monto del pago debe ser un monto real, menor a ${NUMBER.MAX}`,

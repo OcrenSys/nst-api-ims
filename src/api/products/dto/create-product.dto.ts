@@ -35,8 +35,8 @@ export class CreateProductDto {
   name: string;
 
   @IsNumber()
-  @Min(NUMBER.MIN, {
-    message: `El precio del producto debe ser un numero entero mayor o igual a ${NUMBER.MIN}`,
+  @Min(NUMBER.N00, {
+    message: `El precio del producto debe ser un numero entero mayor o igual a ${NUMBER.N00}`,
   })
   @Max(NUMBER.MAX, {
     message: `El precio del producto debe ser un monto real, menor a ${NUMBER.MAX}`,
@@ -44,8 +44,8 @@ export class CreateProductDto {
   price: number;
 
   @IsNumber()
-  @Min(NUMBER.MIN, {
-    message: `El precio de credito del producto debe ser un numero entero mayor o igual a ${NUMBER.MIN}`,
+  @Min(NUMBER.N00, {
+    message: `El precio de credito del producto debe ser un numero entero mayor o igual a ${NUMBER.N00}`,
   })
   @Max(NUMBER.MAX, {
     message: `El precio de credito del producto debe ser un monto real, menor a ${NUMBER.MAX}`,
@@ -53,21 +53,21 @@ export class CreateProductDto {
   priceCredit: number;
 
   @IsNumber()
-  @Min(NUMBER.MIN, {
-    message: `El costo del producto debe ser un numero entero mayor o igual a ${NUMBER.MIN}`,
+  @Min(NUMBER.N00, {
+    message: `El costo del producto debe ser un numero entero mayor o igual a ${NUMBER.N00}`,
   })
   @Max(NUMBER.MAX, {
     message: `El costo del producto debe ser un monto real, menor a ${NUMBER.MAX}`,
   })
   cost: number;
 
-  @Length(NUMBER.MIN, NUMBER.N200)
+  @Length(NUMBER.N00, NUMBER.N200)
   @IsOptional()
   description?: string;
 
   @IsInt()
-  @Min(NUMBER.MIN, {
-    message: `El stock del producto debe ser un numero entero mayor o igual a ${NUMBER.MIN}`,
+  @Min(NUMBER.N00, {
+    message: `El stock del producto debe ser un numero entero mayor o igual a ${NUMBER.N00}`,
   })
   @Max(NUMBER.MAX, {
     message: `El stock del producto debe ser un monto real, menor a ${NUMBER.MAX}`,
@@ -75,7 +75,7 @@ export class CreateProductDto {
   stock: number;
 
   @IsInt()
-  @Min(NUMBER.MIN)
+  @Min(NUMBER.N00)
   @IsOptional()
   order?: number;
 
