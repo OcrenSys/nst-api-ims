@@ -36,7 +36,7 @@ export class AuthGuard implements CanActivate {
     } catch (error) {
       throw new UnauthorizedException({
         ...error,
-        statusCode: HttpStatus.FORBIDDEN,
+        status: HttpStatus.FORBIDDEN,
         timestamp: new Date().toISOString(),
         message: 'No tiene los permisos necesarios para continuar.',
       });

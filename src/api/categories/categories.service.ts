@@ -1,4 +1,9 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpStatus,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource, DeleteResult, Like } from 'typeorm';
 import { from, map } from 'rxjs';
@@ -12,6 +17,7 @@ import { Banner } from '../../database/models/banner.entity';
 import { Image } from '../../database/models/image.entity';
 import {
   ACTION_CREATE,
+  ACTION_DELETE,
   ACTION_FIND,
   ACTION_UPDATE,
   MODEL,
@@ -33,7 +39,7 @@ export class CategoriesService {
     private readonly dataSource: DataSource,
   ) {}
 
-  async create(createCategoryDto: CreateCategoryDto): Promise<ResponseHttp> {
+  async create(createCategoryDto: CreateCategoryDto): Promise<any> {
     const {
       banner = null,
       image = null,
@@ -55,31 +61,41 @@ export class CategoriesService {
         ),
       });
 
-      if (!category) {
-        this.handle.throw(
-          { code: HttpStatus.BAD_REQUEST },
-          'Lo sentimos, no se ha podido crear la nueva categoria.',
+      if (!category)
+        return new NotFoundException(
+          {
+            data: null,
+            status: HttpStatus.NOT_FOUND,
+            message: ACTION_CREATE.error(MODEL.Category),
+          },
+          ACTION_CREATE.error(MODEL.Category),
         );
-      }
 
       await this.categoryRepository.save(category);
 
       await queryRunner.commitTransaction();
 
-      return this.handle.success({
+      return {
         data: category,
-        statusCode: HttpStatus.CREATED,
+        status: HttpStatus.CREATED,
         message: ACTION_CREATE.success(MODEL.Category),
-      });
+      };
     } catch (error) {
       await queryRunner.rollbackTransaction();
-      this.handle.throw(error, 'Algo salió mal al crear la nueva variante.');
+      throw new InternalServerErrorException(
+        {
+          data: error,
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          message: ACTION_FIND.error(MODEL.Category),
+        },
+        ACTION_FIND.error(MODEL.Product),
+      );
     } finally {
       await queryRunner.release();
     }
   }
 
-  async findAll(_filters: any = {}) {
+  async findAll(_filters: any = {}): Promise<any> {
     const filters = {
       ..._filters,
       name: Like(`%${_filters?.name || ''}%`),
@@ -93,17 +109,24 @@ export class CategoriesService {
         relations,
       });
 
-      return this.handle.success({
+      return {
         data: categories,
-        statusCode: HttpStatus.OK,
-        message: ACTION_FIND.error(MODEL.Category),
-      });
+        status: HttpStatus.OK,
+        message: ACTION_FIND.success(MODEL.Category),
+      };
     } catch (error) {
-      this.handle.throw(error);
+      throw new InternalServerErrorException(
+        {
+          data: error,
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          message: ACTION_FIND.error(MODEL.Category),
+        },
+        ACTION_FIND.error(MODEL.Product),
+      );
     }
   }
 
-  async findOne(id: number): Promise<ResponseHttp> {
+  async findOne(id: number): Promise<any> {
     const filters = { id };
     const relations = ['subCategories', 'banner'];
 
@@ -113,16 +136,20 @@ export class CategoriesService {
     });
 
     if (!category)
-      this.handle.throw(
-        { code: HttpStatus.NOT_FOUND },
-        `Categoria con id: "${id}" no pudo ser encontrada`,
+      return new NotFoundException(
+        {
+          data: null,
+          status: HttpStatus.NOT_FOUND,
+          message: ACTION_FIND.error(MODEL.Category, ONLY_ONE),
+        },
+        ACTION_FIND.error(MODEL.Category, ONLY_ONE),
       );
 
-    return this.handle.success({
-      statusCode: HttpStatus.OK,
+    return {
+      status: HttpStatus.OK,
       data: category,
-      message: ACTION_FIND.error(MODEL.Category, ONLY_ONE),
-    });
+      message: ACTION_FIND.success(MODEL.Category, ONLY_ONE),
+    };
   }
 
   async update(id: number, updateCategoryDto: UpdateCategoryDto): Promise<any> {
@@ -143,12 +170,15 @@ export class CategoriesService {
         ...toUpdateVariant,
       });
 
-      if (!category) {
-        this.handle.throw(
-          { code: HttpStatus.BAD_REQUEST },
-          'Lo sentimos, no se ha podido crear la nueva categoria.',
+      if (!category)
+        return new NotFoundException(
+          {
+            data: null,
+            status: HttpStatus.NOT_FOUND,
+            message: ACTION_UPDATE.error(MODEL.Category),
+          },
+          ACTION_UPDATE.error(MODEL.Category),
         );
-      }
 
       if (banner) this.bannerRepository.create(banner);
 
@@ -162,18 +192,23 @@ export class CategoriesService {
       this.categoryRepository.save(category);
 
       await queryRunner.commitTransaction();
-      return this.handle.success({
+
+      return {
         data: category,
-        statusCode: HttpStatus.OK,
-        message: ACTION_UPDATE.error(MODEL.Category),
-      });
+        status: HttpStatus.OK,
+        message: ACTION_UPDATE.success(MODEL.Category),
+      };
     } catch (error) {
       await queryRunner.rollbackTransaction();
-      this.handle.throw({
-        statusCode: error.code,
-        message: error.message,
-        stack: error.stack,
-      });
+
+      return new InternalServerErrorException(
+        {
+          data: null,
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          message: ACTION_UPDATE.error(MODEL.Category),
+        },
+        ACTION_UPDATE.error(MODEL.Category),
+      );
     } finally {
       await queryRunner.release();
     }
@@ -185,19 +220,23 @@ export class CategoriesService {
     });
 
     if (!category) {
-      this.handle.throw(
-        { code: HttpStatus.NOT_FOUND },
-        `Categoria con id: "${id}" no pudo ser encontrado`,
+      return new NotFoundException(
+        {
+          data: null,
+          status: HttpStatus.NOT_FOUND,
+          message: ACTION_DELETE.error(MODEL.Category),
+        },
+        ACTION_DELETE.error(MODEL.Category),
       );
     }
 
     return from(this.categoryRepository.delete(id)).pipe(
       map((result: DeleteResult) => {
-        return this.handle.success({
+        return {
           data: { ...result },
-          statusCode: HttpStatus.OK,
-          message: `Categoria ha sido eliminada exitosamente,`,
-        });
+          status: HttpStatus.OK,
+          message: ACTION_DELETE.success(MODEL.Category),
+        };
       }),
     );
   }

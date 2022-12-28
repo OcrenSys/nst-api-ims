@@ -53,7 +53,7 @@ export class OrdersDetailsService {
 
       return this.handle.success({
         data: orderDetails,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: 'Detalle de factura creado exitosamente.',
       });
     } catch (error) {
@@ -76,7 +76,7 @@ export class OrdersDetailsService {
 
       return this.handle.success({
         data: orderDetails,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: 'Detalles de facturas encontrados con exito.',
       });
     } catch (error) {
@@ -101,7 +101,7 @@ export class OrdersDetailsService {
       );
 
     return this.handle.success({
-      statusCode: HttpStatus.OK,
+      status: HttpStatus.OK,
       data: orderDetail,
       message: 'Detalle de factura encontrado exitosamente!',
     });
@@ -145,7 +145,7 @@ export class OrdersDetailsService {
 
       return this.handle.success({
         data: orderDetail,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Detalle de factura ha sido actualizado exitosamente.`,
       });
     } catch (error) {
@@ -176,7 +176,7 @@ export class OrdersDetailsService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Detalle de factura ha sido eliminado exitosamente.`,
       });
     } catch (error) {

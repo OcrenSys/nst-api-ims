@@ -41,7 +41,7 @@ export class AuthenticationMiddleware implements NestMiddleware {
 
   private static accessDenied(url: string, res: Response) {
     res.status(403).json({
-      statusCode: 403,
+      status: 403,
       timestamp: new Date().toISOString(),
       path: url,
       message: 'Acceso deneado, iniciar sesion para continuar.',

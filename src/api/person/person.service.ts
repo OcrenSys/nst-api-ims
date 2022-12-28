@@ -46,7 +46,7 @@ export class PersonService {
 
       return this.handle.success({
         data: person,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: 'Datos personales creados exitosamente.',
       });
     } catch (error) {
@@ -68,7 +68,7 @@ export class PersonService {
 
       return this.handle.success({
         data: persons,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: 'Datos personales encontrados con exito.',
       });
     } catch (error) {
@@ -92,7 +92,7 @@ export class PersonService {
       );
 
     return this.handle.success({
-      statusCode: HttpStatus.OK,
+      status: HttpStatus.OK,
       data: person,
       message: 'Datos personales encontrados exitosamente!',
     });
@@ -126,7 +126,7 @@ export class PersonService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Datos personales han sido actualizados exitosamente.`,
       });
     } catch (error) {
@@ -157,7 +157,7 @@ export class PersonService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Los datos personales han sido eliminados exitosamente.`,
       });
     } catch (error) {

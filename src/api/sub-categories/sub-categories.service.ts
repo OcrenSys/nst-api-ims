@@ -54,7 +54,7 @@ export class SubCategoriesService {
 
       return this.handle.success({
         data: subCategory,
-        statusCode: HttpStatus.CREATED,
+        status: HttpStatus.CREATED,
         message: 'Sub Categoria creada exitosamente!',
       });
     } catch (error) {
@@ -80,7 +80,7 @@ export class SubCategoriesService {
       return this.handle.success({
         data: subCategories,
         message: 'Sub Categorias encontradas exitosamente.',
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
       });
     } catch (error) {
       this.handle.throw(error);
@@ -103,7 +103,7 @@ export class SubCategoriesService {
       );
 
     return this.handle.success({
-      statusCode: HttpStatus.OK,
+      status: HttpStatus.OK,
       data: subCategory,
       message: 'Sub Categoria encontrada exitosamente!',
     });
@@ -140,7 +140,7 @@ export class SubCategoriesService {
 
       return this.handle.success({
         data: subCategory,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Sub Categoria ${subCategory.description} has sido actualizada exitosamente,`,
       });
     } catch (error) {
@@ -167,7 +167,7 @@ export class SubCategoriesService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Categoria ha sido eliminada exitosamente,`,
       });
     } catch (error) {

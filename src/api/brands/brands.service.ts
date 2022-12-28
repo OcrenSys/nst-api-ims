@@ -44,7 +44,7 @@ export class BrandsService {
 
       return this.handle.success({
         data: brand,
-        statusCode: HttpStatus.CREATED,
+        status: HttpStatus.CREATED,
         message: 'Categorye creada exitosamente!',
       });
     } catch (error) {
@@ -67,7 +67,7 @@ export class BrandsService {
       return this.handle.success({
         data: brands,
         message: 'Marcas encontradas exitosamente.',
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
       });
     } catch (error) {
       this.handle.throw(error, 'Algo salió mal al encontrar las marcas');
@@ -90,7 +90,7 @@ export class BrandsService {
       );
 
     return this.handle.success({
-      statusCode: HttpStatus.OK,
+      status: HttpStatus.OK,
       data: brand,
       message: 'Marca encontrada exitosamente!',
     });
@@ -122,7 +122,7 @@ export class BrandsService {
 
       return this.handle.success({
         data: brand,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Marca ${brand.name} has sido actualizada exitosamente,`,
       });
     } catch (error) {
@@ -150,7 +150,7 @@ export class BrandsService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Marca ha sido eliminada exitosamente,`,
       });
     } catch (error) {

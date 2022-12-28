@@ -73,7 +73,7 @@ export class CreditsService {
 
       return this.handle.success({
         data: credit,
-        statusCode: HttpStatus.CREATED,
+        status: HttpStatus.CREATED,
         message: 'Credito creado exitosamente!',
       });
     } catch (error) {
@@ -96,7 +96,7 @@ export class CreditsService {
       return this.handle.success({
         data: credits,
         message: 'Creditos encontrados exitosamente.',
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
       });
     } catch (error) {
       this.handle.throw(error, 'Algo salió mal al encontrar los creditos.');
@@ -119,7 +119,7 @@ export class CreditsService {
       );
 
     return this.handle.success({
-      statusCode: HttpStatus.OK,
+      status: HttpStatus.OK,
       data: credit,
       message: 'Credito encontrado exitosamente!',
     });
@@ -174,7 +174,7 @@ export class CreditsService {
 
       return this.handle.success({
         data: credit,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Los datos del credito han sido actualizados exitosamente.`,
       });
     } catch (error) {
@@ -205,7 +205,7 @@ export class CreditsService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Credito ha sido eliminado exitosamente.`,
       });
     } catch (error) {

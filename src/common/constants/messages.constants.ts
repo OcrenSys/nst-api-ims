@@ -34,7 +34,7 @@ export const ACTION_UPDATE = Object.freeze({
 });
 
 export const ACTION_DELETE = Object.freeze({
-  success: (model) => `${model} has been deleted successfully`,
+  success: (model) => `${model} has been deleted successfully.`,
   error: (model) => `${model} has not been deleted.`,
 });
 

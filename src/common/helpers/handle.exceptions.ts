@@ -21,7 +21,7 @@ export class HandleExceptions {
         {
           ...error,
           timestamp: new Date().toISOString(),
-          statusCode: HttpStatus.NOT_FOUND,
+          status: HttpStatus.NOT_FOUND,
           message,
         },
         message || 'Lo sentimos, no se encontraron los datos.',
@@ -32,7 +32,7 @@ export class HandleExceptions {
         {
           ...error,
           timestamp: new Date().toISOString(),
-          statusCode: HttpStatus.BAD_REQUEST,
+          status: HttpStatus.BAD_REQUEST,
           message,
         },
         message ||
@@ -43,7 +43,7 @@ export class HandleExceptions {
         {
           ...error,
           timestamp: new Date().toISOString(),
-          statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
           message,
         },
         message || 'Ocurrió un error inesperado.',
@@ -53,7 +53,7 @@ export class HandleExceptions {
       {
         ...error,
         timestamp: new Date().toISOString(),
-        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
         message,
       },
       HttpStatus.INTERNAL_SERVER_ERROR,
@@ -61,14 +61,13 @@ export class HandleExceptions {
   }
 
   success({
-    statusCode = HttpStatus.BAD_REQUEST,
+    status = HttpStatus.BAD_REQUEST,
     data = null,
     error = null,
     message = '',
   }): ResponseHttp {
     return {
-      statusCode,
-      timestamp: new Date().toISOString(),
+      status,
       error,
       data,
       message,

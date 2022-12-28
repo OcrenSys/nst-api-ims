@@ -42,7 +42,7 @@ export class PercentsService {
 
       return this.handle.success({
         data: percent,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: 'Porcentaje creado exitosamente.',
       });
     } catch (error) {
@@ -64,7 +64,7 @@ export class PercentsService {
 
       return this.handle.success({
         data: percents,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: 'Porcentajes encontrados con exito.',
       });
     } catch (error) {
@@ -88,7 +88,7 @@ export class PercentsService {
       );
 
     return this.handle.success({
-      statusCode: HttpStatus.OK,
+      status: HttpStatus.OK,
       data: percent,
       message: 'Datos del porcentaje encontrados exitosamente!',
     });
@@ -118,7 +118,7 @@ export class PercentsService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Los datos del porcentaje han sido actualizados exitosamente.`,
       });
     } catch (error) {
@@ -149,7 +149,7 @@ export class PercentsService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `El porcentaje ha sido eliminado exitosamente.`,
       });
     } catch (error) {
