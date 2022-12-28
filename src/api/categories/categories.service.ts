@@ -1,6 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, DataSource, DeleteResult } from 'typeorm';
+import { Repository, DataSource, DeleteResult, Like } from 'typeorm';
 import { from, map } from 'rxjs';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -10,6 +10,13 @@ import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
 import { Category } from '../../database/models/category.entity';
 import { Banner } from '../../database/models/banner.entity';
 import { Image } from '../../database/models/image.entity';
+import {
+  ACTION_CREATE,
+  ACTION_FIND,
+  ACTION_UPDATE,
+  MODEL,
+  ONLY_ONE,
+} from '../../common/constants/messages.constants';
 
 @Injectable()
 export class CategoriesService {
@@ -43,7 +50,7 @@ export class CategoriesService {
         ...toCreateCategory,
         banner: banner ? this.bannerRepository.create(banner) : null,
         image: image ? this.imageRepository.create(image) : null,
-        subcategories: subCategories.map((s: SubCategory) =>
+        subCategories: subCategories.map((s: SubCategory) =>
           this.subCategoryRepository.create(s),
         ),
       });
@@ -62,7 +69,7 @@ export class CategoriesService {
       return this.handle.success({
         data: category,
         statusCode: HttpStatus.CREATED,
-        message: 'Categorye creada exitosamente!',
+        message: ACTION_CREATE.success(MODEL.Category),
       });
     } catch (error) {
       await queryRunner.rollbackTransaction();
@@ -72,9 +79,13 @@ export class CategoriesService {
     }
   }
 
-  async findAll() {
-    const filters = {};
-    const relations = ['subcategories', 'banner'];
+  async findAll(_filters: any = {}) {
+    const filters = {
+      ..._filters,
+      name: Like(`%${_filters?.name || ''}%`),
+      description: Like(`%${_filters?.description || ''}%`),
+    };
+    const relations = [];
 
     try {
       const categories = await this.categoryRepository.find({
@@ -82,18 +93,10 @@ export class CategoriesService {
         relations,
       });
 
-      /* const categories = await this.dataSource
-        .getRepository(Category)
-        .createQueryBuilder('category')
-        .leftJoinAndSelect('category.banner', 'banner')
-        .leftJoinAndSelect('category.image', 'image')
-        .select(['category', 'banner.name', 'banner.description'])
-        .execute(); */
-
       return this.handle.success({
         data: categories,
-        message: 'Categorias encontradas exitosamente.',
         statusCode: HttpStatus.OK,
+        message: ACTION_FIND.error(MODEL.Category),
       });
     } catch (error) {
       this.handle.throw(error);
@@ -102,7 +105,7 @@ export class CategoriesService {
 
   async findOne(id: number): Promise<ResponseHttp> {
     const filters = { id };
-    const relations = ['subcategories', 'banner'];
+    const relations = ['subCategories', 'banner'];
 
     const category: Category = await this.categoryRepository.findOne({
       relations,
@@ -118,7 +121,7 @@ export class CategoriesService {
     return this.handle.success({
       statusCode: HttpStatus.OK,
       data: category,
-      message: 'Categoria encontrada exitosamente!',
+      message: ACTION_FIND.error(MODEL.Category, ONLY_ONE),
     });
   }
 
@@ -162,7 +165,7 @@ export class CategoriesService {
       return this.handle.success({
         data: category,
         statusCode: HttpStatus.OK,
-        message: `Categoria ${category.name} has sido actualizada exitosamente,`,
+        message: ACTION_UPDATE.error(MODEL.Category),
       });
     } catch (error) {
       await queryRunner.rollbackTransaction();

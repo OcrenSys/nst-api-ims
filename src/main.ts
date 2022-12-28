@@ -6,7 +6,7 @@ import {
   CorsOptionsDelegate,
 } from '@nestjs/common/interfaces/external/cors-options.interface';
 import fs from 'fs';
-import path from 'path';
+import { ValidationPipe } from '@nestjs/common';
 
 const keyPath = 'src/common/helpers/secrets/key.pem';
 const cerPath = 'src/common/helpers/secrets/cert.pem';
@@ -37,6 +37,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { httpsOptions });
   app.enableCors(corsOptions);
   app.setGlobalPrefix(prefix);
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen(port);
 }
 bootstrap();

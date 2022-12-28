@@ -1,4 +1,11 @@
-import { DataSource, DeleteResult, Repository } from 'typeorm';
+import {
+  DataSource,
+  DeleteResult,
+  FindOptionsRelationByString,
+  FindOptionsRelations,
+  FindOptionsWhere,
+  Repository,
+} from 'typeorm';
 import {
   Injectable,
   HttpStatus,
@@ -78,15 +85,16 @@ export class ProductsService {
     }
   }
 
-  async findAll(): Promise<ResponseHttp> {
+  async findAll(
+    filters?: FindOptionsWhere<Product>[] | FindOptionsWhere<Product>,
+    relations?: FindOptionsRelations<Product> | FindOptionsRelationByString,
+  ): Promise<ResponseHttp> {
     let products: Product[] = [];
-    const filters = {};
-    const relations = ['subCategory', 'variants'];
 
     try {
       products = await this.productRepository.find({
-        relations: [...relations],
-        where: { ...filters },
+        relations: relations,
+        where: filters,
       });
 
       return {

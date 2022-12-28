@@ -16,18 +16,19 @@ import { Category } from './category.entity';
 @Entity()
 export class SubCategory extends Base {
   @Column()
-  name: string;
+  name?: string;
 
   @Column({ nullable: true })
   description?: string;
-
- 
 
   @Column({ default: 0 })
   @IsNumber()
   position: number;
 
-  @OneToOne(() => Image, (image) => image.subCategory, { nullable: true })
+  @OneToOne(() => Image, (image) => image.subCategory, {
+    nullable: true,
+    eager: true,
+  })
   @JoinColumn()
   image?: Image;
 
@@ -37,6 +38,6 @@ export class SubCategory extends Base {
   @OneToMany(() => Product, (product) => product.subCategory, { eager: true })
   products?: Product[];
 
-  @ManyToOne(() => Category, (category) => category.subcategories)
+  @ManyToOne(() => Category, (category) => category.subCategories)
   category: Category;
 }

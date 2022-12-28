@@ -6,9 +6,7 @@ import {
   IsString,
   Length,
   Max,
-  MaxLength,
   Min,
-  MinLength,
 } from 'class-validator';
 import { Banner } from './banner.entity';
 import { Brand } from './brand.entity';
@@ -18,62 +16,62 @@ import { Section } from './section.entity';
 import { Variant } from './variant.entity';
 import { Base } from './base.entity';
 import { SubCategory } from './sub-category.entity';
-import { MAX, MIN } from '../../common/constants/numbers.constants';
+import * as NUMBER from '../../common/constants/numbers.constants';
 
 @Entity()
 export class Product extends Base {
   @Column({ unique: true })
-  @Length(3, 30)
+  @Length(NUMBER.N03, NUMBER.N30)
   code: string;
 
   @Column({ nullable: true })
   @IsString()
-  @Length(MIN, 200)
+  @Length(NUMBER.N00, 200)
   description?: string;
 
   @Column()
   @IsNumber()
-  @Min(MIN, {
-    message: `El precio del producto debe ser un numero entero mayor o igual a ${MIN}`,
+  @Min(NUMBER.N00, {
+    message: `Product price should be greather than ${NUMBER.N00}`,
   })
-  @Max(MAX, {
-    message: `El precio del producto debe ser un monto real, menor a ${MAX}`,
+  @Max(NUMBER.N10000, {
+    message: `Product price should be a real number like this, ${NUMBER.N10000}`,
   })
   price: number;
 
   @Column()
   @IsNumber()
-  @Min(MIN, {
-    message: `El precio de credito del producto debe ser un numero entero mayor o igual a ${MIN}`,
+  @Min(NUMBER.N00, {
+    message: `Product credit price should be greather than ${NUMBER.N00}`,
   })
-  @Max(MAX, {
-    message: `El precio de credito del producto debe ser un monto real, menor a ${MAX}`,
+  @Max(NUMBER.N10000, {
+    message: `Product credit price should be a real number like this, ${NUMBER.N10000}`,
   })
   priceCredit: number;
 
   @Column()
   @IsNumber()
-  @Min(MIN, {
-    message: `El costo del producto debe ser un numero entero mayor o igual a ${MIN}`,
+  @Min(NUMBER.N00, {
+    message: `Product cost price should be greather than ${NUMBER.N00}`,
   })
-  @Max(MAX, {
-    message: `El costo del producto debe ser un monto real, menor a ${MAX}`,
+  @Max(NUMBER.N10000, {
+    message: `Product cost should be a real number like this, ${NUMBER.N10000}`,
   })
   cost: number;
 
   @Column()
   @IsInt()
-  @Min(MIN, {
-    message: `El stock del producto debe ser un numero entero mayor o igual a ${MIN}`,
+  @Min(NUMBER.N00, {
+    message: `Product stock should be greather than ${NUMBER.N00}`,
   })
-  @Max(MAX, {
-    message: `El stock del producto debe ser un monto real, menor a ${MAX}`,
+  @Max(NUMBER.N10000, {
+    message: `Product stock should be a real number like this, ${NUMBER.N10000}`,
   })
   stock: number;
 
   @Column({ default: 0 })
   @IsInt()
-  @Min(MIN)
+  @Min(NUMBER.N00)
   position: number;
 
   @Column({ default: false })

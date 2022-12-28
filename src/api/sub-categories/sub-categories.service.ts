@@ -1,12 +1,20 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, DataSource, DeleteResult } from 'typeorm';
+import {
+  Repository,
+  DataSource,
+  DeleteResult,
+  FindOptionsRelationByString,
+  FindOptionsRelations,
+  FindOptionsWhere,
+} from 'typeorm';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
 import { Category } from '../../database/models/category.entity';
 import { CreateSubCategoryDto } from './dto/create-sub-category.dto';
 import { UpdateSubCategoryDto } from './dto/update-sub-category.dto';
 import { SubCategory } from '../../database/models/sub-category.entity';
+import { Product } from 'src/database/models/product.entity';
 
 @Injectable()
 export class SubCategoriesService {
@@ -57,12 +65,14 @@ export class SubCategoriesService {
     }
   }
 
-  async findAll(): Promise<ResponseHttp> {
-    const filters = {};
-    const relations = [];
+  async findAll(
+    filters?: FindOptionsWhere<SubCategory>[] | FindOptionsWhere<SubCategory>,
+    relations?: FindOptionsRelations<SubCategory> | FindOptionsRelationByString,
+  ): Promise<ResponseHttp> {
+    let subCategories: SubCategory[] = [];
 
     try {
-      const subCategories = await this.subCategoryRepository.find({
+      subCategories = await this.subCategoryRepository.find({
         where: filters,
         relations,
       });
@@ -131,7 +141,7 @@ export class SubCategoriesService {
       return this.handle.success({
         data: subCategory,
         statusCode: HttpStatus.OK,
-        message: `Sub Categoria ${subCategory.name} has sido actualizada exitosamente,`,
+        message: `Sub Categoria ${subCategory.description} has sido actualizada exitosamente,`,
       });
     } catch (error) {
       await queryRunner.rollbackTransaction();
