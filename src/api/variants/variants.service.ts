@@ -57,7 +57,7 @@ export class VariantsService {
 
       return this.handle.success({
         data: variant,
-        statusCode: HttpStatus.CREATED,
+        status: HttpStatus.CREATED,
         message: 'Variante creada exitosamente!',
       });
     } catch (error) {
@@ -80,7 +80,7 @@ export class VariantsService {
       });
 
       return this.handle.success({
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         data: [...variants],
         message: 'Varaintes encontradas exitosamente!',
       });
@@ -104,7 +104,7 @@ export class VariantsService {
       );
 
     return this.handle.success({
-      statusCode: HttpStatus.OK,
+      status: HttpStatus.OK,
       data: { ...variant },
       message: 'Variante encontrada exitosamente!',
     });
@@ -130,13 +130,13 @@ export class VariantsService {
       await queryRunner.commitTransaction();
       return this.handle.success({
         data: { ...variant },
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Variante ${variant.name} has sido actualizada exitosamente,`,
       });
     } catch (error) {
       await queryRunner.rollbackTransaction();
       this.handle.throw({
-        statusCode: error.code,
+        status: error.code,
         message: error.message,
         stack: error.stack,
       });
@@ -161,7 +161,7 @@ export class VariantsService {
       map((result: DeleteResult) => {
         return this.handle.success({
           data: { ...result },
-          statusCode: HttpStatus.OK,
+          status: HttpStatus.OK,
           message: `Variante ha sido eliminada exitosamente,`,
         });
       }),

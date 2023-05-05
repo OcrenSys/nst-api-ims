@@ -1,6 +1,11 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpStatus,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, DataSource, DeleteResult } from 'typeorm';
+import { Repository, DataSource, DeleteResult, Like } from 'typeorm';
 import { from, map } from 'rxjs';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -10,6 +15,14 @@ import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
 import { Category } from '../../database/models/category.entity';
 import { Banner } from '../../database/models/banner.entity';
 import { Image } from '../../database/models/image.entity';
+import {
+  ACTION_CREATE,
+  ACTION_DELETE,
+  ACTION_FIND,
+  ACTION_UPDATE,
+  MODEL,
+  ONLY_ONE,
+} from '../../common/constants/messages.constants';
 
 @Injectable()
 export class CategoriesService {
@@ -26,7 +39,7 @@ export class CategoriesService {
     private readonly dataSource: DataSource,
   ) {}
 
-  async create(createCategoryDto: CreateCategoryDto): Promise<ResponseHttp> {
+  async create(createCategoryDto: CreateCategoryDto): Promise<any> {
     const {
       banner = null,
       image = null,
@@ -43,38 +56,52 @@ export class CategoriesService {
         ...toCreateCategory,
         banner: banner ? this.bannerRepository.create(banner) : null,
         image: image ? this.imageRepository.create(image) : null,
-        subcategories: subCategories.map((s: SubCategory) =>
+        subCategories: subCategories.map((s: SubCategory) =>
           this.subCategoryRepository.create(s),
         ),
       });
 
-      if (!category) {
-        this.handle.throw(
-          { code: HttpStatus.BAD_REQUEST },
-          'Lo sentimos, no se ha podido crear la nueva categoria.',
+      if (!category)
+        return new NotFoundException(
+          {
+            data: null,
+            status: HttpStatus.NOT_FOUND,
+            message: ACTION_CREATE.error(MODEL.Category),
+          },
+          ACTION_CREATE.error(MODEL.Category),
         );
-      }
 
       await this.categoryRepository.save(category);
 
       await queryRunner.commitTransaction();
 
-      return this.handle.success({
+      return {
         data: category,
-        statusCode: HttpStatus.CREATED,
-        message: 'Categorye creada exitosamente!',
-      });
+        status: HttpStatus.CREATED,
+        message: ACTION_CREATE.success(MODEL.Category),
+      };
     } catch (error) {
       await queryRunner.rollbackTransaction();
-      this.handle.throw(error, 'Algo salió mal al crear la nueva variante.');
+      throw new InternalServerErrorException(
+        {
+          data: error,
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          message: ACTION_FIND.error(MODEL.Category),
+        },
+        ACTION_FIND.error(MODEL.Product),
+      );
     } finally {
       await queryRunner.release();
     }
   }
 
-  async findAll() {
-    const filters = {};
-    const relations = ['subcategories', 'banner'];
+  async findAll(_filters: any = {}): Promise<any> {
+    const filters = {
+      ..._filters,
+      name: Like(`%${_filters?.name || ''}%`),
+      description: Like(`%${_filters?.description || ''}%`),
+    };
+    const relations = [];
 
     try {
       const categories = await this.categoryRepository.find({
@@ -82,27 +109,26 @@ export class CategoriesService {
         relations,
       });
 
-      /* const categories = await this.dataSource
-        .getRepository(Category)
-        .createQueryBuilder('category')
-        .leftJoinAndSelect('category.banner', 'banner')
-        .leftJoinAndSelect('category.image', 'image')
-        .select(['category', 'banner.name', 'banner.description'])
-        .execute(); */
-
-      return this.handle.success({
+      return {
         data: categories,
-        message: 'Categorias encontradas exitosamente.',
-        statusCode: HttpStatus.OK,
-      });
+        status: HttpStatus.OK,
+        message: ACTION_FIND.success(MODEL.Category),
+      };
     } catch (error) {
-      this.handle.throw(error);
+      throw new InternalServerErrorException(
+        {
+          data: error,
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          message: ACTION_FIND.error(MODEL.Category),
+        },
+        ACTION_FIND.error(MODEL.Product),
+      );
     }
   }
 
-  async findOne(id: number): Promise<ResponseHttp> {
+  async findOne(id: number): Promise<any> {
     const filters = { id };
-    const relations = ['subcategories', 'banner'];
+    const relations = ['subCategories', 'banner'];
 
     const category: Category = await this.categoryRepository.findOne({
       relations,
@@ -110,16 +136,20 @@ export class CategoriesService {
     });
 
     if (!category)
-      this.handle.throw(
-        { code: HttpStatus.NOT_FOUND },
-        `Categoria con id: "${id}" no pudo ser encontrada`,
+      return new NotFoundException(
+        {
+          data: null,
+          status: HttpStatus.NOT_FOUND,
+          message: ACTION_FIND.error(MODEL.Category, ONLY_ONE),
+        },
+        ACTION_FIND.error(MODEL.Category, ONLY_ONE),
       );
 
-    return this.handle.success({
-      statusCode: HttpStatus.OK,
+    return {
+      status: HttpStatus.OK,
       data: category,
-      message: 'Categoria encontrada exitosamente!',
-    });
+      message: ACTION_FIND.success(MODEL.Category, ONLY_ONE),
+    };
   }
 
   async update(id: number, updateCategoryDto: UpdateCategoryDto): Promise<any> {
@@ -140,12 +170,15 @@ export class CategoriesService {
         ...toUpdateVariant,
       });
 
-      if (!category) {
-        this.handle.throw(
-          { code: HttpStatus.BAD_REQUEST },
-          'Lo sentimos, no se ha podido crear la nueva categoria.',
+      if (!category)
+        return new NotFoundException(
+          {
+            data: null,
+            status: HttpStatus.NOT_FOUND,
+            message: ACTION_UPDATE.error(MODEL.Category),
+          },
+          ACTION_UPDATE.error(MODEL.Category),
         );
-      }
 
       if (banner) this.bannerRepository.create(banner);
 
@@ -159,18 +192,23 @@ export class CategoriesService {
       this.categoryRepository.save(category);
 
       await queryRunner.commitTransaction();
-      return this.handle.success({
+
+      return {
         data: category,
-        statusCode: HttpStatus.OK,
-        message: `Categoria ${category.name} has sido actualizada exitosamente,`,
-      });
+        status: HttpStatus.OK,
+        message: ACTION_UPDATE.success(MODEL.Category),
+      };
     } catch (error) {
       await queryRunner.rollbackTransaction();
-      this.handle.throw({
-        statusCode: error.code,
-        message: error.message,
-        stack: error.stack,
-      });
+
+      return new InternalServerErrorException(
+        {
+          data: null,
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          message: ACTION_UPDATE.error(MODEL.Category),
+        },
+        ACTION_UPDATE.error(MODEL.Category),
+      );
     } finally {
       await queryRunner.release();
     }
@@ -182,19 +220,23 @@ export class CategoriesService {
     });
 
     if (!category) {
-      this.handle.throw(
-        { code: HttpStatus.NOT_FOUND },
-        `Categoria con id: "${id}" no pudo ser encontrado`,
+      return new NotFoundException(
+        {
+          data: null,
+          status: HttpStatus.NOT_FOUND,
+          message: ACTION_DELETE.error(MODEL.Category),
+        },
+        ACTION_DELETE.error(MODEL.Category),
       );
     }
 
     return from(this.categoryRepository.delete(id)).pipe(
       map((result: DeleteResult) => {
-        return this.handle.success({
+        return {
           data: { ...result },
-          statusCode: HttpStatus.OK,
-          message: `Categoria ha sido eliminada exitosamente,`,
-        });
+          status: HttpStatus.OK,
+          message: ACTION_DELETE.success(MODEL.Category),
+        };
       }),
     );
   }

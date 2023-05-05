@@ -25,7 +25,12 @@ export class SubCategoriesController {
 
   @Get()
   findAll() {
-    return this.subCategoriesService.findAll();
+    return this.subCategoriesService.findAll({}, ['category', 'products']);
+  }
+
+  @Get('byCategory/:id')
+  findAllByCategory(@Param('id') id: number) {
+    return this.subCategoriesService.findAll({ category: { id: id } }, []);
   }
 
   @Get(':id')

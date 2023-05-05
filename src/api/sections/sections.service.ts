@@ -41,7 +41,7 @@ export class SectionsService {
 
       return this.handle.success({
         data: section,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: 'Sección creada exitosamente.',
       });
     } catch (error) {
@@ -63,7 +63,7 @@ export class SectionsService {
 
       return this.handle.success({
         data: section,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: 'Secciones encontradas con exito.',
       });
     } catch (error) {
@@ -87,7 +87,7 @@ export class SectionsService {
       );
 
     return this.handle.success({
-      statusCode: HttpStatus.OK,
+      status: HttpStatus.OK,
       data: section,
       message: 'Banner encontrada exitosamente!',
     });
@@ -124,7 +124,7 @@ export class SectionsService {
 
       return this.handle.success({
         data: section,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Sección ${section.name} has sido actualizada exitosamente,`,
       });
     } catch (error) {
@@ -152,7 +152,7 @@ export class SectionsService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Sección ha sido eliminada exitosamente,`,
       });
     } catch (error) {

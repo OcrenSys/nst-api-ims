@@ -63,7 +63,7 @@ export class MembersService {
 
       return this.handle.success({
         data: member,
-        statusCode: HttpStatus.CREATED,
+        status: HttpStatus.CREATED,
         message: 'Miembro creado exitosamente!',
       });
     } catch (error) {
@@ -86,7 +86,7 @@ export class MembersService {
       return this.handle.success({
         data: brands,
         message: 'Miembros encontrados exitosamente.',
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
       });
     } catch (error) {
       this.handle.throw(error, 'Algo salió mal al encontrar las miembros.');
@@ -109,7 +109,7 @@ export class MembersService {
       );
 
     return this.handle.success({
-      statusCode: HttpStatus.OK,
+      status: HttpStatus.OK,
       data: member,
       message: 'Miembro encontrado exitosamente.',
     });
@@ -153,7 +153,7 @@ export class MembersService {
 
       return this.handle.success({
         data: member,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `datos del miembro han sido actualizados exitosamente,`,
       });
     } catch (error) {
@@ -184,7 +184,7 @@ export class MembersService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Miembro ha sido eliminado exitosamente,`,
       });
     } catch (error) {

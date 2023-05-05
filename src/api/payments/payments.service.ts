@@ -48,7 +48,7 @@ export class PaymentsService {
 
       return this.handle.success({
         data: payment,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: 'Fecha de pago creada exitosamente.',
       });
     } catch (error) {
@@ -70,7 +70,7 @@ export class PaymentsService {
 
       return this.handle.success({
         data: payments,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: 'Facturas encontradas con exito.',
       });
     } catch (error) {
@@ -94,7 +94,7 @@ export class PaymentsService {
       );
 
     return this.handle.success({
-      statusCode: HttpStatus.OK,
+      status: HttpStatus.OK,
       data: payment,
       message: 'Datos del pago encontrado exitosamente!',
     });
@@ -127,7 +127,7 @@ export class PaymentsService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Los datos del pago han sido actualizados exitosamente.`,
       });
     } catch (error) {
@@ -158,7 +158,7 @@ export class PaymentsService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `El pago ha sido eliminada exitosamente,`,
       });
     } catch (error) {

@@ -42,7 +42,7 @@ export class BannersService {
 
       return this.handle.success({
         data: banner,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: 'Banner creado exitosamente.',
       });
     } catch (error) {
@@ -67,7 +67,7 @@ export class BannersService {
 
       return this.handle.success({
         data: banners,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: 'Banners encontrados con exito.',
       });
     } catch (error) {
@@ -92,7 +92,7 @@ export class BannersService {
         );
 
       return this.handle.success({
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         data: banner,
         message: 'Banner encontrado exitosamente!',
       });
@@ -127,7 +127,7 @@ export class BannersService {
 
       return this.handle.success({
         data: banner,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Banner ${banner.name} has sido actualizado exitosamente,`,
       });
     } catch (error) {
@@ -155,7 +155,7 @@ export class BannersService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Banner ha sido eliminado exitosamente,`,
       });
     } catch (error) {

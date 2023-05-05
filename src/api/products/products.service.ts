@@ -1,4 +1,11 @@
-import { DataSource, DeleteResult, Repository } from 'typeorm';
+import {
+  DataSource,
+  DeleteResult,
+  FindOptionsRelationByString,
+  FindOptionsRelations,
+  FindOptionsWhere,
+  Repository,
+} from 'typeorm';
 import {
   Injectable,
   HttpStatus,
@@ -50,7 +57,7 @@ export class ProductsService {
 
       if (!product) {
         throw new BadRequestException({
-          statusCode: HttpStatus.BAD_REQUEST,
+          status: HttpStatus.BAD_REQUEST,
           timestamp: new Date().toISOString(),
           message: 'Lo sentimos, no se ha podido crear el nuevo producto.',
         });
@@ -61,8 +68,7 @@ export class ProductsService {
       await queryRunner.commitTransaction();
 
       return {
-        statusCode: HttpStatus.CREATED,
-        timestamp: new Date().toISOString(),
+        status: HttpStatus.CREATED,
         error: null,
         data: { ...product },
         message: '¡Producto creado exitosamente!',
@@ -78,20 +84,20 @@ export class ProductsService {
     }
   }
 
-  async findAll(): Promise<ResponseHttp> {
+  async findAll(
+    filters?: FindOptionsWhere<Product>[] | FindOptionsWhere<Product>,
+    relations?: FindOptionsRelations<Product> | FindOptionsRelationByString,
+  ): Promise<ResponseHttp> {
     let products: Product[] = [];
-    const filters = {};
-    const relations = ['subCategory', 'variants'];
 
     try {
       products = await this.productRepository.find({
-        relations: [...relations],
-        where: { ...filters },
+        relations: relations,
+        where: filters,
       });
 
       return {
-        statusCode: HttpStatus.OK,
-        timestamp: new Date().toISOString(),
+        status: HttpStatus.OK,
         error: null,
         data: [...products],
         message: '¡Productos encontrados exitosamente!',
@@ -120,8 +126,7 @@ export class ProductsService {
       );
 
     return {
-      statusCode: HttpStatus.OK,
-      timestamp: new Date().toISOString(),
+      status: HttpStatus.OK,
       error: null,
       data: { ...product },
       message: '¡Producto encontrado exitosamente!',
@@ -172,8 +177,7 @@ export class ProductsService {
       await queryRunner.release();
 
       return {
-        statusCode: HttpStatus.OK,
-        timestamp: new Date().toISOString(),
+        status: HttpStatus.OK,
         error: null,
         data: { ...product },
         message: '¡Producto actualizado exitosamente!',
@@ -213,18 +217,18 @@ export class ProductsService {
     if (error.code === HttpStatus.NOT_FOUND)
       throw new NotFoundException({
         ...data,
-        statusCode: HttpStatus.NOT_FOUND,
+        status: HttpStatus.NOT_FOUND,
       });
 
     if (error.code === HttpStatus.BAD_REQUEST)
       throw new BadRequestException({
         ...data,
-        statusCode: HttpStatus.BAD_REQUEST,
+        status: HttpStatus.BAD_REQUEST,
       });
 
     throw new InternalServerErrorException({
       ...data,
-      statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+      status: HttpStatus.INTERNAL_SERVER_ERROR,
     });
   }
 }

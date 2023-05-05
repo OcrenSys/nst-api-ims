@@ -47,7 +47,7 @@ export class RolesService {
 
       return this.handle.success({
         data: role,
-        statusCode: HttpStatus.CREATED,
+        status: HttpStatus.CREATED,
         message: 'Role creado exitosamente!',
       });
     } catch (error) {
@@ -70,7 +70,7 @@ export class RolesService {
       return this.handle.success({
         data: roles,
         message: 'Roles de usuario encontrados exitosamente.',
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
       });
     } catch (error) {
       this.handle.throw(
@@ -96,7 +96,7 @@ export class RolesService {
       );
 
     return this.handle.success({
-      statusCode: HttpStatus.OK,
+      status: HttpStatus.OK,
       data: role,
       message: 'Role de usuario encontrado exitosamente!',
     });
@@ -131,7 +131,7 @@ export class RolesService {
 
       return this.handle.success({
         data: role,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Datos del role de usuario han actualizados exitosamente.`,
       });
     } catch (error) {
@@ -162,7 +162,7 @@ export class RolesService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Role de usuario ha sido eliminado exitosamente.`,
       });
     } catch (error) {

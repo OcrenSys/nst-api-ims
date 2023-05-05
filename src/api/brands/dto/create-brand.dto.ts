@@ -20,7 +20,7 @@ export class CreateBrandDto {
   name: string;
 
   @IsString()
-  @Length(NUMBER.MIN, NUMBER.N200)
+  @Length(NUMBER.N00, NUMBER.N200)
   @IsOptional()
   description?: string;
 

@@ -24,14 +24,14 @@ export class CreateCategoryDto {
   })
   name: string;
 
-  @Length(NUMBER.MIN, NUMBER.N200)
+  @Length(NUMBER.N00, NUMBER.N200)
   @IsOptional()
   description?: string;
 
   @IsNumber()
   @IsOptional()
-  @Min(NUMBER.MIN, {
-    message: `El precio de credito de la variante debe ser un numero entero mayor o igual a ${NUMBER.MIN}`,
+  @Min(NUMBER.N00, {
+    message: `El precio de credito de la variante debe ser un numero entero mayor o igual a ${NUMBER.N00}`,
   })
   order?: number;
 

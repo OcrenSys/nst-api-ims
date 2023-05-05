@@ -64,7 +64,7 @@ export class ImagesService {
 
       return this.handle.success({
         data: image,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: 'Imagen creada exitosamente.',
       });
     } catch (error) {
@@ -92,7 +92,7 @@ export class ImagesService {
 
       return this.handle.success({
         data: images,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: 'Imagenes encontradas con exito.',
       });
     } catch (error) {
@@ -122,7 +122,7 @@ export class ImagesService {
       );
 
     return this.handle.success({
-      statusCode: HttpStatus.OK,
+      status: HttpStatus.OK,
       data: image,
       message: 'Imagen encontrada exitosamente!',
     });
@@ -174,7 +174,7 @@ export class ImagesService {
 
       return this.handle.success({
         data: image,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Imagen has sido actualizada exitosamente.`,
       });
     } catch (error) {
@@ -205,7 +205,7 @@ export class ImagesService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Imagen ha sido eliminada exitosamente,`,
       });
     } catch (error) {

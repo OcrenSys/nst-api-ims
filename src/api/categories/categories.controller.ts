@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Put,
+  Query,
 } from '@nestjs/common';
 import { Auth } from '../../common/decorators/auth.decorator';
 import { RoleEnum } from '../../common/enums/roles.enum';
@@ -26,8 +27,10 @@ export class CategoriesController {
   }
 
   @Get()
-  findAll() {
-    return this.categoriesService.findAll();
+  @Auth(RoleEnum.Sales, RoleEnum.Admin)
+  findAll(@Query() query: any) {
+    
+    return this.categoriesService.findAll(query);
   }
 
   @Get(':id')
@@ -52,6 +55,7 @@ export class CategoriesController {
   }
 
   @Post()
+  @Auth(RoleEnum.Sales, RoleEnum.Admin)
   reorder(@Body() categories: Category[]) {
     return this.categoriesService.reorder(categories);
   }

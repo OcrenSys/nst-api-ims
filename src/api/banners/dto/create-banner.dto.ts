@@ -24,7 +24,7 @@ export class CreateBannerDto {
   name: string;
 
   @IsString()
-  @Length(NUMBER.MIN, NUMBER.N200, {
+  @Length(NUMBER.N00, NUMBER.N200, {
     /**
      * Specifies if validated value is an array and each of its items must be validated.
      */
@@ -33,7 +33,7 @@ export class CreateBannerDto {
      * Error message to be used on validation fail.
      * Message can be either string or a function that returns a string.
      */
-    message: `La descripción del banner debe ser mayor a ${NUMBER.MIN} y menor de ${NUMBER.N200} caracteres`,
+    message: `La descripción del banner debe ser mayor a ${NUMBER.N00} y menor de ${NUMBER.N200} caracteres`,
     /**
      * Validation groups used for this validation.
      */

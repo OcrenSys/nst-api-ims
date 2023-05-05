@@ -54,7 +54,7 @@ export class UsersService {
 
       return this.handle.success({
         data: user,
-        statusCode: HttpStatus.CREATED,
+        status: HttpStatus.CREATED,
         message: 'Usuario creado exitosamente!',
       });
     } catch (error) {
@@ -77,7 +77,7 @@ export class UsersService {
       return this.handle.success({
         data: users,
         message: 'Usuarios encontradas exitosamente.',
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
       });
     } catch (error) {
       this.handle.throw(error, 'Algo salió mal al encontrar los usuarios');
@@ -100,7 +100,7 @@ export class UsersService {
 
     return this.handle.success({
       data: user,
-      statusCode: HttpStatus.OK,
+      status: HttpStatus.OK,
       message: 'Usuario encontrado exitosamente!',
     });
   }
@@ -121,7 +121,7 @@ export class UsersService {
 
     return this.handle.success({
       data: user,
-      statusCode: HttpStatus.OK,
+      status: HttpStatus.OK,
       message: 'Usuario encontrado exitosamente!',
     });
   }
@@ -159,7 +159,7 @@ export class UsersService {
 
       return this.handle.success({
         data: user,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Usuario has sido actualizadO exitosamente,`,
       });
     } catch (error) {
@@ -190,7 +190,7 @@ export class UsersService {
 
       return this.handle.success({
         data: result,
-        statusCode: HttpStatus.OK,
+        status: HttpStatus.OK,
         message: `Usuario ha sido eliminado exitosamente,`,
       });
     } catch (error) {
