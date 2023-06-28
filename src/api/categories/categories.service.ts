@@ -11,7 +11,6 @@ import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { SubCategory } from '../../database/models/sub-category.entity';
-import { ResponseHttp } from '../../common/helpers/interfaces/response.http';
 import { Category } from '../../database/models/category.entity';
 import { Banner } from '../../database/models/banner.entity';
 import { Image } from '../../database/models/image.entity';

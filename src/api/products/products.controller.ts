@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -25,8 +26,8 @@ export class ProductsController {
 
   @Get()
   @Auth(RoleEnum.Admin)
-  findAll() {
-    return this.productsService.findAll({}, ['subCategory', 'variants']);
+  findAll(@Query() query: unknown) {
+    return this.productsService.findAll(query, ['subCategory', 'variants']);
   }
 
   @Get('bySubCategory/:id')

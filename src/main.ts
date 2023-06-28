@@ -9,7 +9,7 @@ import fs from 'fs';
 import { ValidationPipe } from '@nestjs/common';
 
 const keyPath = 'src/common/helpers/secrets/key.pem';
-const cerPath = 'src/common/helpers/secrets/cert.pem';
+const cerPath = 'src/common/helpers/secrets/server.crt';
 const options: any = {};
 
 if (fs.existsSync(keyPath) && fs.existsSync(cerPath)) {
@@ -20,7 +20,7 @@ if (fs.existsSync(keyPath) && fs.existsSync(cerPath)) {
 }
 
 async function bootstrap() {
-  const prefix: string = 'api/v1';
+  const prefix = 'api/v1';
   const port: number = parseInt(process.env.API_PORT_DEV, 10) || 3000;
   const httpsOptions = {
     key: fs.readFileSync(keyPath),

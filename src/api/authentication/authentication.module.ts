@@ -6,8 +6,7 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
 import { UsersService } from '../users/users.service';
-import { UsersModule } from '../users/users.module';
-import { FirebaseUser } from 'src/common/models/firebase-user';
+import { FirebaseUser } from '../../common/models/firebase-user';
 import { Member } from '../../database/models/member.entity';
 import { Role } from '../../database/models/role.entity';
 import { User } from '../../database/models/user.entity';
@@ -15,7 +14,12 @@ import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 
 @Module({
   controllers: [AuthenticationController],
-  providers: [AuthenticationService, UsersService, JwtStrategy, HandleExceptions],
+  providers: [
+    AuthenticationService,
+    UsersService,
+    JwtStrategy,
+    HandleExceptions,
+  ],
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({

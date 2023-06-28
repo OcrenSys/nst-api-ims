@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  Put,
   Query,
 } from '@nestjs/common';
 import { Auth } from '../../common/decorators/auth.decorator';
@@ -29,7 +28,6 @@ export class CategoriesController {
   @Get()
   @Auth(RoleEnum.Sales, RoleEnum.Admin)
   findAll(@Query() query: any) {
-    
     return this.categoriesService.findAll(query);
   }
 

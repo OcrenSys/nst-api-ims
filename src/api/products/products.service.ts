@@ -4,6 +4,7 @@ import {
   FindOptionsRelationByString,
   FindOptionsRelations,
   FindOptionsWhere,
+  Like,
   Repository,
 } from 'typeorm';
 import {
@@ -22,6 +23,7 @@ import { Variant } from '../../database/models/variant.entity';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from '../../database/models/product.entity';
+import { setOptionsWhere } from '../../common/helpers/validators';
 
 @Injectable()
 export class ProductsService {
@@ -85,15 +87,29 @@ export class ProductsService {
   }
 
   async findAll(
-    filters?: FindOptionsWhere<Product>[] | FindOptionsWhere<Product>,
-    relations?: FindOptionsRelations<Product> | FindOptionsRelationByString,
+    _filters?:
+      | unknown
+      | FindOptionsWhere<Product>[]
+      | FindOptionsWhere<Product>,
+    _relations?: FindOptionsRelations<Product> | FindOptionsRelationByString,
   ): Promise<ResponseHttp> {
+    const { skip = null, take = null, ...rest } = _filters as any;
+
+    const filters = {
+      ...setOptionsWhere(rest),
+      ...(rest?.['name'] ? { name: Like(`%${rest?.['name'] || ''}%`) } : {}),
+      ...(rest?.['description']
+        ? { description: Like(`%${rest?.['description'] || ''}%`) }
+        : {}),
+    };
     let products: Product[] = [];
 
     try {
       products = await this.productRepository.find({
-        relations: relations,
+        relations: _relations,
         where: filters,
+        ...(skip ? { skip: +skip } : {}),
+        ...(take ? { take: +take } : {}),
       });
 
       return {
