@@ -27,14 +27,12 @@ export class ProductsController {
   @Get()
   @Auth(RoleEnum.Admin)
   findAll(@Query() query: unknown) {
-    return this.productsService.findAll(query, ['subCategory', 'variants']);
+    return this.productsService.findAll(query);
   }
 
   @Get('bySubCategory/:id')
   findAllBySubCategory(@Param('id') id: number) {
-    return this.productsService.findAll({ subCategory: { id: id } }, [
-      'variants',
-    ]);
+    return this.productsService.findAll({ subCategory: { id: id } });
   }
 
   @Get(':id')

@@ -1,10 +1,7 @@
 import {
   DataSource,
   DeleteResult,
-  FindOptionsRelationByString,
-  FindOptionsRelations,
   FindOptionsWhere,
-  Like,
   Repository,
 } from 'typeorm';
 import {
@@ -23,7 +20,10 @@ import { Variant } from '../../database/models/variant.entity';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from '../../database/models/product.entity';
-import { setOptionsWhere } from '../../common/helpers/validators';
+import {
+  setOptionsRelation,
+  setOptionsWhere,
+} from '../../common/helpers/validators';
 
 @Injectable()
 export class ProductsService {
@@ -91,26 +91,30 @@ export class ProductsService {
       | unknown
       | FindOptionsWhere<Product>[]
       | FindOptionsWhere<Product>,
-    _relations?: FindOptionsRelations<Product> | FindOptionsRelationByString,
   ): Promise<ResponseHttp> {
-    const { skip = null, take = null, ...rest } = _filters as any;
-
-    const filters = {
-      ...setOptionsWhere(rest),
-      ...(rest?.['name'] ? { name: Like(`%${rest?.['name'] || ''}%`) } : {}),
-      ...(rest?.['description']
-        ? { description: Like(`%${rest?.['description'] || ''}%`) }
-        : {}),
+    const {
+      skip = 0,
+      take = 100,
+      where = {},
+      relations = [],
+    } = (_filters || {}) as any;
+    const _where = {
+      ...setOptionsWhere(where),
+    };
+    const _relations = setOptionsRelation(relations) || [
+      'subCategory',
+      'variants',
+    ];
+    const _options = {
+      relations: _relations,
+      where: _where,
+      ...(skip ? { skip: +skip } : {}),
+      ...(take ? { take: +take } : {}),
     };
     let products: Product[] = [];
 
     try {
-      products = await this.productRepository.find({
-        relations: _relations,
-        where: filters,
-        ...(skip ? { skip: +skip } : {}),
-        ...(take ? { take: +take } : {}),
-      });
+      products = await this.productRepository.find(_options);
 
       return {
         status: HttpStatus.OK,
