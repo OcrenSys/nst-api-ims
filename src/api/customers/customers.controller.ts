@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
@@ -25,8 +26,8 @@ export class CustomersController {
 
   @Get()
   @Auth(RoleEnum.Admin, RoleEnum.Sales)
-  findAll() {
-    return this.customersService.findAll();
+  findAll(@Query() query: unknown) {
+    return this.customersService.findAll(query);
   }
 
   @Get(':id')

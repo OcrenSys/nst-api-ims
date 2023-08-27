@@ -5,6 +5,7 @@ import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { Customer } from '../../database/models/customer.entity';
+import { setOptionsWhere } from '../../common/helpers/validators';
 
 @Injectable()
 export class CustomersService {
@@ -21,15 +22,23 @@ export class CustomersService {
     );
   }
 
-  findAll() {
-    const filters = {};
-    const relations = ['orders'];
+  async findAll(query?: unknown) {
+    const {
+      skip = null,
+      take = null,
+      filters = {},
+      relations = [],
+    } = (query || {}) as any;
+    /* ...(rest?.['nickName']   ? { nickName: Like(`%${rest?.['nickName'] || ''}%`) }   : {}), ...(rest?.['firstName']   ? { firstName: Like(`%${rest?.['firstName'] || ''}%`) }   : {}), ...(rest?.['lastName']   ? { lastName: Like(`%${rest?.['lastName'] || ''}%`) }   : {}), ...(rest?.['phone']   ? { phone: Like(`%${rest?.['name'] || ''}%`) }   : {}), ...(rest?.['identification']   ? { identification: Like(`%${rest?.['identification'] || ''}%`) }   : {}), */
+
+    const _relations = JSON.parse(relations) || ['orders', 'person'];
+    const _where = setOptionsWhere(JSON.parse(filters));
 
     return this.customerRepository.find({
-      relations,
-      where: {
-        ...filters,
-      },
+      relations: _relations,
+      where: _where,
+      ...(skip ? { skip: +skip } : {}),
+      ...(take ? { take: +take } : {}),
     });
   }
 
