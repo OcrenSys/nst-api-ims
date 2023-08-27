@@ -30,14 +30,18 @@ export class Credit extends Base {
   @JoinColumn()
   order?: Order;
 
-  @ManyToOne(() => Percent, (percent) => percent.credits)
+  @ManyToOne(() => Percent, (percent) => percent.credits, { eager: true })
   percent: Percent;
 
-  @OneToMany(() => Payment, (payment) => payment.credit, { nullable: true })
+  @OneToMany(() => Payment, (payment) => payment.credit, {
+    nullable: true,
+    eager: true,
+  })
   payments?: Payment[];
 
   @OneToMany(() => PaymentDate, (paymentDate) => paymentDate.credit, {
     nullable: true,
+    eager: true,
   })
   paymentDates?: PaymentDate[];
 }

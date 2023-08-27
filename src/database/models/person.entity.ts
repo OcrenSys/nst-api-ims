@@ -20,6 +20,9 @@ export class Person extends Base {
   @Column({ nullable: true })
   address?: string;
 
+  @Column({ nullable: true })
+  identification?: string;
+
   @OneToOne(() => Customer, (customer) => customer.person, {
     eager: true,
     nullable: true,
