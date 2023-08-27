@@ -1,30 +1,17 @@
 import { SubCategory } from '../models/sub-category.entity';
+import { ImageData } from './001_image.data';
 import { CategoryData } from './032_category';
+import { faker } from '@faker-js/faker';
 
-export const SubCategoryData: SubCategory[] = [
-  {
-    position: 0,
-    name: 'Calzado  para dama',
-    category: CategoryData[0],
-  },
-  {
-    position: 1,
-    name: 'Calzado para caballero',
-    category: CategoryData[0],
-  },
-  {
-    position: 2,
-    name: 'Ropa para dama',
-    category: CategoryData[1],
-  },
-  {
-    position: 3,
-    name: 'Ropa para caballero',
-    category: CategoryData[1],
-  },
-  {
-    position: 4,
-    name: 'Perfumes para caballero',
-    category: CategoryData[2],
-  },
-];
+const getSubCategories = (): SubCategory[] => {
+  return Array(50)
+    .fill(null)
+    .map((value, index) => ({
+      position: 0,
+      name: faker.commerce.department.name,
+      category: CategoryData[faker.number.int({ min: 0, max: 19 })],
+      image: ImageData[index],
+    }));
+};
+
+export const SubCategoryData: SubCategory[] = getSubCategories();

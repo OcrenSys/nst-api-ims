@@ -1,52 +1,16 @@
 import { Person } from '../models/person.entity';
+import { faker } from '@faker-js/faker';
 
-export const PersonData: Person[] = [
-  {
-    nickName: 'Sebastian',
-    firstName: 'Sebastian',
-    lastName: 'Franco',
-    phone: '88878889',
-    address:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-  },
-  {
-    nickName: 'Juan',
-    firstName: 'Juan',
-    lastName: 'Sebastian',
-    phone: '88878889',
-    address:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-  },
-  {
-    nickName: 'La Glory',
-    firstName: 'Gloria',
-    lastName: 'Trevis',
-    phone: '88878889',
-    address:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-  },
-  {
-    nickName: 'Alex',
-    firstName: 'Alex',
-    lastName: 'Ubago',
-    phone: '88878889',
-    address:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-  },
-  {
-    nickName: 'Enriqueto',
-    firstName: 'Enrrique',
-    lastName: 'Iglesias',
-    phone: '88878889',
-    address:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-  },
-  {
-    nickName: 'Chapulin',
-    firstName: 'Enrrique',
-    lastName: 'Segoviano',
-    phone: '88878889',
-    address:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-  },
-];
+const getPeople = (): Person[] => {
+  return Array(50)
+    .fill(null)
+    .map(() => ({
+      nickName: faker.person.prefix(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      phone: faker.phone.number('505-####-####'),
+      address: `${faker.location.city()}`,
+    }));
+};
+
+export const PersonData: Person[] = getPeople();
