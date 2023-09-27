@@ -8,8 +8,8 @@ import {
 import fs from 'fs';
 import { ValidationPipe } from '@nestjs/common';
 
-const keyPath = `${__dirname}/../**/key.pem`;
-const cerPath = `${__dirname}/../**/server.crt`;
+const keyPath = `../key.pem`;
+const cerPath = `../server.crt`;
 const options: any = {};
 
 if (fs.existsSync(keyPath) && fs.existsSync(cerPath)) {
