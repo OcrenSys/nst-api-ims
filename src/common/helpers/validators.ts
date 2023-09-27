@@ -1,7 +1,11 @@
 import { Like } from 'typeorm';
 
-export function setOptionsRelation(parameters: unknown): any {
-  return JSON.parse(parameters as string);
+export function setOptionsRelation(
+  _parameters: unknown,
+  _relations?: string[],
+): any {
+  const relations: string[] = JSON.parse(_parameters as string);
+  return relations.length ? relations : _relations;
 }
 
 export function setOptionsWhere(parameters: unknown): any {

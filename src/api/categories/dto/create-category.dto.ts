@@ -35,12 +35,12 @@ export class CreateCategoryDto {
   })
   order?: number;
 
-  @IsArray()
   @IsOptional()
+  @IsObject()
   image?: Image;
 
   @IsOptional()
-  @IsObject()
+  @IsArray()
   subCategories?: SubCategory[];
 
   @IsOptional()

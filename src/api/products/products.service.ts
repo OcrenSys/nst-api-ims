@@ -24,6 +24,7 @@ import {
   setOptionsRelation,
   setOptionsWhere,
 } from '../../common/helpers/validators';
+import { ACTION_FIND, MODEL } from 'src/common/constants/messages.constants';
 
 @Injectable()
 export class ProductsService {
@@ -101,10 +102,10 @@ export class ProductsService {
     const _where = {
       ...setOptionsWhere(where),
     };
-    const _relations = setOptionsRelation(relations) || [
+    const _relations = setOptionsRelation(relations, [
       'subCategory',
       'variants',
-    ];
+    ]);
     const _options = {
       relations: _relations,
       where: _where,
@@ -120,12 +121,16 @@ export class ProductsService {
         status: HttpStatus.OK,
         error: null,
         data: [...products],
-        message: '¡Productos encontrados exitosamente!',
+        message: ACTION_FIND.success(MODEL.Product),
       };
     } catch (error) {
-      this.handleExceptions(
-        error,
-        'Algo salió mal al encontrar los productos.',
+      throw new InternalServerErrorException(
+        {
+          data: error,
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          message: ACTION_FIND.error(MODEL.Product),
+        },
+        ACTION_FIND.error(MODEL.Product),
       );
     }
   }

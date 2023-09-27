@@ -5,7 +5,12 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, DataSource, DeleteResult, Like } from 'typeorm';
+import {
+  Repository,
+  DataSource,
+  DeleteResult,
+  FindOptionsWhere,
+} from 'typeorm';
 import { from, map } from 'rxjs';
 import { HandleExceptions } from '../../common/helpers/handle.exceptions';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -22,6 +27,11 @@ import {
   MODEL,
   ONLY_ONE,
 } from '../../common/constants/messages.constants';
+import { ResponseHttp } from 'src/common/helpers/interfaces/response.http';
+import {
+  setOptionsWhere,
+  setOptionsRelation,
+} from 'src/common/helpers/validators';
 
 @Injectable()
 export class CategoriesService {
@@ -94,23 +104,37 @@ export class CategoriesService {
     }
   }
 
-  async findAll(_filters: any = {}): Promise<any> {
-    const filters = {
-      ..._filters,
-      name: Like(`%${_filters?.name || ''}%`),
-      description: Like(`%${_filters?.description || ''}%`),
+  async findAll(
+    _filters?:
+      | unknown
+      | FindOptionsWhere<Category>[]
+      | FindOptionsWhere<Category>,
+  ): Promise<ResponseHttp> {
+    const {
+      skip = 0,
+      take = 100,
+      where = {},
+      relations = [],
+    } = (_filters || {}) as any;
+    const _where = {
+      ...setOptionsWhere(where),
     };
-    const relations = [];
+    const _relations = setOptionsRelation(relations, ['subCategories']);
+    const _options = {
+      relations: _relations,
+      where: _where,
+      ...(skip ? { skip: +skip } : {}),
+      ...(take ? { take: +take } : {}),
+    };
+    let categories: Category[] = [];
 
     try {
-      const categories = await this.categoryRepository.find({
-        where: filters,
-        relations,
-      });
+      categories = await this.categoryRepository.find(_options);
 
       return {
-        data: categories,
         status: HttpStatus.OK,
+        error: null,
+        data: [...categories],
         message: ACTION_FIND.success(MODEL.Category),
       };
     } catch (error) {
@@ -120,7 +144,7 @@ export class CategoriesService {
           status: HttpStatus.INTERNAL_SERVER_ERROR,
           message: ACTION_FIND.error(MODEL.Category),
         },
-        ACTION_FIND.error(MODEL.Product),
+        ACTION_FIND.error(MODEL.Category),
       );
     }
   }
@@ -241,8 +265,8 @@ export class CategoriesService {
   }
 
   async reorder(categories: Category[]): Promise<any> {
-    return new Promise((resolve, reject) => {
-      resolve([]);
+    return new Promise((resolve) => {
+      resolve(categories);
     });
   }
 }
