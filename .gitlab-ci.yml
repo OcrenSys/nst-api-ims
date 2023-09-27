@@ -1,0 +1,76 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - build
+  - deploy
+
+variables:
+  AWS_REGISTRY: $AWS_REGISTRY
+  DOCKER_HOST: tcp://docker:2375
+  AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+
+build:
+  stage: build
+  environment: staging
+  only:
+    refs:
+      - staging
+  variables:
+    APP_NAME: $APP_NAME
+  image:
+    name: amazon/aws-cli
+    entrypoint: [""]
+  before_script:
+    - amazon-linux-extras install docker
+    - aws --version
+    - aws configure list
+    - docker --version
+  script:
+    - TAG=$CI_PIPELINE_IID
+
+    - echo "Staging. Building image..."
+    - docker build -t $AWS_REGISTRY/$APP_NAME:latest .
+
+    - echo "Staging. Getting loggin in AWS..."
+    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_REGISTRY
+
+    - echo "Staging. Tagging image..."
+    - docker tag $AWS_REGISTRY/$APP_NAME:latest $AWS_REGISTRY/$APP_NAME:$TAG
+
+    - echo "Staging. Pushing image..."
+    - docker push $AWS_REGISTRY/$APP_NAME:latest
+    - docker push $AWS_REGISTRY/$APP_NAME:$TAG
+
+deploy:
+  stage: deploy
+  environment: staging
+  only:
+    refs:
+      - staging
+  image:
+    name: amazon/aws-cli
+    entrypoint: [""]
+  before_script:
+    - amazon-linux-extras install docker
+    - yum update && yum install -y jq
+    - jq --version
+    - aws --version
+    - aws configure list
+    - docker --version
+  script:
+    - AWS_TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $AWS_TASK_DEFINITION_NAME --region $AWS_DEFAULT_REGION)
+    - echo $AWS_TASK_DEFINITION
+
+    - AWS_CONTAINER_DEFINTIION=$(echo $AWS_TASK_DEFINITION | jq --arg IMAGE "$AWS_REGISTRY" '.taskDefinition.containerDefinitions[0].image = $IMAGE | .taskDefinition.containerDefinitions[0]')
+    - echo $AWS_CONTAINER_DEFINTIION
+
+    - echo "Staging. Registering new task..."
+    - aws ecs register-task-definition --region "${AWS_DEFAULT_REGION}" --family "${AWS_TASK_DEFINITION_NAME}" --container-definitions "${AWS_CONTAINER_DEFINTIION}"  
+
+    - echo "Staging. Updating the service..."
+    - aws ecs update-service --region $AWS_DEFAULT_REGION --cluster $AWS_CLUSTER_NAME --service $AWS_SERVICE_NAME
