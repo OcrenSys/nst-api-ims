@@ -18,7 +18,7 @@ RUN yarn
 # Bundle app source
 COPY . .
 
-
+EXPOSE 3000
 
 
 
