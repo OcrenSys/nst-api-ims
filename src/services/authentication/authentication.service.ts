@@ -8,9 +8,11 @@ export class AuthenticationService {
 
   constructor() {
     const serviceAccount: ServiceAccount = {
-      projectId: process.env.SERVICE_ACCOUNT_PROJECT_ID,
-      clientEmail: process.env.SERVICE_ACCOUNT_CLIENT_EMAIL,
-      privateKey: process.env.SERVICE_ACCOUNT_PRIVATE_KEY,
+      projectId: process.env.SERVICE_ACCOUNT_PROJECT_ID || undefined,
+      clientEmail: process.env.SERVICE_ACCOUNT_CLIENT_EMAIL || undefined,
+      privateKey: process.env.SERVICE_ACCOUNT_PRIVATE_KEY
+        ? process.env.SERVICE_ACCOUNT_PRIVATE_KEY.replace(/\\n/gm, '\n')
+        : undefined,
     };
 
     this.firebaseApp = firebase.initializeApp({
