@@ -1,7 +1,7 @@
 #########################################################################################################
 # BUILD FOR LOCAL DEVELOPMENT
 #########################################################################################################
-FROM node:18-alpine3.16 As development
+FROM node:18-alpine As development
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -18,10 +18,6 @@ RUN yarn
 # Bundle app source
 COPY . .
 
-EXPOSE 3000
-
-CMD [ "yarn", "start:debug" ]
-
 
 
 
@@ -29,7 +25,7 @@ CMD [ "yarn", "start:debug" ]
 #########################################################################################################
 # BUILD FOR PRODUCTION
 #########################################################################################################
-FROM node:18-alpine3.16 As build
+FROM node:18-alpine As build
 
 WORKDIR /usr/src/app
 
