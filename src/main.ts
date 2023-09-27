@@ -5,26 +5,21 @@ import {
   CorsOptions,
   CorsOptionsDelegate,
 } from '@nestjs/common/interfaces/external/cors-options.interface';
-import fs from 'fs';
 import { ValidationPipe } from '@nestjs/common';
 
-const keyPath = `../key.pem`;
-const cerPath = `../server.crt`;
-const options: any = {};
-
-if (fs.existsSync(keyPath) && fs.existsSync(cerPath)) {
-  options.httpsOptions = {
-    cert: fs.readFileSync(keyPath),
-    key: fs.readFileSync(cerPath),
-  };
-}
+const keyPath = process.env.KEY_PEM
+  ? process.env.KEY_PEM.replace(/\\n/gm, '\n')
+  : undefined;
+const cerPath = process.env.SERVER_CRT
+  ? process.env.SERVER_CRT.replace(/\\n/gm, '\n')
+  : undefined;
 
 async function bootstrap() {
   const prefix = 'api/v1';
   const port: number = parseInt(process.env.API_PORT_DEV, 10) || 3000;
   const httpsOptions = {
-    key: fs.readFileSync(keyPath),
-    cert: fs.readFileSync(cerPath),
+    key: keyPath,
+    cert: cerPath,
   };
   const corsOptions: CorsOptions | CorsOptionsDelegate<any> | any = {
     origin: '*',
