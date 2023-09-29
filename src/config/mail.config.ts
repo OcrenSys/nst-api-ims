@@ -11,7 +11,7 @@ export default () => ({
 
   host: process.env.MAIL_HOST || 'mail.cyon.ch',
   port: parseInt(process.env.MAIL_PORT, 10) || 465,
-  from: process.env.MAIL_FROM || '"AnderS Boutique" <ocrensys@gmail.com>',
-  username: process.env.MAIL_USERNAME,
-  password: process.env.MAIL_PASSWORD,
+  from: process.env.MAIL_FROM || '"Ander Boutique" <ocrensys@gmail.com>',
+  username: process.env.MAIL_USERNAME || 'anderboutique',
+  password: process.env.MAIL_PASSWORD || 'anderboutique',
 });

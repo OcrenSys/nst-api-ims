@@ -1,4 +1,5 @@
 const path = require('path'); // eslint-disable-line
+conole.log('ORMCONFIG, process.env...', process.env);
 
 module.exports = {
   type: 'mysql',
