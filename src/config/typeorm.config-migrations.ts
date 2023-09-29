@@ -1,4 +1,5 @@
 import { DataSource } from 'typeorm';
+require('dotenv').config();
 
 export default new DataSource({
   type: 'mysql',

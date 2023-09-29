@@ -5,6 +5,7 @@ import {
 } from '@nestjs/typeorm';
 import { DataSourceOptions } from 'typeorm';
 import { SeederOptions } from 'typeorm-extension';
+require('dotenv').config();
 
 export default () => ({ ...typeOrmConfigAsync });
 
