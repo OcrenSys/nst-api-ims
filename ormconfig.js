@@ -1,5 +1,4 @@
 const path = require('path'); // eslint-disable-line
-const { retrieveSourceMap } = require('source-map-support');
 
 module.exports = {
   type: 'mysql',
@@ -8,6 +7,10 @@ module.exports = {
   username: process.env.DATABASE_USERNAME,
   database: process.env.DATABASE_NAME,
   password: process.env.DATABASE_PASSWORD,
+  dropSchema: process.env.NODE_ENV === 'development',
+  synchronize: process.env.NODE_ENV === 'development',
+  logging: process.env.NODE_ENV === 'development',
+  migrationsRun: Boolean(process.env.TYPEORM_MIGRATIONS_RUN),
   entities: [path.resolve(__dirname, 'src/**/*.entity.{js,ts}')],
   migrations: [path.resolve(__dirname, 'src/database/migrations/*{.ts,.js}')],
   logger: 'advanced-console',
@@ -18,8 +21,4 @@ module.exports = {
 
   seeds: [path.resolve(__dirname, 'src/database/seeders/**/*{.ts,.js}')],
   factories: [path.resolve(__dirname, 'src/database/factories/**/*{.ts,.js}')],
-
-  dropSchema: false,
-  synchronize: true,
-  migrationsRun: true,
 };
