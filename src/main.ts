@@ -15,8 +15,10 @@ const cerPath = process.env.SERVER_CRT
   : undefined;
 
 async function bootstrap() {
-  const prefix = 'api/v1';
-  const port: number = parseInt(process.env.API_PORT_DEV, 10) || 3000;
+  const API_V1 = 'api/v1';
+  const PORT: number = parseInt(process.env.API_PORT, 10) || 3000;
+  const HOST: string = process.env.API_HOST || '0.0.0.0';
+
   const httpsOptions = {
     key: keyPath,
     cert: cerPath,
@@ -31,8 +33,8 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule, { httpsOptions });
   app.enableCors(corsOptions);
-  app.setGlobalPrefix(prefix);
+  app.setGlobalPrefix(API_V1);
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(port);
+  await app.listen(PORT, HOST);
 }
 bootstrap();
