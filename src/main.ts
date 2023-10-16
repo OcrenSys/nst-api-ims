@@ -16,8 +16,8 @@ const cerPath = process.env.SERVER_CRT
 
 async function bootstrap() {
   const API_V1 = 'api/v1';
-  const PORT: number = parseInt(process.env.API_PORT, 10) || 3000;
-  const HOST: string = process.env.API_HOST || '0.0.0.0';
+  const PORT: number = parseInt(process.env.PORT, 10) || 3000;
+  const HOST: string = process.env.HOST || '0.0.0.0';
 
   const httpsOptions = {
     key: keyPath,
