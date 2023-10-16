@@ -15,11 +15,11 @@ export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {
   useFactory: async (): Promise<TypeOrmModuleOptions> => {
     const dataSourceAndSeederOptions: DataSourceOptions & SeederOptions = {
       type: 'mysql',
-      host: process.env.DATABASE_HOST,
-      port: parseInt(process.env.DATABASE_PORT, 10),
-      username: process.env.DATABASE_USERNAME,
-      database: process.env.DATABASE_NAME,
-      password: process.env.DATABASE_PASSWORD,
+      host: process.env.MYSQLHOST,
+      port: parseInt(process.env.MYSQLPORT, 10),
+      username: process.env.MYSQLUSER,
+      database: process.env.MYSQLDATABASE,
+      password: process.env.MYSQLPASSWORD,
       dropSchema: process.env.NODE_ENV === 'development',
       synchronize: process.env.NODE_ENV === 'development',
       logging: process.env.NODE_ENV === 'development',
@@ -37,11 +37,11 @@ export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: 'mysql',
-  host: process.env.DATABASE_HOST,
-  port: parseInt(process.env.DATABASE_PORT, 10),
-  username: process.env.DATABASE_USERNAME,
-  database: process.env.DATABASE_NAME,
-  password: process.env.DATABASE_PASSWORD,
+  host: process.env.MYSQLHOST,
+  port: parseInt(process.env.MYSQLPORT, 10),
+  username: process.env.MYSQLUSER,
+  database: process.env.MYSQLDATABASE,
+  password: process.env.MYSQLPASSWORD,
   dropSchema: process.env.NODE_ENV === 'development',
   synchronize: process.env.NODE_ENV === 'development',
   logging: process.env.NODE_ENV === 'development',

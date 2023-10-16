@@ -77,10 +77,10 @@ describe('BannersService', () => {
             const _module: TypeOrmModuleOptions = {
               type: 'mysql',
               host: process.env.DATABASE_LOCAL_HOST,
-              port: parseInt(process.env.DATABASE_PORT, 10),
-              username: process.env.DATABASE_USERNAME,
-              database: process.env.DATABASE_NAME,
-              password: process.env.DATABASE_PASSWORD,
+              port: parseInt(process.env.MYSQLPORT, 10),
+              username: process.env.MYSQLUSER,
+              database: process.env.MYSQLDATABASE,
+              password: process.env.MYSQLPASSWORD,
               entities: [`${__dirname}/../**/*.entity.{js,ts}`],
               migrations: [`${__dirname}/../database/migrations/*{.ts,.js}`],
               extra: {
