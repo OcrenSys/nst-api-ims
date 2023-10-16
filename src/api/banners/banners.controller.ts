@@ -30,12 +30,12 @@ export class BannersController {
 
   @Get('public')
   findAllPublic() {
-    return `This PUBLIC action returns all banners`;
+    return this.bannersService.findAll();
   }
 
   @Get('public/:id')
   findOnePublic(@Param('id') id: string) {
-    return `This PUBLIC action returns a #${id} banner`;
+    return this.bannersService.findOne(+id);
   }
 
   @Get(':id')
