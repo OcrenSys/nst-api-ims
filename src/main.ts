@@ -24,7 +24,7 @@ async function bootstrap() {
     cert: cerPath,
   };
   const corsOptions: CorsOptions | CorsOptionsDelegate<any> | any = {
-    origin: '*',
+    origin: 'https://boutique-api.up.railway.app/',
     'Access-Control-Allow-Origin': '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     preflightContinue: false,

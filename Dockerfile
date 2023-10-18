@@ -9,16 +9,14 @@ WORKDIR /usr/src/app
 # Copy application dependency manifests to the container image.
 # A wildcard is used to ensure copying both package.json AND package-lock.json (when available).
 # Copying this first prevents re-running npm install on every code change.
-COPY package*.json ./
+COPY --chown=node:node package*.json .
 
 # Install app dependencies using the `npm ci` command instead of `npm install`
 RUN yarn cache clean --force
 RUN yarn
 
 # Bundle app source
-COPY . .
-
-EXPOSE 3000
+COPY --chown=node:node . .
 
 
 
@@ -29,7 +27,7 @@ FROM node:18-alpine As build
 
 WORKDIR /usr/src/app
 
-COPY --chown=node:node package*.json ./
+COPY --chown=node:node package*.json .
 
 # In order to run `npm run build` we need access to the Nest CLI.
 # The Nest CLI is a dev dependency,
@@ -54,12 +52,10 @@ USER node
 
 
 
-
-
 #########################################################################################################
 # PRODUCTION
 #########################################################################################################
-FROM node:18-alpine3.16 As production
+FROM node:18-alpine As production
 
 # Copy the bundled code from the build stage to the production image
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
