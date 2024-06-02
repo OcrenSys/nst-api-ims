@@ -1,9 +1,9 @@
 {
-  "name": "variedadesback",
-  "title": "Ander Boutique",
+  "name": "nst-api-ims",
+  "title": "IMS API",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "ocrensys@gmail.com",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

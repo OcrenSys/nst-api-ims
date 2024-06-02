@@ -23,7 +23,7 @@ services:
     environment:
       WAIT_HOSTS: mysql:${MYSQLPORT}
     networks:
-      - boutique
+      - ims
     deploy:
       resources:
         limits:
@@ -53,7 +53,7 @@ services:
     ports:
       - '${MYSQLPORT}:${MYSQLPORT}'
     networks:
-      - boutique
+      - ims
     deploy:
       resources:
         limits:
@@ -78,7 +78,7 @@ services:
     depends_on:
       - mysql
     networks:
-      - boutique
+      - ims
     deploy:
       resources:
         limits:
@@ -92,4 +92,4 @@ volumes:
   mysqldata: {}
 
 networks:
-  boutique:
+  ims:

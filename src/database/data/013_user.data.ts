@@ -2,28 +2,14 @@ import { User } from '../models/user.entity';
 
 export const UserData: User[] = [
   {
-    user_id: 'p32VrXXJMRerioUBQweCQ5TeoR03', // ocrensys@gmail.com
+    user_id: 'Bv2wuBUhSLV4M5oZ8xioXZoGSPZ2', // ocrensys@gmail.com | google signin
     isActive: true,
     email: '',
     password: '',
     webToken: '',
   },
   {
-    user_id: 'EC823shbg1NJpfXFugjjEBNRF533', // merlingr18@gmail.com
-    isActive: true,
-    email: '',
-    password: '',
-    webToken: '',
-  },
-  {
-    user_id: '0JnJkLOf8UTJtWfWKVEeXw07P6b2', // +50584081496
-    isActive: true,
-    email: '',
-    password: '',
-    webToken: '',
-  },
-  {
-    user_id: 'kEe6Wqfna5OTIfbYLUjUJ33CNCT2', // +50575082830
+    user_id: 'hwF4758grvcwCF55nXorkajQWO62', // jm001.martinez@gmail.com | email and password
     isActive: true,
     email: '',
     password: '',
