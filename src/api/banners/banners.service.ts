@@ -57,7 +57,7 @@ export class BannersService {
 
   async findAll(): Promise<ResponseHttp> {
     const filters = {};
-    const relations = [];
+    const relations = ['image'];
 
     try {
       const banners = await this.bannerRepository.find({

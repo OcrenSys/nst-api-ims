@@ -14,12 +14,4 @@ export const UserRoleData: any[] = [
     userId: UserData[1],
     roleId: RoleData[1],
   },
-  {
-    userId: UserData[2],
-    roleId: RoleData[2],
-  },
-  {
-    userId: UserData[3],
-    roleId: RoleData[2],
-  },
 ];
