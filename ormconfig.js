@@ -8,10 +8,12 @@ module.exports = {
   username: process.env.MYSQLUSER,
   database: process.env.MYSQLDATABASE,
   password: process.env.MYSQLPASSWORD,
-  dropSchema: process.env.NODE_ENV === 'development',
-  synchronize: process.env.NODE_ENV === 'development',
-  logging: process.env.NODE_ENV === 'development',
+
+  dropSchema: Boolean(process.env.TYPEORM_DROP_SCHEMA),
+  synchronize: Boolean(process.env.TYPEORM_SINCHRONIZE),
   migrationsRun: Boolean(process.env.TYPEORM_MIGRATIONS_RUN),
+  logging: Boolean(process.env.TYPEORM_LOGGING),
+
   entities: [path.resolve(__dirname, 'src/**/*.entity.{js,ts}')],
   migrations: [path.resolve(__dirname, 'src/database/migrations/*{.ts,.js}')],
   logger: 'advanced-console',
