@@ -12,7 +12,10 @@ import { RoleEnum } from '../../common/enums/roles.enum';
 import { BannersService } from './banners.service';
 import { CreateBannerDto } from './dto/create-banner.dto';
 import { UpdateBannerDto } from './dto/update-banner.dto';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiTags('Banners')
+@ApiBearerAuth()
 @Controller('banners')
 export class BannersController {
   constructor(private readonly bannersService: BannersService) {}

@@ -12,7 +12,10 @@ import { CreateSubCategoryDto } from './dto/create-sub-category.dto';
 import { UpdateSubCategoryDto } from './dto/update-sub-category.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
 import { Auth } from '../../common/decorators/auth.decorator';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiTags('Sub Categories')
+@ApiBearerAuth()
 @Controller('sub-categories')
 export class SubCategoriesController {
   constructor(private readonly subCategoriesService: SubCategoriesService) {}

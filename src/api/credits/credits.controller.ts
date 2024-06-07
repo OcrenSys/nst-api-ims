@@ -12,7 +12,10 @@ import { RoleEnum } from '../../common/enums/roles.enum';
 import { CreditsService } from './credits.service';
 import { CreateCreditDto } from './dto/create-credit.dto';
 import { UpdateCreditDto } from './dto/update-credit.dto';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiTags('Credits')
+@ApiBearerAuth()
 @Controller('credits')
 export class CreditsController {
   constructor(private readonly creditsService: CreditsService) {}

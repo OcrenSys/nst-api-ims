@@ -12,7 +12,10 @@ import { CreateVariantDto } from './dto/create-variant.dto';
 import { UpdateVariantDto } from './dto/update-variant.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
 import { Auth } from '../../common/decorators/auth.decorator';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiTags('Variants')
+@ApiBearerAuth()
 @Controller('variants')
 export class VariantsController {
   constructor(private readonly variantsService: VariantsService) {}

@@ -12,7 +12,10 @@ import { CreateSectionDto } from './dto/create-section.dto';
 import { UpdateSectionDto } from './dto/update-section.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
 import { Auth } from '../../common/decorators/auth.decorator';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiTags('Sections')
+@ApiBearerAuth()
 @Controller('sections')
 export class SectionsController {
   constructor(private readonly sectionsService: SectionsService) {}

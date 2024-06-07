@@ -12,7 +12,10 @@ import { RoleEnum } from '../../common/enums/roles.enum';
 import { BrandsService } from './brands.service';
 import { CreateBrandDto } from './dto/create-brand.dto';
 import { UpdateBrandDto } from './dto/update-brand.dto';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiTags('Brands')
+@ApiBearerAuth()
 @Controller('brands')
 export class BrandsController {
   constructor(private readonly brandsService: BrandsService) {}

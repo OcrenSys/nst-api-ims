@@ -12,7 +12,10 @@ import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
 import { Auth } from '../../common/decorators/auth.decorator';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiTags('Person')
+@ApiBearerAuth()
 @Controller('person')
 export class PersonController {
   constructor(private readonly personService: PersonService) {}

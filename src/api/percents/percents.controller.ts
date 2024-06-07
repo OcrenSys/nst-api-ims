@@ -12,7 +12,10 @@ import { CreatePercentDto } from './dto/create-percent.dto';
 import { UpdatePercentDto } from './dto/update-percent.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
 import { Auth } from '../../common/decorators/auth.decorator';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiTags('Percents')
+@ApiBearerAuth()
 @Controller('percents')
 export class PercentsController {
   constructor(private readonly percentsService: PercentsService) {}

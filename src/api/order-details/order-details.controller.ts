@@ -12,12 +12,13 @@ import { CreateOrdersDetailDto } from './dto/create-order-detail.dto';
 import { UpdateOrdersDetailDto } from './dto/update-order-detail.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
 import { Auth } from '../../common/decorators/auth.decorator';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiTags('Order Details')
+@ApiBearerAuth()
 @Controller('orders-details')
 export class OrdersDetailsController {
-  constructor(
-    private readonly ordersDetailsService: OrdersDetailsService,
-  ) {}
+  constructor(private readonly ordersDetailsService: OrdersDetailsService) {}
 
   @Post()
   @Auth(RoleEnum.Admin, RoleEnum.Sales)

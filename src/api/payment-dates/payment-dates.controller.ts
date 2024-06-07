@@ -12,7 +12,10 @@ import { CreatePaymentDateDto } from './dto/create-payment-date.dto';
 import { UpdatePaymentDateDto } from './dto/update-payment-date.dto';
 import { RoleEnum } from '../../common/enums/roles.enum';
 import { Auth } from '../../common/decorators/auth.decorator';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiTags('Payment Dates')
+@ApiBearerAuth()
 @Controller('payment-dates')
 export class PaymentDatesController {
   constructor(private readonly paymentDatesService: PaymentDatesService) {}
