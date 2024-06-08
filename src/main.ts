@@ -1,10 +1,5 @@
-// const path = require('path'); // eslint-disable-line
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import {
-  CorsOptions,
-  CorsOptionsDelegate,
-} from '@nestjs/common/interfaces/external/cors-options.interface';
 import { ValidationPipe } from '@nestjs/common';
 import {
   SwaggerDocumentOptions,
@@ -24,11 +19,18 @@ async function bootstrap() {
   const PORT: number = parseInt(process.env.PORT, 10) || 3000;
   const HOST: string = process.env.HOST || '0.0.0.0';
 
-  const httpsOptions = {
-    key: keyPath,
-    cert: cerPath,
-  };
-  const corsOptions: CorsOptions | CorsOptionsDelegate<any> | any = {
+  console.log('\n\n\nPORT:', PORT);
+  console.log('HOST:', HOST);
+
+  console.log('\n\n\nKEY_PEM:', process.env.KEY_PEM);
+  console.log('SERVER_CRT:', process.env.SERVER_CRT);
+
+  const httpsOptions =
+    keyPath && cerPath ? { key: keyPath, cert: cerPath } : undefined;
+
+  console.log('\n\n\nHTTPS Options:', httpsOptions);
+
+  const corsOptions = {
     origin: 'https://localhost:4200',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
@@ -37,26 +39,35 @@ async function bootstrap() {
     preflightContinue: false,
   };
 
-  const app = await NestFactory.create(AppModule, { httpsOptions });
-  app.enableCors(corsOptions);
-  app.setGlobalPrefix(API_V1);
-  app.useGlobalPipes(new ValidationPipe());
+  console.log('\n\n\ncorsOptions:', corsOptions);
 
-  const config = new DocumentBuilder()
-    .setTitle('IMS API')
-    .setDescription('IMS API endpoints for developers')
-    .setVersion('1.0')
-    .addTag('ims')
-    .addBearerAuth()
-    .build();
+  try {
+    const app = await NestFactory.create(AppModule, { httpsOptions });
+    app.enableCors(corsOptions);
+    app.setGlobalPrefix(API_V1);
+    app.useGlobalPipes(new ValidationPipe());
 
-  const options: SwaggerDocumentOptions = {
-    deepScanRoutes: true,
-  };
+    const config = new DocumentBuilder()
+      .setTitle('IMS API')
+      .setDescription('IMS API endpoints for developers')
+      .setVersion('1.0')
+      .addTag('ims')
+      .addBearerAuth()
+      .build();
 
-  const document = SwaggerModule.createDocument(app, config, options);
-  SwaggerModule.setup(API_V1, app, document);
+    const options: SwaggerDocumentOptions = {
+      deepScanRoutes: true,
+    };
 
-  await app.listen(PORT, HOST);
+    const document = SwaggerModule.createDocument(app, config, options);
+    SwaggerModule.setup(API_V1, app, document);
+
+    await app.listen(PORT, HOST);
+    console.log(`Application is running on: ${await app.getUrl()}`);
+  } catch (error) {
+    console.error('Error starting the application', error);
+    process.exit(1);
+  }
 }
+
 bootstrap();
