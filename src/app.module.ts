@@ -9,11 +9,21 @@ import { AuthenticationMiddleware } from './common/middlewares/authentication/au
 import { AuthenticationService } from './services/authentication/authentication.service';
 import { AuthorizationService } from './services/authorization/authorization.service';
 import { EXCLUDED, ROUTES } from './common/constants/routes.constants';
+import { CorsOptionsService } from './services/corsOptions/corsOptions.service';
+import { SwaggerConfigService } from './services/swaggerConfig/swaggerConfig.service';
+import { HttpOptionsService } from './services/httpOptions/httpOptions.service';
 
 @Module({
   imports: [ConfigModule, DatabaseModule, ApiModule, UsersModule],
   controllers: [AppController],
-  providers: [AppService, AuthenticationService, AuthorizationService],
+  providers: [
+    AppService,
+    AuthenticationService,
+    AuthorizationService,
+    HttpOptionsService,
+    CorsOptionsService,
+    SwaggerConfigService,
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
